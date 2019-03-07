@@ -54,3 +54,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Added at 2019-03-06 23:17:28 -0600 by ningja:
 gem "awesome_print", "~> 1.8"
+
+# Added at 2019-03-07 00:27:24 -0600 by ningja:
+gem "flag_shih_tzu", "~> 0.3.23"

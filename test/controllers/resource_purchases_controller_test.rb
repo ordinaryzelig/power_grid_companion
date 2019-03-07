@@ -4,12 +4,12 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
 
   test '#create updates Player balance, stores resources' do
     player = players(:resource_purchase)
-    player.game.setup!
+    player.game.setup
 
     assert_difference 'player.balance', -15 do
       params = {
         :resource_purchase => {
-          :oil => 4,
+          :oil  => 4,
           :coal => 2,
         },
       }

@@ -4,7 +4,7 @@ class Resource < ApplicationRecord
   belongs_to :market_space, :foreign_key => :resource_market_space_id, :class_name => 'ResourceMarketSpace', :optional => true
   belongs_to :player, :optional => true
 
-  scope :available, -> { joins(:market_space).order('resource_market_spaces.cost') }
+  scope :available, -> { where.not(:resource_market_space_id => nil) }
 
   enum :kind => {
     :coal    => 1,
@@ -15,7 +15,7 @@ class Resource < ApplicationRecord
 
   class << self
 
-    def setup!(game)
+    def setup(game)
       ResourceMarketSpace::STARTING_COSTS.keys.each do |cost|
         unless ResourceMarketSpace::URANIUM_ONLY_COSTS.include?(cost)
           %i[coal oil trash].each do |kind|

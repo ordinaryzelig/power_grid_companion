@@ -1,7 +1,7 @@
 class ResourcePurchase
 
   def initialize(player, resource_params)
-    @player = player
+    @player          = player
     @resource_params = resource_params
   end
 
