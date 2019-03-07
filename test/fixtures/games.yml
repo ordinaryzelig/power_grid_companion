@@ -1,0 +1,2 @@
+resource_purchase:
+  token: <%= SecureRandom.hex(3) %>
