@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
 
   has_many :players
-  include HasResources
+  has_resources
   has_many :resource_market_spaces
   has_many :cards
 
@@ -11,7 +11,6 @@ class Game < ApplicationRecord
     Resource.setup(self)
     ResourceMarketSpace.setup(self)
     Card.setup(self)
-    resources.map(&:resource_market_space_id)
   end
 
 private

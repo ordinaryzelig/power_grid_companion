@@ -1,7 +1,7 @@
 class ResourceMarketSpace < ApplicationRecord
 
   belongs_to :game
-  include HasResources
+  has_resources :as => :owner
 
   default_scope -> { order(:cost) }
 
@@ -27,7 +27,7 @@ class ResourceMarketSpace < ApplicationRecord
       STARTING_COSTS.each do |cost, starting_resources|
         resource_market_space = game.resource_market_spaces.create!(:cost => cost)
         starting_resources.each do |kind, num|
-          assigned_resources = game.resources_of_kind(kind).where(:resource_market_space_id => nil).limit(num)
+          assigned_resources = game.resources_of_kind(kind).general_supply.limit(num)
           resource_market_space.resources.concat assigned_resources
         end
       end

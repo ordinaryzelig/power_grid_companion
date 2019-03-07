@@ -1,12 +1,12 @@
 class Player < ApplicationRecord
 
   belongs_to :game
-  include HasResources
+  has_resources :as => :owner
 
   def purchase_resources(resources)
     self.class.transaction do
       update!(:balance => balance - resources.map(&:cost).reduce(:+))
-      resources.each { |resource| resource.update!(:player => self, :market_space => nil) }
+      resources.each { |resource| resource.update!(:owner => self) }
     end
   end
 

@@ -1,10 +1,10 @@
 class Resource < ApplicationRecord
 
   belongs_to :game
-  belongs_to :market_space, :foreign_key => :resource_market_space_id, :class_name => 'ResourceMarketSpace', :optional => true
-  belongs_to :player, :optional => true
+  belongs_to :owner, :polymorphic => true, :optional => true
 
-  scope :purchasable, -> { where.not(:resource_market_space_id => nil) }
+  scope :purchasable, -> { where(:owner_type => 'ResourceMarketSpace') }
+  scope :general_supply, -> { where(:owner_type => nil) }
 
   enum :kind => {
     :coal    => 1,
@@ -31,7 +31,7 @@ class Resource < ApplicationRecord
   end
 
   def cost
-    market_space&.cost
+    owner.cost
   end
 
 end

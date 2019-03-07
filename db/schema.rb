@@ -53,13 +53,12 @@ ActiveRecord::Schema.define(version: 2019_03_07_062330) do
   create_table "resources", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.integer "kind", null: false
-    t.bigint "resource_market_space_id"
-    t.bigint "player_id"
+    t.string "owner_type"
+    t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_resources_on_game_id"
-    t.index ["player_id"], name: "index_resources_on_player_id"
-    t.index ["resource_market_space_id"], name: "index_resources_on_resource_market_space_id"
+    t.index ["owner_type", "owner_id"], name: "index_resources_on_owner_type_and_owner_id"
   end
 
   add_foreign_key "cards", "games"
