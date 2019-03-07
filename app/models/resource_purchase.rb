@@ -7,7 +7,7 @@ class ResourcePurchase
 
   def save!
     @resource_params.each do |resource_kind, num|
-      resources = @player.game.resources_of_kind(resource_kind).available.limit(Integer(num))
+      resources = @player.game.resources_of_kind(resource_kind).purchasable.limit(Integer(num))
       @player.purchase_resources(resources)
     end
   end
