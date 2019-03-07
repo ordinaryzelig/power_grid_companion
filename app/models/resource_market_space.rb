@@ -3,6 +3,8 @@ class ResourceMarketSpace < ApplicationRecord
   belongs_to :game
   include HasResources
 
+  default_scope -> { order(:cost) }
+
   STARTING_COSTS = {
     1  => {:coal => 3, :oil => 0, :uranium => 0, :trash => 0},
     2  => {:coal => 3, :oil => 0, :uranium => 0, :trash => 0},
