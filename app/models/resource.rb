@@ -4,7 +4,7 @@ class Resource < ApplicationRecord
   belongs_to :market_space, :foreign_key => :resource_market_space_id, :class_name => 'ResourceMarketSpace', :optional => true
   belongs_to :player, :optional => true
 
-  scope :available, -> { where.not(:resource_market_space_id => nil) }
+  scope :available, -> { joins(:market_space).order('resource_market_spaces.cost') }
 
   enum :kind => {
     :coal    => 1,

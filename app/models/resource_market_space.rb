@@ -23,11 +23,12 @@ class ResourceMarketSpace < ApplicationRecord
 
   class << self
 
-    def setup!(game)
+    def setup(game)
       STARTING_COSTS.each do |cost, starting_resources|
         resource_market_space = game.resource_market_spaces.create!(:cost => cost)
         starting_resources.each do |kind, num|
-          resource_market_space.resources.concat game.resources_of_kind(kind).limit(num)
+          assigned_resources = game.resources_of_kind(kind).where(:resource_market_space_id => nil).limit(num)
+          resource_market_space.resources.concat assigned_resources
         end
       end
     end
