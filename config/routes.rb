@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :games, :only => [:create]
   resources :players, :only => [] do
     member do
       post :claim

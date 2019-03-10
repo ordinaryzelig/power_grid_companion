@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_035925) do
     t.bigint "game_id", null: false
     t.string "name", null: false
     t.integer "color", null: false
-    t.integer "balance", null: false
+    t.integer "balance", default: 50, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "turn_order", null: false

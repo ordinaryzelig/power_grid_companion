@@ -4,7 +4,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.belongs_to :game, foreign_key: true, :null => false
       t.string :name, :null => false
       t.integer :color, :null => false
-      t.integer :balance, :null => false
+      t.integer :balance, :null => false, :default => 50
 
       t.timestamps
     end
