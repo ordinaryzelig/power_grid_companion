@@ -1,5 +1,13 @@
-resource_purchase:
-  game: $LABEL
-  name: $LABEL
+DEFAULTS: &DEFAULTS
+  name: ready player 1
   color: blue
   balance: 50
+  turn_order: 1
+
+resource_purchase:
+  <<: *DEFAULTS
+  game: $LABEL
+
+auction_creator:
+  <<: *DEFAULTS
+  game: $LABEL

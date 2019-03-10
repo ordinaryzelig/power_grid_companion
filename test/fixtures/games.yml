@@ -1,2 +1,5 @@
 resource_purchase:
   token: <%= SecureRandom.hex(3) %>
+
+auction_creator:
+  token: <%= SecureRandom.hex(3) %>

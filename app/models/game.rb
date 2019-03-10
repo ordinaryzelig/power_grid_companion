@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   has_resources
   has_many :resource_market_spaces
   has_many :cards
+  has_many :auctions
 
   before_validation :generate_token, :unless => :token
 

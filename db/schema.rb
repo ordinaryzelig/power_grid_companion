@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_062330) do
+ActiveRecord::Schema.define(version: 2019_03_10_025457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auctions", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "card_id", null: false
+    t.bigint "player_id", null: false
+    t.integer "bidders", null: false, array: true
+    t.integer "price", null: false
+    t.index ["card_id"], name: "index_auctions_on_card_id"
+    t.index ["game_id"], name: "index_auctions_on_game_id"
+    t.index ["player_id"], name: "index_auctions_on_player_id"
+  end
 
   create_table "cards", force: :cascade do |t|
     t.bigint "game_id"
@@ -41,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_062330) do
     t.integer "balance", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "turn_order", null: false
     t.index ["game_id"], name: "index_players_on_game_id"
   end
 
@@ -61,6 +73,9 @@ ActiveRecord::Schema.define(version: 2019_03_07_062330) do
     t.index ["owner_type", "owner_id"], name: "index_resources_on_owner_type_and_owner_id"
   end
 
+  add_foreign_key "auctions", "cards"
+  add_foreign_key "auctions", "games"
+  add_foreign_key "auctions", "players"
   add_foreign_key "cards", "games"
   add_foreign_key "cards", "players"
   add_foreign_key "players", "games"
