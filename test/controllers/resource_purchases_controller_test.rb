@@ -5,6 +5,7 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
   test '#create updates Player balance, stores resources' do
     player = players(:resource_purchase)
     player.game.setup
+    claim_player player
 
     assert_difference 'player.balance', -15 do
       params = {

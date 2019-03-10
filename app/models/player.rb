@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
 
   belongs_to :game
+  has_many :cards
   has_resources :as => :owner
 
   scope :in_turn_order, -> { order(:turn_order) }
@@ -20,6 +21,10 @@ class Player < ApplicationRecord
       update!(:balance => balance - resources.map(&:cost).reduce(:+))
       resources.each { |resource| resource.update!(:owner => self) }
     end
+  end
+
+  def turn_order_data
+    [-cities, -cards.map(&:number).max]
   end
 
 end
