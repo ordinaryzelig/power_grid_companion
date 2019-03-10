@@ -3,3 +3,6 @@ resource_purchase:
 
 auction_creator:
   token: <%= SecureRandom.hex(3) %>
+
+only_bidder:
+  token: <%= SecureRandom.hex(3) %>

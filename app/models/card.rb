@@ -1,5 +1,7 @@
 class Card < ApplicationRecord
 
+  belongs_to :player, :optional => true
+
   include FlagShihTzu
   has_flags(
     1 => :step_3,

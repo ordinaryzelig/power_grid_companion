@@ -23,4 +23,25 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal game.players.in_turn_order.map(&:id), auction.bidders
   end
 
+  test 'only bidder buys Card' do
+    player = players(:only_bidder)
+    game = player.game
+    game.setup
+    assert_equal 1, game.players.size
+    claim_player player
+    card = game.cards.find_by(:number => 3)
+
+    post auctions_url, :params => {
+      :auction => {
+        :card_id => card.id,
+      }
+    }
+    game.reload
+
+    player.reload
+    card.reload
+    assert_equal player, card.player
+    assert_equal 47, player.balance
+  end
+
 end

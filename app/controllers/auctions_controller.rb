@@ -5,6 +5,7 @@ class AuctionsController < ApplicationController
       :player_id => current_player.id,
     )
     auction = current_game.auctions.create!(auction_atts)
+    auction.bid_by current_player
   end
 
 private

@@ -5,7 +5,7 @@ class CreateAuctions < ActiveRecord::Migration[5.2]
       t.belongs_to :card, foreign_key: true, :null => false
       t.belongs_to :player, foreign_key: true, :null => false
       t.integer :bidders, :array => true, :null => false
-      t.integer :price, :null => false
+      t.integer :price
     end
   end
 end

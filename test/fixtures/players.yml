@@ -11,3 +11,7 @@ resource_purchase:
 auction_creator:
   <<: *DEFAULTS
   game: $LABEL
+
+only_bidder:
+  <<: *DEFAULTS
+  game: $LABEL
