@@ -8,7 +8,7 @@ class Auction < ApplicationRecord
 
   def bid_by(bidder)
     self.class.transaction do
-      raise "Wrong player (#{bidder.id}) bid. Next bidder is #{bidder_ids.first}" unless bidder_ids.first == bidder.id
+      authorize_player bidder
 
       increment_price
       if bidder_ids.size == 1
@@ -19,6 +19,16 @@ class Auction < ApplicationRecord
 
       save!
     end
+  end
+
+  def pass_by(player)
+    authorize_player player
+
+    bidder_ids.shift
+    if bidder_ids.size == 1
+      sell_to bidders.first
+    end
+    save!
   end
 
   def bidders
@@ -39,9 +49,13 @@ private
     bidder_ids.push bidder_ids.shift
   end
 
-  def sell_to(bidder)
-    card.update!(:player => bidder)
+  def sell_to(player)
+    card.update!(:player => player)
     player.update!(:balance => player.balance - price)
+  end
+
+  def authorize_player(player)
+    raise "Wrong player (#{player.id}) turn. Only player that can do anything is #{bidder_ids.first}" unless bidder_ids.first == player.id
   end
 
 end

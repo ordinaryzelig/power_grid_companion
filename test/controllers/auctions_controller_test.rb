@@ -56,7 +56,31 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal [1, 2, 3], auction.bidders.map(&:turn_order)
-    assert_equal card.number + 1, auction.price
+  end
+
+  test 'passing removes bidder, sells to last bidder' do
+    auction = auctions(:multiple_bidders)
+    card = cards(:multiple_bidders)
+    assert_equal [3, 1, 2], auction.bidders.map(&:turn_order)
+    claim_player auction.bidders.first
+
+    assert_difference 'auction.price', 0 do
+      post pass_auction_url(auction)
+      auction.reload
+    end
+
+    assert_equal [1, 2], auction.bidders.map(&:turn_order)
+
+    claim_player auction.bidders.first
+    assert_difference 'auction.price', 0 do
+      post pass_auction_url(auction)
+      auction.reload
+    end
+
+    assert_equal [2], auction.bidders.map(&:turn_order)
+    winner = auction.bidders.first
+    assert_equal winner, auction.card.player
+    assert_equal 47, winner.balance
   end
 
 end

@@ -1,6 +1,6 @@
 class AuctionsController < ApplicationController
 
-  before_action :set_auction, :only => %i[bid]
+  before_action :set_auction, :only => %i[bid pass]
 
   def create
     auction_atts = auction_params.merge(
@@ -12,6 +12,10 @@ class AuctionsController < ApplicationController
 
   def bid
     @auction.bid_by current_player
+  end
+
+  def pass
+    @auction.pass_by current_player
   end
 
 private

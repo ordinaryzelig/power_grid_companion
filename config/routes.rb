@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :auctions, :only => [:create] do
     member do
       post :bid
+      post :pass
     end
   end
   resources :resource_purchases, :only => [:create]
