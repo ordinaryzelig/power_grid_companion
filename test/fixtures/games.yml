@@ -6,3 +6,6 @@ auction_creator:
 
 only_bidder:
   token: <%= SecureRandom.hex(3) %>
+
+multiple_bidders:
+  token: <%= SecureRandom.hex(3) %>

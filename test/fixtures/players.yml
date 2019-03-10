@@ -15,3 +15,11 @@ auction_creator:
 only_bidder:
   <<: *DEFAULTS
   game: $LABEL
+
+<% 3.times.each do |idx| %>
+multiple_bidders_<%= idx %>:
+  <<: *DEFAULTS
+  game: multiple_bidders
+  color: <%= idx %>
+  turn_order: <%= idx + 1 %>
+<% end %>

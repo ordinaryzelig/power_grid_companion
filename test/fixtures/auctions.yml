@@ -1,0 +1,9 @@
+multiple_bidders:
+  game: $LABEL
+  card: $LABEL
+  player: multiple_bidders_0
+  bidder_ids:
+    <% [2, 0, 1].each do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("multiple_bidders_#{idx}") %>
+    <% end %>
+  price: 3

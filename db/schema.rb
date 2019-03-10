@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_025457) do
+ActiveRecord::Schema.define(version: 2019_03_10_035925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_025457) do
     t.bigint "game_id", null: false
     t.bigint "card_id", null: false
     t.bigint "player_id", null: false
-    t.integer "bidders", null: false, array: true
+    t.integer "bidder_ids", null: false, array: true
     t.integer "price"
     t.index ["card_id"], name: "index_auctions_on_card_id"
     t.index ["game_id"], name: "index_auctions_on_game_id"
