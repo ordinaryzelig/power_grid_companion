@@ -28,6 +28,10 @@ class Resource < ApplicationRecord
       end
     end
 
+    def return_to_general_supply
+      update_all(:owner_type => nil, :owner_id => nil)
+    end
+
   end
 
   def cost

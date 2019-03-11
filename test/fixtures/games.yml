@@ -12,3 +12,6 @@ multiple_bidders:
 
 building:
   token: <%= SecureRandom.hex(3) %>
+
+cities_power_up:
+  token: <%= SecureRandom.hex(3) %>

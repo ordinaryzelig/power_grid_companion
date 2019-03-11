@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   end
   resources :buildings, :only => [:create]
   resources :resource_purchases, :only => [:create]
+  resources :cities_power_ups, :only => [:create]
 
 end

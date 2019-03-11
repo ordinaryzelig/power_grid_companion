@@ -2,6 +2,7 @@ class Card < ApplicationRecord
 
   belongs_to :game
   belongs_to :player, :optional => true
+  has_resources :as => :owner
 
   include FlagShihTzu
   has_flags(

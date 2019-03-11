@@ -27,3 +27,8 @@ multiple_bidders_<%= idx %>:
 building:
   <<: *DEFAULTS
   game: $LABEL
+
+cities_power_up:
+  <<: *DEFAULTS
+  game: $LABEL
+  cities: 1
