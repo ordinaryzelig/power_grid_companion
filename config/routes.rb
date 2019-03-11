@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :pass
     end
   end
+  resources :buildings, :only => [:create]
   resources :resource_purchases, :only => [:create]
 
 end

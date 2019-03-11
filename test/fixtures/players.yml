@@ -23,3 +23,7 @@ multiple_bidders_<%= idx %>:
   color: <%= idx %>
   turn_order: <%= idx + 1 %>
 <% end %>
+
+building:
+  <<: *DEFAULTS
+  game: $LABEL

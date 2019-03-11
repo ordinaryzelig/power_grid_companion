@@ -9,3 +9,6 @@ only_bidder:
 
 multiple_bidders:
   token: <%= SecureRandom.hex(3) %>
+
+building:
+  token: <%= SecureRandom.hex(3) %>
