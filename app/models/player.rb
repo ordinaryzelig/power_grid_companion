@@ -20,4 +20,10 @@ class Player < ApplicationRecord
     [-cities, -cards.map(&:number).max]
   end
 
+  def purchase_resource(resource)
+    self.balance -= resource.cost
+    resource.move_to(self)
+    save!
+  end
+
 end

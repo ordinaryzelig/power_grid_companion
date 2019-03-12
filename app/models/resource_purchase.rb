@@ -17,10 +17,7 @@ class ResourcePurchase
   end
 
   def purchase_resources(resources)
-    Player.transaction do
-      @player.update!(:balance => @player.balance - resources.map(&:cost).reduce(:+))
-      resources.each { |resource| resource.update!(:owner => @player) }
-    end
+    resources.each(&@player.method(:purchase_resource))
   end
 
 end

@@ -33,4 +33,15 @@ class Resource < ApplicationRecord
     owner.cost
   end
 
+  def move_to(new_owner)
+    if owner.is_a?(ResourceMarketSpace)
+      owner.update!(:occupied => false)
+    end
+    update!(:owner => new_owner == :general_supply ? nil : new_owner)
+  end
+
+  def return_to_general_supply
+    move_to(:general_supply)
+  end
+
 end

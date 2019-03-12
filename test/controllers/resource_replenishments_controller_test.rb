@@ -5,12 +5,13 @@ class ResourceReplenishmentsControllerTest < ActionDispatch::IntegrationTest
   test 'replenishes Resource market' do
     game = games(:resource_replenishment)
     game.setup
-    claim_player game.players.first!
+    player = game.players.first!
+    claim_player player
 
     Resource.kinds.keys.each do |kind|
       game.resources_of_kind(kind).purchasable.limit(1).each do |resource|
-        resource.owner.update!(:occupied => false)
-        resource.update!(:owner => nil)
+        player.purchase_resource(resource)
+        resource.return_to_general_supply
       end
     end
 
