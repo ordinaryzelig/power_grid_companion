@@ -1,7 +1,7 @@
 class ResourceMarketSpace < ApplicationRecord
 
   belongs_to :game
-  has_one :resource
+  has_one :resource, :as => :owner
 
   extend EnumResourceKind
 

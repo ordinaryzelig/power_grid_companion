@@ -1,31 +1,29 @@
-%h1= @game.id
+%h1 Game #{@game.id}
 
 .row
   - @game.resource_market_spaces.group_by(&:cost).each do |cost, cost_spaces|
-    .col-1
-      .card
+    .card
 
-        .card-header
-          = cost
+      .card-header
+        = cost
 
-        .card-body
+      .card-body
 
-          .row
-            - cost_spaces.select(&:coal?).each do |space|
-              .col-4
-                = fa_icon 'cloud'
+        .row
+          - cost_spaces.select(&:coal?).each do |space|
+            .col-4
+              = resource_market_space_box space
 
-          .row
-            - cost_spaces.select(&:oil?).each do |space|
-              .col-3
-                = fa_icon 'database'
-
+        .row
+          - cost_spaces.select(&:oil?).each do |space|
             .col-3
-              - cost_spaces.select(&:uranium?).each do |space|
-                = fa_icon 'radiation-alt'
+              = resource_market_space_box space
 
-          .row
-            - cost_spaces.select(&:trash?).each do |space|
-              .col-4
-                = space.kind
-                = fa_icon 'trash-alt'
+          .col-3
+            - cost_spaces.select(&:uranium?).each do |space|
+              = resource_market_space_box space
+
+        .row
+          - cost_spaces.select(&:trash?).each do |space|
+            .col-4
+              = resource_market_space_box space
