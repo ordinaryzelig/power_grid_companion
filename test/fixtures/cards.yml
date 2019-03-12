@@ -1,3 +1,14 @@
 multiple_bidders:
   game: $LABEL
   number: 3
+
+claim_auction:
+  game: $LABEL
+  number: 3
+
+<% 3.upto(6) do |number| %>
+claim_auction_replace_<%= number %>:
+  game: claim_auction_replace
+  number: <%= number %>
+  player: <%= number < 6 ? 'claim_auction_replace' : nil %>
+<% end %>

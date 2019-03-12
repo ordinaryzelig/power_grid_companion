@@ -7,3 +7,19 @@ multiple_bidders:
     - <%= ActiveRecord::FixtureSet.identify("multiple_bidders_#{idx}") %>
     <% end %>
   price: 3
+
+claim_auction:
+  game: $LABEL
+  card: $LABEL
+  player: $LABEL
+  bidder_ids:
+    - <%= ActiveRecord::FixtureSet.identify(:claim_auction) %>
+  price: 3
+
+claim_auction_replace:
+  game: $LABEL
+  card: claim_auction_replace_6
+  player: $LABEL
+  bidder_ids:
+    - <%= ActiveRecord::FixtureSet.identify(:claim_auction_replace) %>
+  price: 6

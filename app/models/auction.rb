@@ -11,11 +11,7 @@ class Auction < ApplicationRecord
       authorize_player bidder
 
       increment_price
-      if bidder_ids.size == 1
-        sell_to bidder
-      else
-        cycle_bidders
-      end
+      cycle_bidders
 
       save!
     end
@@ -25,14 +21,16 @@ class Auction < ApplicationRecord
     authorize_player player
 
     bidder_ids.shift
-    if bidder_ids.size == 1
-      sell_to bidders.first
-    end
     save!
   end
 
   def bidders
     Player.find(bidder_ids)
+  end
+
+  def claim(card_to_replace)
+    card_to_replace&.update!(:player => nil)
+    sell_to bidders.first
   end
 
 private

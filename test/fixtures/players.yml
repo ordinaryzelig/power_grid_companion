@@ -38,3 +38,11 @@ replenishment_<%= idx %>:
   <<: *DEFAULTS
   game: resource_replenishment
 <% end %>
+
+claim_auction:
+  <<: *DEFAULTS
+  game: $LABEL
+
+claim_auction_replace:
+  <<: *DEFAULTS
+  game: $LABEL

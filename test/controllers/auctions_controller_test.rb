@@ -23,27 +23,6 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal game.players.in_turn_order.map(&:id), auction.bidder_ids
   end
 
-  test 'only bidder buys Card' do
-    player = players(:only_bidder)
-    game = player.game
-    game.setup
-    assert_equal 1, game.players.size
-    claim_player player
-    card = game.cards.find_by(:number => 3)
-
-    post auctions_url, :params => {
-      :auction => {
-        :card_id => card.id,
-      }
-    }
-    game.reload
-
-    player.reload
-    card.reload
-    assert_equal player, card.player
-    assert_equal 47, player.balance
-  end
-
   test 'bid with multiple potential buyers' do
     auction = auctions(:multiple_bidders)
     card = cards(:multiple_bidders)
@@ -58,7 +37,7 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [1, 2, 3], auction.bidders.map(&:turn_order)
   end
 
-  test 'passing removes bidder, sells to last bidder' do
+  test 'passing removes bidder' do
     auction = auctions(:multiple_bidders)
     card = cards(:multiple_bidders)
     assert_equal [3, 1, 2], auction.bidders.map(&:turn_order)
@@ -76,11 +55,35 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
       post pass_auction_url(auction)
       auction.reload
     end
+  end
 
-    assert_equal [2], auction.bidders.map(&:turn_order)
-    winner = auction.bidders.first
-    assert_equal winner, auction.card.player
-    assert_equal 47, winner.balance
+  test 'claiming Auction sells to bidder' do
+    auction = auctions(:claim_auction)
+    card = cards(:claim_auction)
+    player = players(:claim_auction)
+    claim_player player
+
+    assert_difference 'player.balance', -auction.price do
+      post claim_auction_url(auction)
+      player.reload
+    end
+
+    card.reload
+    assert_equal player, card.player
+    assert_equal 47, player.balance
+  end
+
+  test 'claiming Auction requires bidder to replace Card if they have 3 Cards' do
+    auction = auctions(:claim_auction_replace)
+    card_to_replace = cards(:claim_auction_replace_3)
+    player = players(:claim_auction_replace)
+    assert_includes player.cards, card_to_replace
+    claim_player player
+
+    post claim_auction_url(auction), :params => {:card_to_replace_id => card_to_replace.id}
+
+    player.reload
+    refute_includes player.cards, card_to_replace
   end
 
 end

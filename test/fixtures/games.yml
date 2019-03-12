@@ -19,3 +19,9 @@ cities_power_up:
 resource_replenishment:
   token: <%= SecureRandom.hex(3) %>
   step: 2
+
+claim_auction:
+  token: <%= SecureRandom.hex(3) %>
+
+claim_auction_replace:
+  token: <%= SecureRandom.hex(3) %>

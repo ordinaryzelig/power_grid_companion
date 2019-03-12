@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       post :bid
       post :pass
+      post :claim
     end
   end
   resources :buildings, :only => [:create]
