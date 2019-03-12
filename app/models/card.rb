@@ -71,4 +71,12 @@ class Card < ApplicationRecord
 
   end
 
+  def has_space?
+    resources.size < capacity
+  end
+
+  def capacity
+    resources_required * 2
+  end
+
 end

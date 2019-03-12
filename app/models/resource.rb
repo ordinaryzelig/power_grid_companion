@@ -3,6 +3,8 @@ class Resource < ApplicationRecord
   belongs_to :game
   belongs_to :owner, :polymorphic => true, :optional => true
 
+  validates :owner_type, :inclusion => {:in => ['Card', 'ResourceMarketSpace']}, :if => :owner_type
+
   scope :purchasable, -> { where(:owner_type => 'ResourceMarketSpace') }
   scope :general_supply, -> { where(:owner_type => nil) }
 

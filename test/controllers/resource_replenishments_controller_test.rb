@@ -9,6 +9,8 @@ class ResourceReplenishmentsControllerTest < ActionDispatch::IntegrationTest
     claim_player player
 
     Resource.kinds.keys.each do |kind|
+      card = game.cards.send(kind).first
+      player.purchase_card card, card.number
       game.resources_of_kind(kind).purchasable.limit(1).each do |resource|
         player.purchase_resource(resource)
         resource.return_to_general_supply

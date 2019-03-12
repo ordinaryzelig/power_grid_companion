@@ -50,8 +50,7 @@ private
   end
 
   def sell_to(player)
-    card.update!(:player => player)
-    player.update!(:balance => player.balance - price)
+    player.purchase_card(card, price)
   end
 
   def authorize_player(player)
