@@ -19,6 +19,10 @@ class Game < ApplicationRecord
     Card.setup(self)
   end
 
+  def replenishment_rates
+    ResourceReplenishment::RATES.fetch(players.size).fetch(step)
+  end
+
 private
 
   def generate_token

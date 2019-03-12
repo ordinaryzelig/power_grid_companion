@@ -15,3 +15,7 @@ building:
 
 cities_power_up:
   token: <%= SecureRandom.hex(3) %>
+
+resource_replenishment:
+  token: <%= SecureRandom.hex(3) %>
+  step: 2

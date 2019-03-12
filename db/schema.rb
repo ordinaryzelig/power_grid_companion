@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
 
   create_table "games", force: :cascade do |t|
     t.string "token", null: false
+    t.integer "step", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_games_on_token", unique: true
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
     t.bigint "game_id", null: false
     t.integer "kind"
     t.integer "cost", null: false
+    t.boolean "occupied", default: false, null: false
     t.index ["game_id"], name: "index_resource_market_spaces_on_game_id"
   end
 

@@ -32,3 +32,9 @@ cities_power_up:
   <<: *DEFAULTS
   game: $LABEL
   cities: 1
+
+<% 4.times do |idx| %>
+replenishment_<%= idx %>:
+  <<: *DEFAULTS
+  game: resource_replenishment
+<% end %>

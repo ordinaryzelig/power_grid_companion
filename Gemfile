@@ -49,9 +49,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 # Added at 2019-03-06 23:17:28 -0600 by ningja:
 gem "awesome_print", "~> 1.8"
 

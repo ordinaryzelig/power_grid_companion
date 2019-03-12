@@ -6,6 +6,8 @@ class ResourceMarketSpace < ApplicationRecord
   extend EnumResourceKind
 
   default_scope -> { order(:cost) }
+  scope :occupied, -> { where(:occupied => true) }
+  scope :unoccupied, -> { where(:occupied => false) }
 
   COSTS = [
      1,
@@ -62,7 +64,9 @@ class ResourceMarketSpace < ApplicationRecord
       STARTING_MARKET.each do |kind, num|
         assigned_resources = game.resources_of_kind(kind).general_supply.limit(num)
         assigned_resources.each do |resource|
-          resource.update!(:owner => free_spaces_by_kind.fetch(kind.to_s).pop)
+          free_space = free_spaces_by_kind.fetch(kind.to_s).pop
+          resource.update!(:owner => free_space)
+          free_space.update!(:occupied => true)
         end
       end
     end
