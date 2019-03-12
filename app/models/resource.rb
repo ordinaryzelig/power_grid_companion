@@ -6,17 +6,12 @@ class Resource < ApplicationRecord
   scope :purchasable, -> { where(:owner_type => 'ResourceMarketSpace') }
   scope :general_supply, -> { where(:owner_type => nil) }
 
-  enum :kind => {
-    :coal    => 1,
-    :oil     => 2,
-    :uranium => 3,
-    :trash   => 4,
-  }
+  extend EnumResourceKind
 
   class << self
 
     def setup(game)
-      ResourceMarketSpace::STARTING_COSTS.keys.each do |cost|
+      ResourceMarketSpace::COSTS.each do |cost|
         unless ResourceMarketSpace::URANIUM_ONLY_COSTS.include?(cost)
           %i[coal oil trash].each do |kind|
             3.times do

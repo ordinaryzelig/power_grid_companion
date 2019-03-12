@@ -59,7 +59,9 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
 
   create_table "resource_market_spaces", force: :cascade do |t|
     t.bigint "game_id", null: false
-    t.integer "cost"
+    t.integer "kind"
+    t.integer "cost", null: false
+    t.boolean "occupied", default: false, null: false
     t.index ["game_id"], name: "index_resource_market_spaces_on_game_id"
   end
 

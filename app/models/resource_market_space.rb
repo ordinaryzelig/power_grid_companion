@@ -1,34 +1,68 @@
 class ResourceMarketSpace < ApplicationRecord
 
   belongs_to :game
-  has_resources :as => :owner
+  has_one :resource
+
+  extend EnumResourceKind
 
   default_scope -> { order(:cost) }
 
-  STARTING_COSTS = {
-    1  => {:coal => 3, :oil => 0, :uranium => 0, :trash => 0},
-    2  => {:coal => 3, :oil => 0, :uranium => 0, :trash => 0},
-    3  => {:coal => 3, :oil => 3, :uranium => 0, :trash => 0},
-    4  => {:coal => 3, :oil => 3, :uranium => 0, :trash => 0},
-    5  => {:coal => 3, :oil => 3, :uranium => 0, :trash => 0},
-    6  => {:coal => 3, :oil => 3, :uranium => 0, :trash => 0},
-    7  => {:coal => 3, :oil => 3, :uranium => 0, :trash => 3},
-    8  => {:coal => 3, :oil => 3, :uranium => 0, :trash => 3},
-    10 => {:coal => 0, :oil => 0, :uranium => 0, :trash => 0},
-    12 => {:coal => 0, :oil => 0, :uranium => 0, :trash => 0},
-    14 => {:coal => 0, :oil => 0, :uranium => 1, :trash => 0},
-    16 => {:coal => 0, :oil => 0, :uranium => 1, :trash => 0},
-  }
+  COSTS = [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+    10,
+    12,
+    14,
+    16,
+  ]
   URANIUM_ONLY_COSTS = [10, 12, 14, 16]
+
+  STARTING_MARKET = {
+    :coal    => 24,
+    :oil     => 18,
+    :uranium => 2,
+    :trash   => 6,
+  }
 
   class << self
 
     def setup(game)
-      STARTING_COSTS.each do |cost, starting_resources|
-        resource_market_space = game.resource_market_spaces.create!(:cost => cost)
-        starting_resources.each do |kind, num|
-          assigned_resources = game.resources_of_kind(kind).general_supply.limit(num)
-          resource_market_space.resources.concat assigned_resources
+      # Build all spaces.
+      (COSTS - URANIUM_ONLY_COSTS).each do |cost|
+        (Resource.kinds.keys - ['uranium']).each do |kind|
+          3.times do
+            game.resource_market_spaces.build(
+              :cost => cost,
+              :kind => kind,
+            )
+          end
+        end
+        game.resource_market_spaces.build(
+          :cost => cost,
+          :kind => :uranium,
+        )
+      end
+      URANIUM_ONLY_COSTS.each do |cost|
+        game.resource_market_spaces.build(
+          :cost => cost,
+          :kind => :uranium,
+        )
+      end
+
+      game.save!
+
+      # Fill spaces according to STARTING_COSTS.
+      free_spaces_by_kind = game.resource_market_spaces.group_by(&:kind)
+      STARTING_MARKET.each do |kind, num|
+        assigned_resources = game.resources_of_kind(kind).general_supply.limit(num)
+        assigned_resources.each do |resource|
+          resource.update!(:owner => free_spaces_by_kind.fetch(kind.to_s).pop)
         end
       end
     end

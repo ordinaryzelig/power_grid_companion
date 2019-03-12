@@ -4,6 +4,10 @@ class GamesController < ApplicationController
     game = Game.create!(game_params)
   end
 
+  def show
+    @game = Game.find(params[:id])
+  end
+
 private
 
   def game_params

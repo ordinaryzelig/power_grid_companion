@@ -57,3 +57,12 @@ gem "awesome_print", "~> 1.8"
 
 # Added at 2019-03-07 00:27:24 -0600 by ningja:
 gem "flag_shih_tzu", "~> 0.3.23"
+
+# Added at 2019-03-11 19:30:52 -0500 by ningja:
+gem "haml-rails", "~> 2.0"
+
+gem "bootstrap", "~> 4.3"
+
+gem "jquery-rails", "~> 4.3"
+
+gem "font-awesome-rails", "~> 4.7"
