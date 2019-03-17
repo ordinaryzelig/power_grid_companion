@@ -19,7 +19,7 @@
               - if card = player.cards[idx]
                 .card.power_plant
 
-                  .card-header.text-center= card.number
+                  %h5.card-header.text-center= card.number
 
                   .card-body.text-center.requirements{:data => {:kinds => card.selected_kinds.first(1).join('-')}}
                     .row
