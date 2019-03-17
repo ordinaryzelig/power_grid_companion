@@ -1,5 +1,5 @@
 .row.track
   - game.players.in_turn_order.each do |player|
     .col-2
-      %div[player]{:data => {:color => player.color}}
+      %div[player]{:data => {:color => player.color}, :class => game.current_player_id == player.id ? 'active' : nil}
         = icon('fas', 'home')

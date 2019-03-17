@@ -5,11 +5,13 @@ class Game < ApplicationRecord
   has_many :resource_market_spaces
   has_many :cards
   has_many :auctions
+  belongs_to :current_player, :optional => true, :class_name => 'Player'
 
   accepts_nested_attributes_for :players
 
   before_validation :generate_token, :unless => :token
   before_validation :randomize_turn_order, :on => :create
+  before_validation :on => :create { self.current_player = players.first }
 
   after_create :setup
 
