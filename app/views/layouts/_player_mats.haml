@@ -1,6 +1,7 @@
 #player_mats
   - current_game.players.in_turn_order.each do |player|
     .card.player_mat[player]{:data => {:color => player.color}}
+
       %h3.card-header.d-flex
         .mat_item.flex-grow-1= player.name
         .mat_item.cities
@@ -9,13 +10,17 @@
         .mat_item.power_capacity
           = bolt_icon
           = player.power_capacity
+
       .card-body
         .row
           - 3.times.each do |idx|
             .col-4
+
               - if card = player.cards[idx]
                 .card.power_plant
+
                   .card-header.text-center= card.number
+
                   .card-body.text-center.requirements{:data => {:kinds => card.selected_kinds.first(1).join('-')}}
                     .row
                       .col
@@ -26,3 +31,12 @@
                         = resources_power_cities_arrow_icon
                         = house_icon
                         = card.cities
+
+                  - if card.resources.any?
+                    .card-body.resources.text-center
+                      %h6.card-title Storage
+                      - card.resources.in_groups_of(card.resources_required, false).each do |resources|
+                        .row
+                          .col
+                            - resources.each do |resource|
+                              = resource_icon resource.kind

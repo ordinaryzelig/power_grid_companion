@@ -23,7 +23,7 @@
   .power_plant
     .card-body, .card-header
       padding: 0.25rem
-    .card-body
+    .card-body.requirements
       color: white
       @each $kind, $color in $resource_colors
         +power_plant_requirements($kind, $color)
