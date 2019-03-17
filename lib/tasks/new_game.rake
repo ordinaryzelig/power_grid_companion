@@ -8,5 +8,6 @@ task :new_game => :environment do
       }
     end,
   )
-  ap g.id
+  ap "Game #{g.id}"
+  ap "Players #{g.players.in_turn_order.ids.join(', ')}"
 end

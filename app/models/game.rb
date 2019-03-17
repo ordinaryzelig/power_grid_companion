@@ -11,14 +11,15 @@ class Game < ApplicationRecord
 
   before_validation :generate_token, :unless => :token
   before_validation :randomize_turn_order, :on => :create
-  before_validation :on => :create { self.current_player = players.first }
 
   after_create :setup
 
   def setup
+    self.current_player = players.min_by(&:turn_order)
     Resource.setup(self)
     ResourceMarketSpace.setup(self)
     Card.setup(self)
+    save!
   end
 
   def replenishment_rates
