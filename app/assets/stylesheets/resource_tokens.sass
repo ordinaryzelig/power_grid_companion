@@ -1,0 +1,15 @@
+=resource_token($kind, $color)
+  &[data-kind="#{$kind}"]
+    color: white
+    background-color: #{$color}
+
+.resource_token
+  display: inline-block
+  $square: 20px
+  font-size: 12px
+  width: $square
+  height: $square
+  text-align: center
+  transform: rotate(10deg)
+  @each $kind, $color in $resource_colors
+    +resource_token($kind, $color)

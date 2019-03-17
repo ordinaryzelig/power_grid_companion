@@ -34,9 +34,8 @@
 
                   - if card.resources.any?
                     .card-body.resources.text-center
-                      %h6.card-title Storage
                       - card.resources.in_groups_of(card.resources_required, false).each do |resources|
                         .row
                           .col
                             - resources.each do |resource|
-                              = resource_icon resource.kind
+                              = resource_token resource
