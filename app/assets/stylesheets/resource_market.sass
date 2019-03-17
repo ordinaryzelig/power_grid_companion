@@ -1,3 +1,8 @@
+=occupied_resource_market_space($kind, $color)
+  &.occupied[data-kind="#{$kind}"]
+    color: white
+    background-color: #{$color}
+
 .resource_market_space
   border: 1px solid rgba(0, 0, 0, 0.125)
   text-align: center
@@ -6,15 +11,8 @@
   height: $square
 
   &.occupied
-    &.coal
-      background-color: brown
-      color: white
-    &.oil
-      background-color: black
-      color: white
-    &.uranium
-      background-color: red
-    &.trash
-      background-color: yellow
+    @each $kind, $color in $resource_colors
+      +occupied_resource_market_space($kind, $color)
+
   &:not(.occupied)
     color: lightgray
