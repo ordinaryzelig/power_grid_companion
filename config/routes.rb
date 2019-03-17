@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :players, :only => [] do
     member do
       post :claim
+      get :claim if Rails.env.development?
     end
   end
   resources :auctions, :only => [:create] do

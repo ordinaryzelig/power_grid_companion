@@ -1,7 +1,9 @@
 class PlayersController < ApplicationController
 
   def claim
-    cookies.signed[:player_id] = params.fetch(:id)
+    player = Player.find(params.fetch(:id))
+    cookies.signed[:player_id] = player.id
+    redirect_to player.game
   end
 
 end
