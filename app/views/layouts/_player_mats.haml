@@ -1,0 +1,28 @@
+#player_mats
+  - current_game.players.in_turn_order.each do |player|
+    .card.player_mat[player]{:data => {:color => player.color}}
+      %h3.card-header.d-flex
+        .mat_item.flex-grow-1= player.name
+        .mat_item.cities
+          = house_icon
+          = player.cities
+        .mat_item.power_capacity
+          = bolt_icon
+          = player.power_capacity
+      .card-body
+        .row
+          - 3.times.each do |idx|
+            .col-4
+              - if card = player.cards[idx]
+                .card.power_plant
+                  .card-header.text-center= card.number
+                  .card-body.text-center.requirements{:data => {:kinds => card.selected_kinds.first(1).join('-')}}
+                    .row
+                      .col
+                        - card.resources_required.times do
+                          = resource_icon card.selected_kinds.first
+                    .row
+                      .col
+                        = resources_power_cities_arrow_icon
+                        = house_icon
+                        = card.cities

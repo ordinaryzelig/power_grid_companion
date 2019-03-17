@@ -33,4 +33,8 @@ class Player < ApplicationRecord
     update!(:balance => balance - price)
   end
 
+  def power_capacity
+    cards.sum(&:cities)
+  end
+
 end

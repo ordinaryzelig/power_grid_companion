@@ -15,6 +15,9 @@ class Card < ApplicationRecord
     :column => 'kinds',
   )
 
+  default_scope -> { order(:number) }
+  scope :power_plants, -> { not_step_3 }
+
   STANDARD_DECK = {
      3 => {:selected_kinds => [:oil],        :resources_required => 2, :cities => 1},
      4 => {:selected_kinds => [:coal],       :resources_required => 2, :cities => 1},

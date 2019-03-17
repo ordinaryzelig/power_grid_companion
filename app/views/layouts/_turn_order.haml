@@ -2,5 +2,5 @@
   - current_game.players.in_turn_order.each do |player|
     .col-2
       %div[player]{:data => {:color => player.color}, :class => current_game.current_player_id == player.id ? 'active' : nil}
-        .house= icon('fas', 'home')
-        .cities= player.cities
+        %span.house= house_icon
+        %span.cities= player.cities
