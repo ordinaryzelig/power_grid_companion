@@ -4,9 +4,5 @@ $player_colors: (
   "green":  green,
   "purple": purple,
   "red":    red,
-  "yellow": yellow,
+  "yellow": rgb(255, 200, 0),
 );
-
-@function player_color($key) {
-  @return map-get($player_colors, $key);
-};

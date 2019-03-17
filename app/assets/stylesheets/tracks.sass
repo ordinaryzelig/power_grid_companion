@@ -1,11 +1,11 @@
-=player_track($player_color)
+=player_track($player_color, $color)
   &[data-color="#{$player_color}"]
-    $player_color: #{$player_color}
-    color: $player_color
-    border-color: $player_color
-    opacity: 0.5
+    opacity: 0.6
+    &:not(.active)
+      .house
+        color: #{$color}
     &.active
-      background-color: $player_color
+      background-color: #{$color}
       color: white
       opacity: 1
 
@@ -16,4 +16,4 @@
     border-style: solid
     border-color: gray
     @each $player_color, $color in $player_colors
-      +player_track($player_color)
+      +player_track($player_color, $color)
