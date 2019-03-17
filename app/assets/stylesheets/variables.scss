@@ -1,0 +1,12 @@
+$player_colors: (
+  "black":  black,
+  "blue":   blue,
+  "green":  green,
+  "purple": purple,
+  "red":    red,
+  "yellow": yellow,
+);
+
+@function player_color($key) {
+  @return map-get($player_colors, $key);
+};

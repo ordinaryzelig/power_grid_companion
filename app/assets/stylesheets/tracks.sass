@@ -1,0 +1,17 @@
+=player_track($player_color)
+  &[data-color="#{$player_color}"]
+    $player_color: #{$player_color}
+    color: $player_color
+    border-color: $player_color
+    &.active
+      background-color: $player_color
+      color: white
+
+.track
+  .player
+    text-align: center
+    border-width: 1px
+    border-style: solid
+    border-color: gray
+    @each $player_color, $color in $player_colors
+      +player_track($player_color)
