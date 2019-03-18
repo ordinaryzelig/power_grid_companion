@@ -12,18 +12,18 @@
         .row
           - cost_spaces.select(&:coal?).each do |space|
             .col-4
-              = resource_market_space_box space
+              = resource_market_space space
 
         .row
           - cost_spaces.select(&:oil?).each do |space|
             .col-3
-              = resource_market_space_box space
+              = resource_market_space space
 
           .col-3
             - cost_spaces.select(&:uranium?).each do |space|
-              = resource_market_space_box space
+              = resource_market_space space
 
         .row
           - cost_spaces.select(&:trash?).each do |space|
             .col-4
-              = resource_market_space_box space
+              = resource_market_space space

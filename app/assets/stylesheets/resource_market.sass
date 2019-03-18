@@ -1,18 +1,9 @@
-=occupied_resource_market_space($kind, $color)
-  &.occupied[data-kind="#{$kind}"]
-    color: white
-    background-color: #{$color}
-
 .resource_market_space
-  border: 1px solid rgba(0, 0, 0, 0.125)
+  $empty_color: rgba(0, 0, 0, 0.125)
+  border: 1px solid $empty_color
   text-align: center
   $square: 30px
   width: $square
   height: $square
-
-  &.occupied
-    @each $kind, $color in $resource_colors
-      +occupied_resource_market_space($kind, $color)
-
   &:not(.occupied)
-    color: lightgray
+    color: $empty_color

@@ -1,13 +1,17 @@
 module ResourceMarketSpacesHelper
 
-  def resource_market_space_box(space)
+  def resource_market_space(space)
     options = {}
-    options[:class] = ['resource_market_space']
-    options[:class] << 'occupied' if space.resource.present?
+    options[:class] = %w[resource_market_space]
     options[:data] = {:kind => space.kind}
-    content_tag :div, options do
-      resource_icon(space.kind)
-    end
+    content =
+      if space.resource
+        options[:class] << 'occupied'
+        resource_token(space.resource)
+      else
+        resource_icon(space.kind)
+      end
+    content_tag :div, content, options
   end
 
 end
