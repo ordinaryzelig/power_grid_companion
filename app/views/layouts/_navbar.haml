@@ -1,0 +1,8 @@
+%nav.navbar.sticky-top.navbar-light.bg-light
+  .navbar-brand
+    Game #{current_game.token}
+  %button.navbar-toggler{:type => "button", :data => {:toggle => "collapse", :target => "#navbarNav"}}
+    %span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse
+    %ul.navbar-nav
+      %li.nav-item= link_to 'New Game', new_game_url, :class => 'nav-link'

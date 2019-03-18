@@ -9,9 +9,15 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, shrink-to-fit=no"}
   %body
+
+    = render 'layouts/navbar'
+
     .container-fluid
 
+      = render 'layouts/game_nav'
       = render 'layouts/turn_order'
-      = render 'layouts/player_mats'
+      #game_nav_panes
+        = render 'layouts/player_mats'
+        = render 'layouts/resource_market'
 
       = yield

@@ -1,4 +1,4 @@
-#player_mats.collapse
+#player_mats.collapse{:data => {:parent => '#game_nav_panes'}}
   - current_game.players.in_turn_order.each do |player|
     .card.player_mat[player]{:data => {:color => player.color}}
 
