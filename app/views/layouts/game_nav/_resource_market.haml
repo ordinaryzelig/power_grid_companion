@@ -1,5 +1,5 @@
 #resource_market.collapse{:data => {:parent => '#game_nav_panes'}}
-  - @game.resource_market_spaces.group_by(&:cost).each do |cost, cost_spaces|
+  - current_game.resource_market_spaces.group_by(&:cost).each do |cost, cost_spaces|
     .card
 
       .card-header
