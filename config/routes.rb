@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get :claim if Rails.env.development?
     end
   end
-  resources :auctions, :only => %i[new create] do
+  resources :auctions, :only => %i[new create show] do
     member do
       post :bid
       post :pass

@@ -12,6 +12,11 @@ class AuctionsController < ApplicationController
     )
     auction = current_game.auctions.create!(auction_atts)
     auction.bid_by current_player
+    redirect_to auction
+  end
+
+  def show
+    @auction = current_game.auctions.find(params[:id])
   end
 
   def bid
