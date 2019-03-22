@@ -5,7 +5,7 @@ class ResourceMarketSpace < ApplicationRecord
 
   extend EnumResourceKind
 
-  default_scope -> { order(:cost) }
+  default_scope -> { order(:cost, :occupied) }
   scope :occupied, -> { where(:occupied => true) }
   scope :unoccupied, -> { where(:occupied => false) }
 
