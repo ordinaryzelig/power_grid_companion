@@ -25,3 +25,6 @@ claim_auction:
 
 claim_auction_replace:
   token: <%= SecureRandom.hex(3) %>
+
+card_setup:
+  token: <%= SecureRandom.hex(3) %>

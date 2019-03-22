@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_031222) do
+ActiveRecord::Schema.define(version: 2019_03_22_051938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_031222) do
     t.integer "resources_required"
     t.integer "cities"
     t.bigint "player_id"
+    t.integer "position", null: false
     t.index ["game_id", "number"], name: "index_cards_on_game_id_and_number", unique: true
     t.index ["game_id"], name: "index_cards_on_game_id"
     t.index ["player_id"], name: "index_cards_on_player_id"

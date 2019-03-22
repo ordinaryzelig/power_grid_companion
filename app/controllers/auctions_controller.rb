@@ -2,6 +2,10 @@ class AuctionsController < ApplicationController
 
   before_action :set_auction, :only => %i[bid pass claim]
 
+  def new
+    @auction = current_game.auctions.new
+  end
+
   def create
     auction_atts = auction_params.merge(
       :player_id => current_player.id,

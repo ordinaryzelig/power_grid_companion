@@ -8,8 +8,13 @@ private
   helper_method :current_player
 
   def current_game
-    @current_game ||= current_player.game
+    current_player.game
   end
   helper_method :current_game
+
+  def current_game_player
+    current_game.current_player
+  end
+  helper_method :current_game_player
 
 end

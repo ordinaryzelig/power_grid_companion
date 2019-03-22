@@ -17,25 +17,4 @@
             .col-4
 
               - if card = player.cards[idx]
-                .card.power_plant
-
-                  %h5.card-header.text-center= card.number
-
-                  .card-body.text-center.requirements{:data => {:kinds => card.selected_kinds.first(1).join('-')}}
-                    .row
-                      .col
-                        - card.resources_required.times do
-                          = resource_icon card.selected_kinds.first
-                    .row
-                      .col
-                        = resources_power_cities_arrow_icon
-                        = house_icon
-                        = card.cities
-
-                  - if card.resources.any?
-                    .card-body.resources.text-center
-                      - card.resources.in_groups_of(card.resources_required, false).each do |resources|
-                        .row
-                          .col
-                            - resources.each do |resource|
-                              = resource_token resource
+                = render card
