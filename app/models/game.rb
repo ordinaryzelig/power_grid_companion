@@ -14,6 +14,16 @@ class Game < ApplicationRecord
 
   after_create :setup
 
+  enum(
+    :phase => {
+      :turn_order       => 1,
+      :auction          => 2,
+      :buying_resources => 3,
+      :building         => 4,
+      :bureaucracy      => 5,
+    },
+  )
+
   def setup
     self.current_player = players.min_by(&:turn_order)
     Resource.setup(self)

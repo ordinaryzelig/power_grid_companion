@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_020538) do
+ActiveRecord::Schema.define(version: 2019_03_22_031222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
     t.bigint "current_player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "phase", default: 1
     t.index ["current_player_id"], name: "index_games_on_current_player_id"
     t.index ["token"], name: "index_games_on_token", unique: true
   end
