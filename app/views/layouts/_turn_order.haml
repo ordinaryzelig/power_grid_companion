@@ -4,3 +4,9 @@
       %div[player]{:data => {:color => player.color}, :class => current_game.current_player_id == player.id ? 'active' : nil}
         %span.house= house_icon
         %span.cities= player.cities
+        %div
+          - if player == current_player
+            You
+          - else
+            - if Rails.env.development?
+              = link_to player.id, claim_player_url(player)
