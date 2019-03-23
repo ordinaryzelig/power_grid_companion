@@ -33,6 +33,14 @@ class Auction < ApplicationRecord
     sell_to bidders.first
   end
 
+  def player_turn
+    bidders.first
+  end
+
+  def player_turn?(player)
+    player_turn.tap(&method(:ap)) == player.tap(&method(:ap))
+  end
+
 private
 
   def set_initial_bidding_order
@@ -52,7 +60,7 @@ private
   end
 
   def authorize_player(player)
-    raise "Wrong player (#{player.id}) turn. Only player that can do anything is #{bidder_ids.first}" unless bidder_ids.first == player.id
+    raise "Wrong player (#{player.id}) turn. Only player that can do anything is #{bidder_ids.first}" unless player_turn?(player)
   end
 
 end

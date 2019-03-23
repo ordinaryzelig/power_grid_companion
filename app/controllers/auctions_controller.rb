@@ -1,6 +1,7 @@
 class AuctionsController < ApplicationController
 
-  before_action :set_auction, :only => %i[bid pass claim]
+  before_action :set_auction, :only => %i[show bid pass claim]
+  before_action :set_turn, :only => %i[show]
 
   def new
     @auction = current_game.auctions.new
@@ -16,7 +17,6 @@ class AuctionsController < ApplicationController
   end
 
   def show
-    @auction = current_game.auctions.find(params[:id])
   end
 
   def bid
@@ -25,6 +25,7 @@ class AuctionsController < ApplicationController
 
   def pass
     @auction.pass_by current_player
+    redirect_to @auction
   end
 
   def claim
@@ -44,6 +45,10 @@ private
 
   def set_auction
     @auction = current_game.auctions.find(params[:id])
+  end
+
+  def set_turn
+    @your_turn = @auction.player_turn?(current_player)
   end
 
 end
