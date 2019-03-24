@@ -32,7 +32,9 @@ class Resource < ApplicationRecord
   end
 
   def cost
-    owner.cost
+    if owner.is_a?(ResourceMarketSpace)
+      owner.cost
+    end
   end
 
   def move_to(new_owner)

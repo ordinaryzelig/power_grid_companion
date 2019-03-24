@@ -1,6 +1,8 @@
 =resource_token($kind, $color)
   &[data-kind="#{$kind}"]
     background-color: #{$color}
+    &.selected
+      opacity: 0.25
 
 .resource_token
   display: inline-block
