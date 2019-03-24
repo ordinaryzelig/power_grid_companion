@@ -16,8 +16,8 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'player.balance', -15 do
       params = {
         :resource_purchase => {
-          :oil  => 4,
           :coal => 2,
+          :oil  => 4,
         },
       }
       post resource_purchases_url, :params => params

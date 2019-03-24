@@ -8,10 +8,11 @@ class ResourcePurchase
   def save!
     @resource_params.each do |resource_kind, num|
       resources =
-        @player.game.resources_of_kind(resource_kind)
-          .purchasable
-          .sort_by(&:cost)
-          .take(Integer(num))
+        @player.game.resource_market_spaces
+          .occupied
+          .send(resource_kind)
+          .first(Integer(num))
+          .map(&:resource)
       purchase_resources(resources)
     end
   end

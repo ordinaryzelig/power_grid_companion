@@ -23,10 +23,8 @@ task :random_cards, [:game_id] => :environment do |t, args|
       card
     end
     player.cards.not_renewable.each do |card|
-      (1..card.resources_required * 2).to_a.sample.times do
-        resource = game.resources_of_kind(card.selected_kinds.sample).purchasable.first
-        player.purchase_resource resource
-      end
+      num = (1..card.resources_required * 2).to_a.sample
+      ResourcePurchase.new(player, {card.selected_kinds.sample => num}).save!
     end
   end
 end
