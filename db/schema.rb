@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_051938) do
+ActiveRecord::Schema.define(version: 2019_03_10_020538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_051938) do
     t.bigint "player_id", null: false
     t.integer "bidder_ids", null: false, array: true
     t.integer "price"
+    t.integer "round", null: false
     t.index ["card_id"], name: "index_auctions_on_card_id"
     t.index ["game_id"], name: "index_auctions_on_game_id"
     t.index ["player_id"], name: "index_auctions_on_player_id"
@@ -42,10 +43,11 @@ ActiveRecord::Schema.define(version: 2019_03_22_051938) do
   create_table "games", force: :cascade do |t|
     t.string "token", null: false
     t.integer "step", default: 1, null: false
+    t.integer "round", default: 1, null: false
+    t.integer "phase", default: 1
     t.bigint "current_player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "phase", default: 1
     t.index ["current_player_id"], name: "index_games_on_current_player_id"
     t.index ["token"], name: "index_games_on_token", unique: true
   end

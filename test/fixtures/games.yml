@@ -1,30 +1,43 @@
+DEFAULTS: &DEFAULTS
+  round: 1
+
 resource_purchase:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 auction_creator:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 only_bidder:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 multiple_bidders:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 building:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 cities_power_up:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 resource_replenishment:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
   step: 2
 
 claim_auction:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 claim_auction_replace:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
 
 card_setup:
+  <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>

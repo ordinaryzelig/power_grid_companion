@@ -10,6 +10,7 @@ class AuctionsController < ApplicationController
   def create
     auction_atts = auction_params.merge(
       :player_id => current_player.id,
+      :round     => current_game.round,
     )
     auction = current_game.auctions.create!(auction_atts)
     auction.bid_by current_player

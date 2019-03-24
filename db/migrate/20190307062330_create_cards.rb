@@ -7,6 +7,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.integer :resources_required
       t.integer :cities
       t.belongs_to :player, foreign_key: true
+      t.integer :position, :null => false
     end
     add_index :cards, [:game_id, :number], :unique => true
   end
