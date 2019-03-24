@@ -38,7 +38,11 @@ class Auction < ApplicationRecord
   end
 
   def player_turn?(player)
-    player_turn.tap(&method(:ap)) == player.tap(&method(:ap))
+    player_turn == player
+  end
+
+  def open?
+    bidder_ids.size > 1
   end
 
 private

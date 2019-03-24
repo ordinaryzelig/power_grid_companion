@@ -6,7 +6,7 @@
         %span.cities= player.cities
         %div
           - if player == current_player
-            You
+            #{current_player.balance}€
           - else
             - if Rails.env.development?
               = link_to player.id, claim_player_url(player)

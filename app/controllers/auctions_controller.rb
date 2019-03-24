@@ -21,6 +21,7 @@ class AuctionsController < ApplicationController
 
   def bid
     @auction.bid_by current_player
+    redirect_to @auction
   end
 
   def pass
@@ -31,6 +32,7 @@ class AuctionsController < ApplicationController
   def claim
     card_to_replace = current_game.cards.find(params[:card_to_replace_id]) if params[:card_to_replace_id]
     @auction.claim(card_to_replace)
+    redirect_to [:new, @auction]
   end
 
 private
