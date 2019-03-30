@@ -7,10 +7,11 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Game.count' do
       params = {
         :game => {
-          :players_attributes => colors.map do |color|
+          :players_attributes => colors.each_with_index.map do |color, idx|
             {
-              :name  => "Player #{color}",
-              :color => color,
+              :name          => "Player #{color}",
+              :color         => color,
+              :seat_position => idx + 1,
             }
           end,
         },

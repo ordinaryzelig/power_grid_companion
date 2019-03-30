@@ -2,6 +2,7 @@ DEFAULTS: &DEFAULTS
   name: ready player 1
   color: blue
   balance: 50
+  seat_position: 1
   turn_order: 1
 
 resource_purchase:
@@ -37,6 +38,8 @@ cities_power_up:
 replenishment_<%= idx %>:
   <<: *DEFAULTS
   game: resource_replenishment
+  color: <%= Player.colors.keys.fetch(idx) %>
+  seat_position: <%= idx %>
 <% end %>
 
 claim_auction:

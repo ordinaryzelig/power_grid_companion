@@ -6,6 +6,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.integer :color, :null => false
       t.integer :balance, :null => false, :default => 50
       t.integer :cities, :null => false, :default => 0
+      t.integer :seat_position, :null => false
       t.integer :turn_order, :null => false
 
       t.timestamps

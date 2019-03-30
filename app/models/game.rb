@@ -1,16 +1,26 @@
 class Game < ApplicationRecord
 
-  has_many :players
+  has_many :players, :inverse_of => :game do
+    def setup
+      missing_colors = Player.colors.keys - map(&:color)
+      missing_colors.each_with_index do |color, idx|
+        build(:seat_position => idx + 1)
+      end
+      sort_by(&:seat_position)
+    end
+  end
   has_resources
   has_many :resource_market_spaces
   has_many :cards
   has_many :auctions
   belongs_to :current_player, :optional => true, :class_name => 'Player'
 
-  accepts_nested_attributes_for :players
+  accepts_nested_attributes_for :players, :reject_if => -> (atts) { atts.values_at(:name, :color).all?(&:blank?) }
 
   before_validation :generate_token, :unless => :token
   before_validation :randomize_turn_order, :on => :create
+
+  validate :at_least_2_players, :on => :create
 
   after_create :setup
 
@@ -45,6 +55,12 @@ private
   def randomize_turn_order
     players.shuffle.each_with_index do |player, idx|
       player.turn_order = idx + 1
+    end
+  end
+
+  def at_least_2_players
+    if players.size < 2
+      errors.add(:base, 'Enter at least 2 players')
     end
   end
 

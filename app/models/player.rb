@@ -4,6 +4,10 @@ class Player < ApplicationRecord
   has_many :cards
   has_resources :as => :owner
 
+  validates :name, :presence => true
+  validates :color, :presence => true, :uniqueness => {:scope => :game_id}
+  validates :seat_position, :presence => true, :uniqueness => {:scope => :game_id}
+
   scope :in_turn_order, -> { order(:turn_order) }
   scope :starting_with, -> (player) { where('turn_order >= ?', player.turn_order) }
 
