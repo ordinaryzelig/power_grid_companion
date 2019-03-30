@@ -1,0 +1,21 @@
+- if @game.errors.any?
+  .alert.alert-danger
+    = @game.errors.full_messages.join('. ')
+
+= form_for @game do |f|
+
+  %p
+    Enter players in the order they are seated.
+    Turn order will be determined randomly.
+
+  = f.fields_for :players, @game.players do |player_f|
+    = player_f.hidden_field :seat_position
+    .form-row
+
+      .form-group.col-4
+        = player_f.collection_select :color, Player.colors.keys, :itself, :titleize, {:prompt => 'Color'}, :class => 'form-control'
+
+      .form-group.col-8
+        = player_f.text_field :name, :class => 'form-control', :placeholder => 'Name'
+
+  = f.submit 'Play', :class => 'btn btn-primary btn-block'

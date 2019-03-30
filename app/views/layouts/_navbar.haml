@@ -1,6 +1,8 @@
 %nav.navbar.sticky-top.navbar-light.bg-light
   .navbar-brand
-    Game #{current_game.token}
+    Power Grid
+    - if current_game
+      | Game #{current_game.token}
   %button.navbar-toggler{:type => "button", :data => {:toggle => "collapse", :target => "#navbarNav"}}
     %span.navbar-toggler-icon
   #navbarNav.collapse.navbar-collapse

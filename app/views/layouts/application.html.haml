@@ -11,14 +11,16 @@
   %body
 
     = render 'layouts/navbar'
-    = render 'layouts/game_state'
-    = render 'layouts/game_nav'
+    - if current_game
+      = render 'layouts/game_state'
+      = render 'layouts/game_nav'
 
     .container-fluid
 
-      = render 'layouts/turn_order'
-      #game_nav_panes
-        = render 'layouts/game_nav/player_mats'
-        = render 'layouts/game_nav/resource_market'
+      - if current_game
+        = render 'layouts/turn_order'
+        #game_nav_panes
+          = render 'layouts/game_nav/player_mats'
+          = render 'layouts/game_nav/resource_market'
 
       = yield
