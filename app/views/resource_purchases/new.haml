@@ -12,3 +12,7 @@
       %span#cost #{@resource_purchase.cost}€
 
     = f.submit 'Buy', :class => 'btn btn-success btn-block'
+
+:coffee
+  $(document).on 'turbolinks:load', ->
+    setup_resource_purchasing()

@@ -1,4 +1,5 @@
-$(document).on 'turbolinks:load', ->
+window.setup_resource_purchasing = ->
+
   market = $('#resource_market')
   market.collapse('show')
   market.addClass('active')
