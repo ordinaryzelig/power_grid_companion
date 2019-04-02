@@ -20,7 +20,12 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
 
     auction = game.auctions.last
     assert_equal card, auction.card
-    assert_equal game.players.in_turn_order.map(&:id), auction.bidder_ids
+    bidder_ids = [
+      players(:auction_participator_0).id,
+      players(:auction_participator_1).id,
+      players(:auction_creator).id, # Bid first, so is last.
+    ]
+    assert_equal bidder_ids, auction.bidder_ids
   end
 
   test 'bid with multiple potential buyers' do

@@ -12,6 +12,16 @@ resource_purchase:
 auction_creator:
   <<: *DEFAULTS
   game: $LABEL
+  seat_position: 0
+  turn_order: 0
+
+<% 2.times do |idx| %>
+auction_participator_<%= idx %>:
+  <<: *DEFAULTS
+  game: auction_creator
+  seat_position: <%= idx %>
+  turn_order: <%= 2 - idx %>
+<% end %>
 
 only_bidder:
   <<: *DEFAULTS

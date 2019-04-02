@@ -9,6 +9,7 @@ class Player < ApplicationRecord
   validates :seat_position, :presence => true, :uniqueness => {:scope => :game_id}
 
   scope :in_turn_order, -> { order(:turn_order) }
+  scope :in_seat_order, -> { order(:seat_position) }
   scope :starting_with, -> (player) { where('turn_order >= ?', player.turn_order) }
 
   enum :color => {

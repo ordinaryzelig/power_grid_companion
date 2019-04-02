@@ -48,7 +48,7 @@ class Auction < ApplicationRecord
 private
 
   def set_initial_bidding_order
-    self.bidder_ids = game.players.in_turn_order.starting_with(player).map(&:id)
+    self.bidder_ids = game.players.in_seat_order.starting_with(player).map(&:id)
   end
 
   def increment_price
