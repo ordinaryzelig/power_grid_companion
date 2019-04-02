@@ -21,7 +21,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
     game = Game.last
     assert_equal colors.map(&:to_s).sort, game.players.map(&:color).sort
-    assert_equal (1..colors.size).to_a, game.players.map(&:turn_order).sort
+    assert_equal (0...colors.size).to_a, game.players.map(&:turn_order).sort
 
     refute_empty game.resources
     refute_empty game.resource_market_spaces

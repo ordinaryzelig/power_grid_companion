@@ -4,7 +4,7 @@ class Game < ApplicationRecord
     def setup
       missing_colors = Player.colors.keys - map(&:color)
       missing_colors.each_with_index do |color, idx|
-        build(:seat_position => idx + 1)
+        build(:seat_position => idx)
       end
       sort_by(&:seat_position)
     end
@@ -54,7 +54,7 @@ private
 
   def randomize_turn_order
     players.shuffle.each_with_index do |player, idx|
-      player.turn_order = idx + 1
+      player.turn_order = idx
     end
   end
 

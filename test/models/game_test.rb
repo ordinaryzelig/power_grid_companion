@@ -13,7 +13,7 @@ class GameTest < ActiveSupport::TestCase
       end
     )
 
-    assert_equal 1, game.current_player.turn_order
+    assert_equal 0, game.current_player.turn_order
   end
 
 end
