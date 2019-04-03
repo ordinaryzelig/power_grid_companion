@@ -1,5 +1,8 @@
 class BuildingsController < ApplicationController
 
+  def new
+  end
+
   def create
     buildings = Buildings.new(current_player, buildings_params)
     buildings.save!
