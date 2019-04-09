@@ -8,16 +8,16 @@ class BuildingsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference 'player.cities', 2 do
       params = {
-        :buildings => {
-          '0' => {
+        :buildings => [
+          {
             :connection_cost => 5,
             :building_cost   => 10,
           },
-          '1' => {
+          {
             :connection_cost => 10,
             :building_cost   => 15,
           },
-        },
+        ],
       }
       post buildings_url, :params => params
       player.reload

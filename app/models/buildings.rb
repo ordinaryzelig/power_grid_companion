@@ -28,7 +28,7 @@ class Buildings
   end
 
   def buildings_atts
-    @buildings_atts ||= @params.fetch(:buildings).values
+    @buildings_atts ||= @params.fetch(:buildings)
   end
 
 end

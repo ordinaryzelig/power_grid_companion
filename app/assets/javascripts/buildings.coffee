@@ -8,6 +8,7 @@ $(document).on 'turbolinks:load', ->
     form.find('.rows').append(template)
     event.preventDefault()
     update_total()
+    $('.connection_cost:last').focus()
 
   $(document).on 'click', '#new_buildings a.delete', ->
     $(@).parents('.building_fields').remove()
