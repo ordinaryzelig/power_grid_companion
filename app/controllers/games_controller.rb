@@ -16,7 +16,13 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    game = Game.find_by!(:token => params[:id])
+    case game.phase
+    when 'auction'
+      redirect_to new_auction_url
+    else
+      raise "Don't know how to navigate to #{game.phase.inspect}"
+    end
   end
 
 private
