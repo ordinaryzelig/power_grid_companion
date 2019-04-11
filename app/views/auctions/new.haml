@@ -1,10 +1,12 @@
 %h1 Auction
 
-%h3= current_game_player.name
-
 %p Choose a Power Plant to put up for auction.
 
 = form_for @auction, :data => {:confirm => 'Start bidding?'} do |f|
   = f.hidden_field :card_id
 
-  = render 'market'
+  = render 'market', :market_type => 'actual', :cards => @actual_market
+
+  = f.submit 'Start bidding', :class => 'btn btn-success btn-block'
+
+  = render 'market', :market_type => 'future', :cards => @future_market

@@ -1,7 +1,5 @@
-- current_game.cards.auctionable.first(8).in_groups_of(4, false).each_with_index do |cards, row|
-  - market_type = row == 0 ? 'actual' : 'future'
-  %h5.mt-5= market_type.titleize
-  .row.power_plant_market{:class => market_type}
-    - cards.each do |card|
-      .col-6
-        = render card
+%h5.mt-5= market_type.titleize
+.row.power_plant_market{:class => market_type}
+  - cards.each do |card|
+    .col-6
+      = render card

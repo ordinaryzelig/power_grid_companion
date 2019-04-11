@@ -5,6 +5,7 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = current_game.auctions.new
+    @actual_market, @future_market = current_game.cards.auctionable.first(8).in_groups_of(4, false)
   end
 
   def create
