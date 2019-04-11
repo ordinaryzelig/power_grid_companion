@@ -1,7 +1,7 @@
 $(document).on 'turbolinks:load', ->
 
   auction_form = $('#new_auction')
-  auction_form.find('.power_plant').on 'click', ->
+  auction_form.find('.actual .power_plant').on 'click', ->
     power_plant = $(@)
 
     # Highlight card.

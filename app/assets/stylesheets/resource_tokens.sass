@@ -11,5 +11,6 @@
   height: $resource_token_square
   text-align: center
   transform: rotate(10deg)
+  box-shadow: $box-shadow
   @each $kind, $color in $resource_colors
     +resource_token($kind, $color)
