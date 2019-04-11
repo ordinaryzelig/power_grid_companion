@@ -8,7 +8,8 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     if @game.save
-      redirect_to game_url(@game)
+      @game.update!(:phase => :auction)
+      redirect_to new_auction_url
     else
       @game.players.setup
       render :new
