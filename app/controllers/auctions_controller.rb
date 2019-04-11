@@ -2,10 +2,10 @@ class AuctionsController < ApplicationController
 
   before_action :set_auction, :only => %i[show bid pass claim]
   before_action :set_turn, :only => %i[show]
+  before_action :set_markets, :only => %i[new show]
 
   def new
     @auction = current_game.auctions.new
-    @actual_market, @future_market = current_game.cards.auctionable.first(8).in_groups_of(4, false)
   end
 
   def create
@@ -53,6 +53,10 @@ private
 
   def set_turn
     @your_turn = @auction.player_turn?(current_player)
+  end
+
+  def set_markets
+    @actual_market, @future_market = current_game.cards.auctionable.first(8).in_groups_of(4, false)
   end
 
 end

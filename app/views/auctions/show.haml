@@ -24,6 +24,7 @@
       - if current_player == @auction.bidders.first
         %h3 You won the auction for #{@auction.price}€.
 
-        = link_to 'Buy power plant', claim_auction_url(@auction), :method => :post, :class => 'btn btn-success btn-block'
+        = link_to 'Pay for power plant', claim_auction_url(@auction), :method => :post, :class => 'btn btn-success btn-block'
 
-= render 'market'
+= render 'market', :market_type => 'actual', :cards => @actual_market
+= render 'market', :market_type => 'future', :cards => @future_market
