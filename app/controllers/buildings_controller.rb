@@ -6,7 +6,7 @@ class BuildingsController < ApplicationController
   def create
     buildings = Buildings.new(current_player, buildings_params)
     buildings.save!
-    redirect_to new_buildings_url
+    redirect_to new_building_url
   end
 
 private
