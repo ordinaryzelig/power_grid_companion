@@ -8,6 +8,10 @@ class Game < ApplicationRecord
       end
       sort_by(&:seat_position)
     end
+
+    def in_new_turn_order
+      sort_by(&:turn_order_data)
+    end
   end
   has_resources
   has_many :resource_market_spaces
@@ -48,6 +52,12 @@ class Game < ApplicationRecord
 
   def to_param
     token
+  end
+
+  def determine_turn_order
+    players.in_new_turn_order.each_with_index do |player, idx|
+      player.update!(:turn_order => idx)
+    end
   end
 
 private

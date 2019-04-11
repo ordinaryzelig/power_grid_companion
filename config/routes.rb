@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :claim if Rails.env.development?
     end
   end
+  resources :turn_orders, :only => %i[new create]
   resources :auctions, :only => %i[new create show] do
     member do
       post :bid

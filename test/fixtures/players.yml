@@ -59,3 +59,12 @@ claim_auction:
 claim_auction_replace:
   <<: *DEFAULTS
   game: $LABEL
+
+<% %i[green red yellow].each_with_index do |color, idx| %>
+new_turn_order_<%= color %>:
+  <<: *DEFAULTS
+  game: new_turn_order
+  turn_order: <%= idx %>
+  color: <%= color %>
+  seat_position: <%= idx %>
+<% end %>

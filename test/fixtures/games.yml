@@ -41,3 +41,7 @@ claim_auction_replace:
 card_setup:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+
+new_turn_order:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>

@@ -18,7 +18,7 @@
     .container-fluid
 
       - if current_game
-        = render 'layouts/turn_order'
+        = render 'turn_orders/turn_order', :players => current_game.players.in_turn_order
         #game_nav_panes
           = render 'layouts/game_nav/player_mats'
           = render 'layouts/game_nav/resource_market'
