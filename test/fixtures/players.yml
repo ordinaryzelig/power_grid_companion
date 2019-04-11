@@ -19,7 +19,7 @@ auction_creator:
 auction_participator_<%= idx %>:
   <<: *DEFAULTS
   game: auction_creator
-  seat_position: <%= idx %>
+  seat_position: <%= 2 - idx %>
   turn_order: <%= 2 - idx %>
 <% end %>
 
