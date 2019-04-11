@@ -9,6 +9,7 @@ class ResourcePurchasesController < ApplicationController
   def create
     resource_purchase = ResourcePurchase.new(current_player, resource_purchase_params)
     resource_purchase.save!
+    current_game.update!(:phase => :auction)
     redirect_to new_resource_purchase_url
   end
 
