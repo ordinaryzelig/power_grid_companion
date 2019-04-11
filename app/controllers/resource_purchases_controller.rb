@@ -3,7 +3,7 @@ class ResourcePurchasesController < ApplicationController
   before_action :set_turn
 
   def new
-    @resource_purchase = ResourcePurchase.new(current_player, ActionController::Parameters.new)
+    @resource_purchase = ResourcePurchase.new(current_player, {})
   end
 
   def create

@@ -3,13 +3,14 @@ class ResourcePurchase
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  def initialize(player, resource_params)
+  def initialize(player, resource_params, options = {})
     @player          = player
     @resource_params = resource_params
+    @options         = options
   end
 
   def save!
-    authorize_player
+    authorize_player unless @options[:skip_authorization]
     purchase_resources(resources)
   end
 
@@ -35,11 +36,11 @@ private
 
   def resources
     @resources ||=
-      @resource_params.to_unsafe_h.flat_map do |resource_kind, num|
+      @resource_params.keys.flat_map do |resource_kind|
         @player.game.resource_market_spaces
           .occupied
           .send(resource_kind)
-          .first(Integer(num))
+          .first(Integer(@resource_params.fetch(resource_kind)))
           .map(&:resource)
       end
   end

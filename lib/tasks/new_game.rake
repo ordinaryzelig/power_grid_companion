@@ -24,7 +24,7 @@ task :random_cards, [:game_id] => :environment do |t, args|
     end
     player.cards.not_renewable.each do |card|
       num = (1..card.resources_required * 2).to_a.sample
-      ResourcePurchase.new(player, {card.selected_kinds.sample => num}).save!
+      ResourcePurchase.new(player, {card.selected_kinds.sample => num}, :skip_authorization => true).save!
     end
   end
 end
