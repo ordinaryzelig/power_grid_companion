@@ -14,7 +14,9 @@ claim_auction:
   card: $LABEL
   player: $LABEL
   bidder_ids:
-    - <%= ActiveRecord::FixtureSet.identify(:claim_auction) %>
+    <% 2.times do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("claim_auction_#{idx}") %>
+    <% end %>
   price: 3
   round: 1
 
@@ -23,6 +25,8 @@ claim_auction_replace:
   card: claim_auction_replace_6
   player: $LABEL
   bidder_ids:
-    - <%= ActiveRecord::FixtureSet.identify(:claim_auction_replace) %>
+    <% 2.times do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("claim_auction_replace_#{idx}") %>
+    <% end %>
   price: 6
   round: 1

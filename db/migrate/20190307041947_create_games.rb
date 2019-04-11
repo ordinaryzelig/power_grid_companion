@@ -5,7 +5,8 @@ class CreateGames < ActiveRecord::Migration[5.2]
       t.integer :step, :null => false, :default => 1
       t.integer :round, :null => false, :default => 1
       t.integer :phase, :default => 1
-      t.belongs_to :current_player
+      t.integer :phase_player_ids, :array => true
+
       t.timestamps
     end
     add_index :games, :token, :unique => true

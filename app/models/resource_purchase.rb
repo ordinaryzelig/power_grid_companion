@@ -46,7 +46,7 @@ private
   end
 
   def authorize_player
-    unless @player.id == @player.game.current_player_id
+    unless @player.id == @player.game.current_player.id
       raise "Wrong player (#{@player.id}) turn. Only player that can do anything is #{@player.game.current_player.name} (#{@player.game.current_player.id})."
     end
   end

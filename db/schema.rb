@@ -45,10 +45,9 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
     t.integer "step", default: 1, null: false
     t.integer "round", default: 1, null: false
     t.integer "phase", default: 1
-    t.bigint "current_player_id"
+    t.integer "phase_player_ids", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["current_player_id"], name: "index_games_on_current_player_id"
     t.index ["token"], name: "index_games_on_token", unique: true
   end
 

@@ -5,7 +5,6 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
   test '#create updates Player balance, stores resources' do
     player = players(:resource_purchase)
     player.game.setup
-    player.game.update!(:current_player => player)
     claim_player player
 
     coal_card = player.game.cards.find_by!(:number => 4)

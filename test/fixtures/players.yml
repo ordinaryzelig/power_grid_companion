@@ -52,13 +52,23 @@ replenishment_<%= idx %>:
   seat_position: <%= idx %>
 <% end %>
 
-claim_auction:
+<% 2.times do |idx| %>
+claim_auction_<%= idx %>:
   <<: *DEFAULTS
-  game: $LABEL
+  game: claim_auction
+  color: <%= idx %>
+  seat_position: <%= idx %>
+  turn_order: <%= idx %>
+<% end %>
 
-claim_auction_replace:
+<% 2.times do |idx| %>
+claim_auction_replace_<%= idx %>:
   <<: *DEFAULTS
-  game: $LABEL
+  game: claim_auction_replace
+  color: <%= idx %>
+  seat_position: <%= idx %>
+  turn_order: <%= idx %>
+<% end %>
 
 <% %i[green red yellow].each_with_index do |color, idx| %>
 new_turn_order_<%= color %>:
@@ -67,4 +77,12 @@ new_turn_order_<%= color %>:
   turn_order: <%= idx %>
   color: <%= color %>
   seat_position: <%= idx %>
+<% end %>
+
+<% 3.times do |idx| %>
+skip_auction_<%= idx %>:
+  <<: *DEFAULTS
+  game: skip_auction
+  turn_order: <%= idx %>
+  color: <%= idx %>
 <% end %>

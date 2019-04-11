@@ -17,7 +17,6 @@ class Game < ApplicationRecord
   has_many :resource_market_spaces
   has_many :cards
   has_many :auctions
-  belongs_to :current_player, :optional => true, :class_name => 'Player'
 
   accepts_nested_attributes_for :players, :reject_if => -> (atts) { atts.values_at(:name, :color).all?(&:blank?) }
 
@@ -39,7 +38,7 @@ class Game < ApplicationRecord
   )
 
   def setup
-    self.current_player = players.min_by(&:turn_order)
+    self.phase_player_ids = players.in_turn_order.ids
     Resource.setup(self)
     ResourceMarketSpace.setup(self)
     Card.setup(self)
@@ -58,6 +57,18 @@ class Game < ApplicationRecord
     players.in_new_turn_order.each_with_index do |player, idx|
       player.update!(:turn_order => idx)
     end
+  end
+
+  def phase_players
+    @phase_players ||= players.find(phase_player_ids)
+  end
+
+  def remove_phase_player(player)
+    update!(:phase_player_ids => phase_player_ids.without(player.id))
+  end
+
+  def current_player
+    phase_players.first
   end
 
 private

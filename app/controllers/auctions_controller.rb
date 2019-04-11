@@ -1,7 +1,8 @@
 class AuctionsController < ApplicationController
 
   before_action :set_auction, :only => %i[show bid pass claim]
-  before_action :set_turn, :only => %i[show]
+  before_action :set_turn, :only => %i[new]
+  before_action :set_bid_turn, :only => %i[show]
   before_action :set_markets, :only => %i[new show]
 
   def new
@@ -37,6 +38,11 @@ class AuctionsController < ApplicationController
     redirect_to [:new, @auction]
   end
 
+  def skip
+    current_game.remove_phase_player(current_player)
+    redirect_to new_auction_url
+  end
+
 private
 
   def auction_params
@@ -52,6 +58,10 @@ private
   end
 
   def set_turn
+    @your_turn = current_game.current_player == current_player
+  end
+
+  def set_bid_turn
     @your_turn = @auction.player_turn?(current_player)
   end
 

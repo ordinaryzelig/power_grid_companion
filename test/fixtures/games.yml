@@ -33,10 +33,18 @@ resource_replenishment:
 claim_auction:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    <% 2.times do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("claim_auction_#{idx}") %>
+    <% end %>
 
 claim_auction_replace:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    <% 2.times do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("claim_auction_replace_#{idx}") %>
+    <% end %>
 
 card_setup:
   <<: *DEFAULTS
@@ -45,3 +53,11 @@ card_setup:
 new_turn_order:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+
+skip_auction:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    <% 3.times do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("skip_auction_#{idx}") %>
+    <% end %>

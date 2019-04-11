@@ -65,7 +65,7 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
   test 'claiming Auction sells to bidder' do
     auction = auctions(:claim_auction)
     card = cards(:claim_auction)
-    player = players(:claim_auction)
+    player = players(:claim_auction_0)
     claim_player player
 
     assert_difference 'player.balance', -auction.price do
@@ -76,12 +76,14 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     card.reload
     assert_equal player, card.player
     assert_equal 47, player.balance
+
+    refute_includes auction.game.phase_player_ids, player.id
   end
 
   test 'claiming Auction requires bidder to replace Card if they have 3 Cards' do
     auction = auctions(:claim_auction_replace)
     card_to_replace = cards(:claim_auction_replace_3)
-    player = players(:claim_auction_replace)
+    player = players(:claim_auction_replace_0)
     assert_includes player.cards, card_to_replace
     claim_player player
 
@@ -89,6 +91,18 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
 
     player.reload
     refute_includes player.cards, card_to_replace
+  end
+
+  test 'skipping Auction removes Player from phase' do
+    game = games(:skip_auction)
+    players = 3.times.map { |idx| players("skip_auction_#{idx}") }
+    player = players.first
+    claim_player player
+
+    post skip_auctions_url
+
+    game.reload
+    assert_equal players.without(player).map(&:id), game.phase_player_ids
   end
 
 end

@@ -12,7 +12,7 @@ claim_auction:
 claim_auction_replace_<%= number %>:
   game: claim_auction_replace
   number: <%= number %>
-  player: <%= number < 6 ? 'claim_auction_replace' : nil %>
+  player: <%= number < 6 ? 'claim_auction_replace_0' : nil %>
   position: <%= number %>
 <% end %>
 

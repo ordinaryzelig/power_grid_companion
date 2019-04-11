@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
 
-  test 'assigns first Player as current_player' do
+  test 'assigns phase Players' do
     game = Game.create!(
       :players_attributes => Player.colors.keys.each_with_index.map do |color, idx|
         {
@@ -13,7 +13,7 @@ class GameTest < ActiveSupport::TestCase
       end
     )
 
-    assert_equal 0, game.current_player.turn_order
+    assert_equal Player.colors.keys, game.phase_players.map(&:color)
   end
 
 end
