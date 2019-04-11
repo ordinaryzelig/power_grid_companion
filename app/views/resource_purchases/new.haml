@@ -1,18 +1,22 @@
-- content_for :resource_purchase do
-  = form_for @resource_purchase, :local => true do |f|
-    .form-group.row
-      - Resource.kinds.keys.each do |kind|
-        .col-3.text-right
-          = f.label kind
-        .col-3
-          = f.text_field kind, :readonly => true, :class => 'form-control'
+- if @your_turn
+  - content_for :resource_purchase do
+    = form_for @resource_purchase, :local => true do |f|
+      .form-group.row
+        - Resource.kinds.keys.each do |kind|
+          .col-3.text-right
+            = f.label kind
+          .col-3
+            = f.text_field kind, :readonly => true, :class => 'form-control'
 
-    %h5
-      Cost:
-      %span#cost #{@resource_purchase.cost}€
+      %h5
+        Cost:
+        %span#cost #{@resource_purchase.cost}€
 
-    = f.submit 'Buy', :class => 'btn btn-success btn-block'
+      = f.submit 'Buy', :class => 'btn btn-success btn-block'
 
-:coffee
-  $(document).on 'turbolinks:load', ->
-    setup_resource_purchasing()
+  :coffee
+    $(document).on 'turbolinks:load', ->
+      setup_resource_purchasing()
+
+- else
+  %h4 Waiting for #{current_game.current_player.name}

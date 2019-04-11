@@ -9,6 +9,7 @@ class ResourcePurchase
   end
 
   def save!
+    authorize_player
     purchase_resources(resources)
   end
 
@@ -41,6 +42,12 @@ private
           .first(Integer(num))
           .map(&:resource)
       end
+  end
+
+  def authorize_player
+    unless @player.id == @player.game.current_player_id
+      raise "Wrong player (#{@player.id}) turn. Only player that can do anything is #{@player.game.current_player.name} (#{@player.game.current_player.id})."
+    end
   end
 
 end

@@ -1,5 +1,7 @@
 class ResourcePurchasesController < ApplicationController
 
+  before_action :set_turn
+
   def new
     @resource_purchase = ResourcePurchase.new(current_player, ActionController::Parameters.new)
   end
@@ -21,6 +23,10 @@ private
         :uranium,
         :trash,
       )
+  end
+
+  def set_turn
+    @your_turn = current_game_player == current_player
   end
 
 end

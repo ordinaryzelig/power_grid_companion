@@ -68,7 +68,7 @@ private
   end
 
   def authorize_player(player)
-    raise "Wrong player (#{player.id}) turn. Only player that can do anything is #{bidder_ids.first}" unless player_turn?(player)
+    raise "Wrong player (#{player.id}) turn. Only player that can do anything is #{bidders.first.name} (#{bidders.first.id})" unless player_turn?(player)
   end
 
 end
