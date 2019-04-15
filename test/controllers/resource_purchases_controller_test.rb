@@ -26,8 +26,6 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal 2, coal_card.coals.count
     assert_equal 4, oil_card.oils.count
-
-    assert_equal 'auction', player.game.phase
   end
 
 end

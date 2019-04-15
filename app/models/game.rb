@@ -57,7 +57,6 @@ class Game < ApplicationRecord
     players.in_new_turn_order.each_with_index do |player, idx|
       player.update!(:turn_order => idx)
     end
-    reset_phase_players!
   end
 
   def phase_players
@@ -79,6 +78,11 @@ class Game < ApplicationRecord
   def reset_phase_players!
     reset_phase_players
     save!
+  end
+
+  def next_phase(phase)
+    reset_phase_players
+    update!(:phase => phase)
   end
 
 private

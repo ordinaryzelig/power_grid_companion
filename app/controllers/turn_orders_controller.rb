@@ -7,9 +7,11 @@ class TurnOrdersController < ApplicationController
   def create
     current_game.determine_turn_order
     if current_game.round == 1
+      current_game.next_phase(:buying_resources)
       redirect_to [:new, :resource_purchase]
     else
-      redirect_to new_auction_url
+      current_game.next_phase(:auction)
+      redirect_to [:new, :auction]
     end
   end
 
