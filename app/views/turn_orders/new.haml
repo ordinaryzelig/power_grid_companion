@@ -1,5 +1,5 @@
 %h3 New turn order
 
-= render 'turn_orders/turn_order', :players => @new_turn_order_players
+= render 'turn_orders/turn_order', :players => @new_turn_order_players, :hide_phase_status => true
 
 = button_to 'Continue', turn_orders_url, :class => 'btn btn-primary btn-block mt-3'

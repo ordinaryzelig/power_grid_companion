@@ -1,14 +1,15 @@
 .turn_order.row
   - players.each do |player|
     .col-2
-      %div[player]{:data => {:color => player.color}, :class => current_game.current_player.id == player.id ? 'active' : nil}
+      %div[player]{:data => {:color => player.color}, :class => current_game.current_player&.id == player.id ? 'active' : nil}
         %span.house= house_icon
         %span.cities= player.cities
-        %div.phase_status
-          - if current_game.phase_players.include?(player)
-            = circle_icon
-          - else
-            = check_circle_icon
+        - unless local_assigns[:hide_phase_status]
+          %div.phase_status
+            - if current_game.phase_players.include?(player)
+              = circle_icon
+            - else
+              = check_circle_icon
         %div
           - if player == current_player
             #{current_player.balance}€
