@@ -13,7 +13,7 @@ class GameTest < ActiveSupport::TestCase
       end
     )
 
-    assert_equal Player.colors.keys, game.phase_players.map(&:color)
+    assert_equal game.players.in_turn_order.map(&:color), game.phase_players.map(&:color)
   end
 
 end
