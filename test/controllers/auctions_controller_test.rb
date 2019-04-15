@@ -78,6 +78,8 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 47, player.balance
 
     refute_includes auction.game.phase_player_ids, player.id
+
+    assert_redirected_to new_auction_url
   end
 
   test 'claiming Auction requires bidder to replace Card if they have 3 Cards' do

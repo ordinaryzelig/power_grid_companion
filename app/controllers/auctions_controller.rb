@@ -35,7 +35,7 @@ class AuctionsController < ApplicationController
   def claim
     card_to_replace = current_game.cards.find(params[:card_to_replace_id]) if params[:card_to_replace_id]
     @auction.claim(card_to_replace)
-    redirect_to [:new, @auction]
+    redirect_to [:new, :auction]
   end
 
   def skip
