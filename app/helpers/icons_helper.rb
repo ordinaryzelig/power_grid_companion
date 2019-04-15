@@ -8,6 +8,8 @@ module IconsHelper
     :house                        => ['fas', 'home'],
     :resources_power_cities_arrow => ['fas', 'long-arrow-alt-right'],
     :bolt                         => ['fas', 'bolt'],
+    :circle                       => ['far', 'circle'],
+    :check_circle                 => ['far', 'check-circle'],
   }
 
   def house_icon
@@ -24,6 +26,14 @@ module IconsHelper
 
   def bolt_icon
     icon(*ICONS.fetch(:bolt))
+  end
+
+  def circle_icon
+    icon(*ICONS.fetch(:circle))
+  end
+
+  def check_circle_icon
+    icon(*ICONS.fetch(:check_circle))
   end
 
 end
