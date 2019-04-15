@@ -28,4 +28,13 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 4, oil_card.oils.count
   end
 
+  test '#pass' do
+    player = players(:resource_purchase_pass)
+    claim_player player
+
+    post pass_resource_purchases_url
+
+    refute_includes player.game.phase_players.ids, player.id
+  end
+
 end

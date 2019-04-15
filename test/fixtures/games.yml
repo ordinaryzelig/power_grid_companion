@@ -61,3 +61,9 @@ skip_auction:
     <% 3.times do |idx| %>
     - <%= ActiveRecord::FixtureSet.identify("skip_auction_#{idx}") %>
     <% end %>
+
+resource_purchase_pass:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    - <%= ActiveRecord::FixtureSet.identify(:resource_purchase_pass) %>

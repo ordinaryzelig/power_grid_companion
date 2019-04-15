@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     end
   end
   resources :buildings, :only => %i[new create]
-  resources :resource_purchases, :only => %i[new create]
+  resources :resource_purchases, :only => %i[new create] do
+    collection do
+      post :pass
+    end
+  end
   resources :cities_power_ups, :only => %i[create]
   resources :resource_replenishments, :only => %i[create]
 

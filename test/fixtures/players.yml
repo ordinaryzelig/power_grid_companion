@@ -86,3 +86,7 @@ skip_auction_<%= idx %>:
   turn_order: <%= idx %>
   color: <%= idx %>
 <% end %>
+
+resource_purchase_pass:
+  <<: *DEFAULTS
+  game: $LABEL
