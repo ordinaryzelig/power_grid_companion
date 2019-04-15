@@ -50,7 +50,7 @@ class Auction < ApplicationRecord
 private
 
   def set_initial_bidding_order
-    player_ids = game.players.in_seat_order.ids
+    player_ids = game.phase_players.in_seat_order.ids
     player_idx = player_ids.index(player.id)
     self.bidder_ids = player_ids.each_with_index.map do |player_id, idx|
       player_ids.fetch(player_idx - idx)

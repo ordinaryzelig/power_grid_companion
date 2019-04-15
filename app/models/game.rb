@@ -60,7 +60,7 @@ class Game < ApplicationRecord
   end
 
   def phase_players
-    @phase_players ||= players.find(phase_player_ids)
+    @phase_players ||= players.where(:id => phase_player_ids)
   end
 
   def remove_phase_player(player)
