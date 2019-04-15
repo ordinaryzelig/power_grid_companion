@@ -13,7 +13,7 @@
   - if @your_turn
     = f.submit 'Start bidding', :class => 'btn btn-success btn-block'
 
-- if @your_turn
+- if @your_turn && current_game.round != 1
   = button_to 'Pass', skip_auctions_url, :class => 'btn btn-secondary btn-block mt-2', :data => {:confirm => 'Skip the auction phase?'}
 
 = render 'market', :market_type => 'future', :cards => @future_market
