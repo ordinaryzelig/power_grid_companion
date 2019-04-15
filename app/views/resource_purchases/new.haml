@@ -12,7 +12,7 @@
         Cost:
         %span#cost #{@resource_purchase.cost}€
 
-      = f.submit 'Buy', :class => 'btn btn-success btn-block'
+      = f.submit 'Buy', :class => 'btn btn-success btn-block', :data => {:confirm => 'Are you sure?'}
 
   :coffee
     $(document).on 'turbolinks:load', ->
