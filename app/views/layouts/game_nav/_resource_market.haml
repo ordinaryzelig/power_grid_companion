@@ -4,8 +4,7 @@
   - current_game.resource_market_spaces.group_by(&:cost).each do |cost, cost_spaces|
     .card
 
-      .card-header
-        = cost
+      %h4.card-header.text-center= cost
 
       .card-body
 
