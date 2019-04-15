@@ -38,7 +38,7 @@ class Game < ApplicationRecord
   )
 
   def setup
-    self.phase_player_ids = players.in_turn_order.ids
+    reset_phase_players
     Resource.setup(self)
     ResourceMarketSpace.setup(self)
     Card.setup(self)
@@ -57,6 +57,7 @@ class Game < ApplicationRecord
     players.in_new_turn_order.each_with_index do |player, idx|
       player.update!(:turn_order => idx)
     end
+    reset_phase_players!
   end
 
   def phase_players
@@ -69,6 +70,15 @@ class Game < ApplicationRecord
 
   def current_player
     phase_players.first
+  end
+
+  def reset_phase_players
+    self.phase_player_ids = players.in_turn_order.ids
+  end
+
+  def reset_phase_players!
+    reset_phase_players
+    save!
   end
 
 private

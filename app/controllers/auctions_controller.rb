@@ -35,12 +35,12 @@ class AuctionsController < ApplicationController
   def claim
     card_to_replace = current_game.cards.find(params[:card_to_replace_id]) if params[:card_to_replace_id]
     @auction.claim(card_to_replace)
-    redirect_to [:new, :auction]
+    next_player_or_next_phase
   end
 
   def skip
     current_game.remove_phase_player(current_player)
-    redirect_to new_auction_url
+    next_player_or_next_phase
   end
 
 private
@@ -67,6 +67,19 @@ private
 
   def set_markets
     @actual_market, @future_market = current_game.cards.auctionable.first(8).in_groups_of(4, false)
+  end
+
+  def next_player_or_next_phase
+    if current_game.phase_players.any?
+      redirect_to [:new, :auction]
+    else
+      current_game.reset_phase_players!
+      if current_game.round == 1
+        redirect_to [:new, :turn_order]
+      else
+        redirect_to [:new, :resource_purchase]
+      end
+    end
   end
 
 end
