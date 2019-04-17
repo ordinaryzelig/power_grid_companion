@@ -29,7 +29,7 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#pass' do
-    player = players(:resource_purchase_pass)
+    player = players(:resource_purchase_pass_0)
     claim_player player
 
     post pass_resource_purchases_url

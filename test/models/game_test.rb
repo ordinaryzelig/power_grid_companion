@@ -16,4 +16,13 @@ class GameTest < ActiveSupport::TestCase
     assert_equal game.players.in_turn_order.map(&:color), game.phase_players.map(&:color)
   end
 
+  test '#remove_phase_player' do
+    game = games(:remove_phase_player)
+    player = game.phase_players.first!
+
+    game.remove_phase_player player
+
+    refute_includes game.phase_players.ids, player.id
+  end
+
 end

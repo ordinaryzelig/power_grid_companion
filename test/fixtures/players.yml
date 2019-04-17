@@ -87,6 +87,15 @@ skip_auction_<%= idx %>:
   color: <%= idx %>
 <% end %>
 
-resource_purchase_pass:
+<% 2.times do |idx| %>
+resource_purchase_pass_<%= idx %>:
+  <<: *DEFAULTS
+  game: resource_purchase_pass
+  color: <%= idx %>
+  turn_order: <%= idx %>
+  seat_position: <%= idx %>
+<% end %>
+
+remove_phase_player:
   <<: *DEFAULTS
   game: $LABEL

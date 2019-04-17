@@ -37,11 +37,10 @@ private
 
   def next_player_or_next_phase
     if current_game.phase_players.any?
-      redirect_to new_resource_purchase_url
+      redirect_to [:new, :resource_purchase]
     else
       current_game.next_phase(:building)
-      current_game.update!(:phase => :building)
-      redirect_to [:new, :buildings]
+      redirect_to [:new, :building]
     end
   end
 

@@ -66,4 +66,12 @@ resource_purchase_pass:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
   phase_player_ids:
-    - <%= ActiveRecord::FixtureSet.identify(:resource_purchase_pass) %>
+    <% 2.times do |idx| %>
+      - <%= ActiveRecord::FixtureSet.identify("resource_purchase_pass_#{idx}") %>
+    <% end %>
+
+remove_phase_player:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    - <%= ActiveRecord::FixtureSet.identify(:remove_phase_player) %>

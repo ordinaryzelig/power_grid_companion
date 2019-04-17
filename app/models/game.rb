@@ -64,6 +64,7 @@ class Game < ApplicationRecord
   end
 
   def remove_phase_player(player)
+    @phase_players = nil
     update!(:phase_player_ids => phase_player_ids.without(player.id))
   end
 
