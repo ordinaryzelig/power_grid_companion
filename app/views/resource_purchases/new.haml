@@ -12,9 +12,11 @@
         Cost:
         %span#cost #{@resource_purchase.cost}€
 
-      = f.submit 'Buy', :class => 'btn btn-success btn-block', :data => {:confirm => 'Done buying resources?'}
-
-    = button_to 'Pass', pass_resource_purchases_url, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Are you sure you want to pass?'}
+      .row
+        .col-6
+          = f.submit 'Buy', :class => 'btn btn-success btn-block', :data => {:confirm => 'Done buying resources?'}
+        .col-6
+          = link_to 'Pass', pass_resource_purchases_url, :method => :post, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Are you sure you want to pass?'}
 
   :coffee
     $(document).on 'turbolinks:load', ->
