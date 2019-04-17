@@ -18,7 +18,11 @@ Rails.application.routes.draw do
       post :skip
     end
   end
-  resources :buildings, :only => %i[new create]
+  resources :buildings, :only => %i[new create] do
+    collection do
+      post :pass
+    end
+  end
   resources :resource_purchases, :only => %i[new create] do
     collection do
       post :pass
