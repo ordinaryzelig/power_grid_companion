@@ -38,16 +38,16 @@ $(document).on 'turbolinks:load', ->
 
     """
     <div class="building_fields form-row">
-      <div class="form-group col-6">
-        <input placeholder="Connection cost" class="connection_cost form-control" type="number" name="buildings[][connection_cost]" id="buildings[][connection_cost]">
-      </div>
       <div class="form-group col-1">
-        <i class="fas fa-home"></i>
+        <label for="buildings[][building_cost]"><i class="fas fa-home"></i></label>
       </div>
       <div class="form-group col-4">
         <select class="building_cost form-control" name="buildings[][building_cost]" id="buildings[][building_cost]">
           #{select_options}
         </select>
+      </div>
+      <div class="form-group col-6">
+        <input placeholder="Connection cost" class="connection_cost form-control" type="number" name="buildings[][connection_cost]" id="buildings[][connection_cost]">
       </div>
       <div class="form-group col-1">
         <a class="delete text-danger">
