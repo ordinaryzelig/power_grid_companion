@@ -23,6 +23,8 @@ class GamesController < ApplicationController
       redirect_to new_auction_url
     when 'buying_resources'
       redirect_to new_resource_purchase_url
+    when 'building'
+      redirect_to new_building_url
     else
       raise "Don't know how to navigate to #{game.phase.inspect}"
     end
