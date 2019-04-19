@@ -25,4 +25,4 @@
     = form.fields_for 'cards[]', card do |f|
       = f.hidden_field :id, :value => card.id
       - card.selected_kinds.each do |kind|
-        = f.hidden_field kind
+        = f.hidden_field kind, :data => {:kind => kind}

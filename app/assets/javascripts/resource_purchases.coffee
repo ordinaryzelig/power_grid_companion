@@ -2,7 +2,6 @@ window.setup_resource_purchasing = ->
 
   market = $('#resource_market')
   market.collapse('show')
-  market.addClass('active')
 
   market.find('.resource_token').on 'click', ->
     token = $(@)

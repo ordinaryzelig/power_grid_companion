@@ -6,12 +6,12 @@
     = render 'player_mats/player_mat', :player => current_player, :form => f
     = f.submit 'Burn resources', :class => 'btn btn-success btn-block mt-2'
 
-  %h4.mt-3 Payouts
-  .row
-    - CitiesPowerUp::PAYMENTS.to_a.in_groups_of(7, false).each do |group|
+  %h4.mt-3 Payment
+  .row#payments_table
+    - CitiesPowerUp::PAYMENTS.to_a.in_groups_of(7).each do |group|
       .col-4
-        %dl.payments.row
+        %table.table.payments_table.table.table-borderless.table-sm
           - group.each do |cities, elektro|
-            - data = {:cities => cities}
-            %dt.col-3.text-right{:data => data}= cities
-            %dd.col-7{:data => data}= number_to_currency elektro, :unit => '€', :precision => 0
+            %tr{:data => {:cities => cities}, :class => [cities == 0 ? 'table-success' : nil]}
+              %th.text-right= cities
+              %td= number_to_currency elektro, :unit => '€', :precision => 0
