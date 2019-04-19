@@ -69,13 +69,4 @@ private
     @actual_market, @future_market = current_game.cards.auctionable.first(8).in_groups_of(4, false)
   end
 
-  def next_player_or_next_phase
-    if current_game.phase_players.any?
-      redirect_to [:new, :auction]
-    else
-      current_game.next_phase!
-      redirect_to [:new, current_game.phase]
-    end
-  end
-
 end

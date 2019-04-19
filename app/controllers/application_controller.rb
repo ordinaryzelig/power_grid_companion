@@ -17,4 +17,13 @@ private
   end
   helper_method :current_game_player
 
+  def next_player_or_next_phase
+    if current_game.phase_players.any?
+      redirect_to [:new, current_game.phase]
+    else
+      current_game.next_phase!
+      redirect_to [:new, current_game.phase]
+    end
+  end
+
 end

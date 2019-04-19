@@ -37,6 +37,7 @@ claim_auction:
     <% 2.times do |idx| %>
     - <%= ActiveRecord::FixtureSet.identify("claim_auction_#{idx}") %>
     <% end %>
+  phase: auction
 
 claim_auction_replace:
   <<: *DEFAULTS
