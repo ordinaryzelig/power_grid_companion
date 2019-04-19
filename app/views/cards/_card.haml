@@ -1,4 +1,4 @@
-.card.mb-2.power_plant{:data => {:id => card.id}}
+.card.mb-2.power_plant{:data => card.attributes}
 
   %h5.card-header.text-center= card.number
 
@@ -20,3 +20,9 @@
           .col
             - resources.each do |resource|
               = resource_token resource
+
+  - if local_assigns[:form]
+    = form.fields_for 'cards[]', card do |f|
+      = f.hidden_field :id, :value => card.id
+      - card.selected_kinds.each do |kind|
+        = f.hidden_field kind

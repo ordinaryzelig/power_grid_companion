@@ -1,5 +1,8 @@
 class CitiesPowerUp
 
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
+
   PAYMENTS = {
      0 => 10,
      1 => 22,
@@ -34,6 +37,10 @@ class CitiesPowerUp
     cards_atts.each(&method(:burn_resources))
     payout
     @player.save!
+  end
+
+  def persisted?
+    false
   end
 
 private

@@ -15,4 +15,4 @@
         .col-4
 
           - if card = player.cards[idx]
-            = render card
+            = render card, :form => local_assigns[:form]

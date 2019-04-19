@@ -1,10 +1,17 @@
-%h1 Choose power plants to power up your cities
+%h3 Choose resources power your cities
 
 - if @your_turn
 
-  = render '/player_mat', :player => current_player
+  = form_for @cities_power_up do |f|
+    = render 'player_mats/player_mat', :player => current_player, :form => f
+    = f.submit 'Burn resources', :class => 'btn btn-success btn-block mt-2'
 
-  %dl.payments.row
-    - CitiesPowerUp::PAYMENTS.each do |cities, elektro|
-      %dt.col-1= cities
-      %dd.col-11= number_to_currency elektro, :unit => '€'
+  %h4.mt-3 Payouts
+  .row
+    - CitiesPowerUp::PAYMENTS.to_a.in_groups_of(7, false).each do |group|
+      .col-4
+        %dl.payments.row
+          - group.each do |cities, elektro|
+            - data = {:cities => cities}
+            %dt.col-3.text-right{:data => data}= cities
+            %dd.col-7{:data => data}= number_to_currency elektro, :unit => '€', :precision => 0
