@@ -109,7 +109,7 @@ class ResourceReplenishment
   end
 
   def save!
-    @game.replenishment_rates.each do |kind, num|
+    rates.each do |kind, num|
       supply_resources = @game.resources_of_kind(kind).general_supply.limit(num)
       free_spaces = @game.resource_market_spaces.send(kind).unoccupied.last(supply_resources.count)
       supply_resources.each do |resource|
@@ -118,6 +118,14 @@ class ResourceReplenishment
         free_space.update!(:occupied => true)
       end
     end
+  end
+
+private
+
+  def rates
+    ResourceReplenishment::RATES
+      .fetch(@game.players.size)
+      .fetch(@game.step)
   end
 
 end

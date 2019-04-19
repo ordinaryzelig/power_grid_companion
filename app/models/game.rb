@@ -46,10 +46,6 @@ class Game < ApplicationRecord
     save!
   end
 
-  def replenishment_rates
-    ResourceReplenishment::RATES.fetch(players.size).fetch(step)
-  end
-
   def to_param
     token
   end
