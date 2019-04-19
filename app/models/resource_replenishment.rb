@@ -120,12 +120,14 @@ class ResourceReplenishment
     end
   end
 
+  def player_rates
+    ResourceReplenishment::RATES.fetch(@game.players.size)
+  end
+
 private
 
   def rates
-    ResourceReplenishment::RATES
-      .fetch(@game.players.size)
-      .fetch(@game.step)
+    player_rates.fetch(@game.step)
   end
 
 end

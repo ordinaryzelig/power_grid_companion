@@ -10,7 +10,7 @@
   .row#payments_table
     - CitiesPowerUp::PAYMENTS.to_a.in_groups_of(7).each do |group|
       .col-4
-        %table.table.payments_table.table.table-borderless.table-sm
+        %table.table.payments_table.table.table-sm
           - group.each do |cities, elektro|
             %tr{:data => {:cities => cities}, :class => [cities == 0 ? 'table-success' : nil]}
               %th.text-right= cities
