@@ -104,16 +104,17 @@ private
   def next_phase
     case phase
     when 'turn_order'
-      if round == 1 then          'resource_purchase'
-      else                        'auction'
+      if round == 1 then               'resource_purchase'
+      else                             'auction'
       end
     when 'auction'
-      if round == 1 then          'turn_order'
-      else                        'resource_purchase'
+      if round == 1 then               'turn_order'
+      else                             'resource_purchase'
       end
-    when 'resource_purchase' then 'building'
-    when 'building'          then 'cities_power_up'
-    when 'cities_power_up'   then 'resource_replenishment'
+    when 'resource_purchase'      then 'building'
+    when 'building'               then 'cities_power_up'
+    when 'cities_power_up'        then 'resource_replenishment'
+    when 'resource_replenishment' then 'turn_order'
     else
       raise "No next phase for #{phase.inspect}"
     end

@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+  before_action :set_resource_replenishment, :if => :current_game
+
 private
 
   def current_player
@@ -24,6 +26,10 @@ private
       current_game.next_phase!
       redirect_to [:new, current_game.phase]
     end
+  end
+
+  def set_resource_replenishment
+    @resource_replenishment = ResourceReplenishment.new(current_game)
   end
 
 end

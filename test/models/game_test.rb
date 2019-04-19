@@ -32,12 +32,13 @@ class GameTest < ActiveSupport::TestCase
     end
   end
 
-  test_next_phase 'turn_order',        1,      :expected => 'resource_purchase'
-  test_next_phase 'turn_order',        :other, :expected => 'auction'
-  test_next_phase 'auction',           1,      :expected => 'turn_order'
-  test_next_phase 'auction',           :other, :expected => 'resource_purchase'
-  test_next_phase 'resource_purchase', :any,   :expected => 'building'
-  test_next_phase 'building',          :any,   :expected => 'cities_power_up'
-  test_next_phase 'cities_power_up',   :any,   :expected => 'resource_replenishment'
+  test_next_phase 'turn_order',            1,      :expected => 'resource_purchase'
+  test_next_phase 'turn_order',            :other, :expected => 'auction'
+  test_next_phase 'auction',               1,      :expected => 'turn_order'
+  test_next_phase 'auction',               :other, :expected => 'resource_purchase'
+  test_next_phase 'resource_purchase',     :any,   :expected => 'building'
+  test_next_phase 'building',              :any,   :expected => 'cities_power_up'
+  test_next_phase 'cities_power_up',       :any,   :expected => 'resource_replenishment'
+  test_next_phase 'resource_replenishment',:any,   :expected => 'turn_order'
 
 end

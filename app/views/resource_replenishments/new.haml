@@ -1,13 +1,8 @@
-%h3 Resource Replenishment
+- content_for :resource_replenishment do
+  %h3 Resource Replenishment
 
-.row
-  - @resource_replenishment.player_rates.each do |step, rates|
-    .col-4
-      %table.resource_replenishment_rates.table.table-sm.table-bordered{:class => current_game.step == step ? 'table-success' : nil}
-        %thead{:class => current_game.step == step ? 'bg-success text-white' : nil}
-          %th.text-center{:colspan => 2}= "Step #{step}"
-        %tbody
-          - rates.each do |kind, num|
-            %tr
-              %th= kind
-              %td= num
+= link_to 'Replenish', resource_replenishments_url, :method => :post, :class => 'btn btn-success btn-block mb-3'
+
+:coffee
+  $(document).on 'turbolinks:load', ->
+    show_resource_replenishment()
