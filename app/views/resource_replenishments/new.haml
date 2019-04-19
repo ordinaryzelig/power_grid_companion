@@ -1,7 +1,10 @@
 - content_for :resource_replenishment do
   %h3 Resource Replenishment
 
-= link_to 'Replenish', resource_replenishments_url, :method => :post, :class => 'btn btn-success btn-block mb-3'
+- if current_game_player == current_player
+  = link_to 'Replenish', resource_replenishments_url, :method => :post, :class => 'btn btn-success btn-block mb-3'
+- else
+  %h4 Waiting for #{current_game_player.name} to replenish resources.
 
 :coffee
   $(document).on 'turbolinks:load', ->
