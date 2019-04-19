@@ -1,6 +1,10 @@
-require 'test_helper'
-
 class CitiesPowerUpsController < ApplicationController
+
+  before_action :set_turn
+
+  def new
+    @cities_power_up = CitiesPowerUp.new(current_player, {})
+  end
 
   def create
     cities_power_up = CitiesPowerUp.new(current_player, cities_power_up_params)
@@ -18,6 +22,10 @@ private
           *Resource.kinds.keys,
         ],
       )
+  end
+
+  def set_turn
+    @your_turn = current_game_player == current_player
   end
 
 end

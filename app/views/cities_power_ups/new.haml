@@ -1,0 +1,10 @@
+%h1 Choose power plants to power up your cities
+
+- if @your_turn
+
+  = render '/player_mat', :player => current_player
+
+  %dl.payments.row
+    - CitiesPowerUp::PAYMENTS.each do |cities, elektro|
+      %dt.col-1= cities
+      %dd.col-11= number_to_currency elektro, :unit => '€'

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       post :pass
     end
   end
-  resources :cities_power_ups, :only => %i[create]
+  resources :cities_power_ups, :only => %i[new create]
   resources :resource_replenishments, :only => %i[create]
 
 end

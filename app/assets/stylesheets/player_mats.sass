@@ -6,14 +6,13 @@
     border-color: #{$color}
     background-color: rgba($color, 0.1)
 
-#player_mats
-  .player_mat
-    border-width: 2px
-    border-style: solid
-    @each $player_color, $color in $player_colors
-      +player_mat($player_color, $color)
-    & > .card-body, & > .card-header
-      padding: 5px
-    .mat_item
-      &.cities, &.power_capacity
-        padding: 0 10px
+.player_mat
+  border-width: 2px
+  border-style: solid
+  @each $player_color, $color in $player_colors
+    +player_mat($player_color, $color)
+  & > .card-body, & > .card-header
+    padding: 5px
+  .mat_item
+    &.cities, &.power_capacity
+      padding: 0 10px

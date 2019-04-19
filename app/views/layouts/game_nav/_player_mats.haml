@@ -1,20 +1,3 @@
 #player_mats.collapse{:data => {:parent => '#game_nav_panes'}}
   - current_game.players.in_turn_order.each do |player|
-    .card.player_mat[player]{:data => {:color => player.color}}
-
-      %h3.card-header.d-flex
-        .mat_item.flex-grow-1= player.name
-        .mat_item.cities
-          = house_icon
-          = player.cities
-        .mat_item.power_capacity
-          = bolt_icon
-          = player.power_capacity
-
-      .card-body
-        .row
-          - 3.times.each do |idx|
-            .col-4
-
-              - if card = player.cards[idx]
-                = render card
+    = render '/player_mat', :player => player

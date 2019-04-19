@@ -1,0 +1,18 @@
+.card.player_mat[player]{:data => {:color => player.color}}
+
+  %h3.card-header.d-flex
+    .mat_item.flex-grow-1= player.name
+    .mat_item.cities
+      = house_icon
+      = player.cities
+    .mat_item.power_capacity
+      = bolt_icon
+      = player.power_capacity
+
+  .card-body
+    .row
+      - 3.times.each do |idx|
+        .col-4
+
+          - if card = player.cards[idx]
+            = render card
