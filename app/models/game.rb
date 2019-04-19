@@ -29,11 +29,12 @@ class Game < ApplicationRecord
 
   enum(
     :phase => {
-      :turn_order       => 1,
-      :auction          => 2,
-      :buying_resources => 3,
-      :building         => 4,
-      :bureaucracy      => 5,
+      :turn_order             => 1,
+      :auction                => 2,
+      :resource_purchase      => 3,
+      :building               => 4,
+      :cities_power_up        => 5,
+      :resource_replenishment => 6,
     },
   )
 
@@ -81,9 +82,9 @@ class Game < ApplicationRecord
     save!
   end
 
-  def next_phase(phase)
+  def next_phase!
     reset_phase_players
-    update!(:phase => phase)
+    update!(:phase => next_phase)
   end
 
 private
@@ -101,6 +102,24 @@ private
   def at_least_2_players
     if players.size < 2
       errors.add(:base, 'Enter at least 2 players')
+    end
+  end
+
+  def next_phase
+    case phase
+    when 'turn_order'
+      if round == 1 then          'resource_purchase'
+      else                        'auction'
+      end
+    when 'auction'
+      if round == 1 then          'turn_order'
+      else                        'resource_purchase'
+      end
+    when 'resource_purchase' then 'building'
+    when 'building'          then 'cities_power_up'
+    when 'cities_power_up'   then 'resource_replenishment'
+    else
+      raise "No next phase for #{phase.inspect}"
     end
   end
 

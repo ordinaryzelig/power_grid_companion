@@ -25,4 +25,19 @@ class GameTest < ActiveSupport::TestCase
     refute_includes game.phase_players.ids, player.id
   end
 
+  def self.test_next_phase(current_phase, round, expected:)
+    test "next_phase after #{current_phase}, round #{round}" do
+      game = Game.new(:phase => current_phase, :round => round)
+      assert_equal expected, game.send(:next_phase)
+    end
+  end
+
+  test_next_phase 'turn_order',        1,      :expected => 'resource_purchase'
+  test_next_phase 'turn_order',        :other, :expected => 'auction'
+  test_next_phase 'auction',           1,      :expected => 'turn_order'
+  test_next_phase 'auction',           :other, :expected => 'resource_purchase'
+  test_next_phase 'resource_purchase', :any,   :expected => 'building'
+  test_next_phase 'building',          :any,   :expected => 'cities_power_up'
+  test_next_phase 'cities_power_up',   :any,   :expected => 'resource_replenishment'
+
 end

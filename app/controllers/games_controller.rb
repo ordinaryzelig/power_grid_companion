@@ -18,16 +18,7 @@ class GamesController < ApplicationController
 
   def show
     game = Game.find_by!(:token => params[:id])
-    case game.phase
-    when 'auction'
-      redirect_to new_auction_url
-    when 'buying_resources'
-      redirect_to new_resource_purchase_url
-    when 'building'
-      redirect_to new_building_url
-    else
-      raise "Don't know how to navigate to #{game.phase.inspect}"
-    end
+    redirect_to [:new, game.phase]
   end
 
 private

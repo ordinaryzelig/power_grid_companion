@@ -73,13 +73,8 @@ private
     if current_game.phase_players.any?
       redirect_to [:new, :auction]
     else
-      if current_game.round == 1
-        current_game.next_phase(:turn_order)
-        redirect_to [:new, :turn_order]
-      else
-        current_game.next_phase(:buying_resources)
-        redirect_to [:new, :resource_purchase]
-      end
+      current_game.next_phase!
+      redirect_to [:new, current_game.phase]
     end
   end
 

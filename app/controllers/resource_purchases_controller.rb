@@ -39,8 +39,8 @@ private
     if current_game.phase_players.any?
       redirect_to [:new, :resource_purchase]
     else
-      current_game.next_phase(:building)
-      redirect_to [:new, :building]
+      current_game.next_phase!
+      redirect_to [:new, current_game.phase]
     end
   end
 
