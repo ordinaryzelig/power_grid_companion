@@ -2,7 +2,7 @@
 
 - if @your_turn
 
-  = form_for @cities_power_up do |f|
+  = form_for @cities_power_up, :data => current_player.attributes.slice(*%w[cities]) do |f|
     = render 'player_mats/player_mat', :player => current_player, :form => f
     = f.submit 'Burn resources', :class => 'btn btn-success btn-block mt-2'
 

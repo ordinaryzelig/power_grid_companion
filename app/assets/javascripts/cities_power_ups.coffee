@@ -19,9 +19,11 @@ $(document).on 'turbolinks:load', ->
     power_plant.toggleClass('powered', powered)
 
   update_powered_cities_count = ->
-    num_powered = 0
+    possible_capacity = 0
+    cities = $('#new_cities_power_up').data('cities')
     $.map power_plants.filter('.powered'), (power_plant) ->
-      num_powered += parseInt($(power_plant).data('cities'))
+      possible_capacity += parseInt($(power_plant).data('cities'))
+    num_powered = Math.min(cities, possible_capacity)
     selected_class = 'table-success'
     payments_table.find(".#{selected_class}").removeClass(selected_class)
     payments_table.find("""*[data-cities="#{num_powered}"]""").addClass(selected_class)

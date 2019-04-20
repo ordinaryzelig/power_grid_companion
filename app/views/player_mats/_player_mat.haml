@@ -1,4 +1,4 @@
-.card.player_mat[player]{:data => {:color => player.color}}
+.card.player_mat[player]{:data => player.attributes.slice(*%w[color])}
 
   %h3.card-header.d-flex
     .mat_item.flex-grow-1= player.name
