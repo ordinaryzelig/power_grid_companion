@@ -32,4 +32,9 @@ private
     @resource_replenishment = ResourceReplenishment.new(current_game)
   end
 
+  def debug?
+    params[:debug]
+  end
+  helper_method :debug?
+
 end

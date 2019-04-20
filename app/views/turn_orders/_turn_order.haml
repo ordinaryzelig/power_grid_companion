@@ -10,9 +10,10 @@
               = circle_icon
             - else
               = check_circle_icon
-        %div
-          - if player == current_player
-            #{current_player.balance}€
-          - else
-            - if Rails.env.development?
-              = link_to player.id, claim_player_url(player)
+        - if debug?
+          %div
+            - if player == current_player
+              #{current_player.balance}€
+            - else
+              - if Rails.env.development?
+                = link_to player.id, claim_player_url(player)
