@@ -1,13 +1,11 @@
 =player_track($player_color, $color)
   &[data-color="#{$player_color}"]
-    opacity: 0.6
     &:not(.active)
       .house
         color: #{$color}
     &.active
       background-color: #{$color}
       color: white
-      opacity: 1
 
 .turn_order
   .player
@@ -17,3 +15,5 @@
     border-color: gray
     @each $player_color, $color in $player_colors
       +player_track($player_color, $color)
+  .col-2
+    padding: 8px

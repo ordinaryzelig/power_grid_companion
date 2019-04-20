@@ -1,9 +1,10 @@
-.turn_order.row
+.turn_order.row{:class => [local_assigns[:turn_order_track] ? 'turn_order_track' : nil]}
   - players.each do |player|
     .col-2
-      %div[player]{:data => {:color => player.color}, :class => current_game.current_player&.id == player.id ? 'active' : nil}
-        %span.house= house_icon
-        %span.cities= player.cities
+      - active = current_game.current_player&.id == player.id && local_assigns[:turn_order_track]
+      %div[player]{:data => {:color => player.color}, :class => active ? 'active' : nil}
+        .house= house_icon
+        = "#{player.cities}|#{player.power_capacity}"
         - unless local_assigns[:hide_phase_status]
           %div.phase_status
             - if current_game.phase_players.include?(player)
