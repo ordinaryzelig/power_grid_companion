@@ -1,6 +1,9 @@
 = yield :resource_replenishment
 
 #resource_replenishment.collapse{:data => {:parent => '#game_nav_panes'}}
+
+  %h3 Replenishment
+
   .row
     - @resource_replenishment.player_rates.each do |step, rates|
       .col-4

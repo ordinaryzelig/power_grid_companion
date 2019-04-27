@@ -10,6 +10,9 @@ module IconsHelper
     :bolt                         => ['fas', 'bolt'],
     :circle                       => ['far', 'circle'],
     :check_circle                 => ['far', 'check-circle'],
+    :users                        => ['fas', 'users'],
+    :industry                     => ['fas', 'industry'],
+    :recycle                      => ['fas', 'recycle'],
   }
 
   def house_icon
@@ -34,6 +37,24 @@ module IconsHelper
 
   def check_circle_icon
     icon(*ICONS.fetch(:check_circle))
+  end
+
+  def players_icon
+    icon(*ICONS.fetch(:users))
+  end
+
+  def market_icon
+    icon(*ICONS.fetch(:industry))
+  end
+
+  def resources_icons
+    %i[coal oil uranium trash].map do |type|
+      icon(*ICONS.fetch(type))
+    end.join.html_safe
+  end
+
+  def replenishment_icon
+    icon(*ICONS.fetch(:recycle))
   end
 
 end
