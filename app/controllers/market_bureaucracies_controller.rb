@@ -13,10 +13,4 @@ class MarketBureaucraciesController < ApplicationController
     end
   end
 
-  if Rails.env.development?
-    def index
-      render :create
-    end
-  end
-
 end
