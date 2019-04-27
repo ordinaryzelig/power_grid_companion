@@ -1,14 +1,16 @@
-%h1 Auction
+- content_for :auction do
 
-- if @your_turn
-  %p Choose a Power Plant to put up for auction.
-- else
-  Waiting for #{current_game.current_player.name}.
+  %h1 Auction
+
+  - if @your_turn
+    %p Choose a Power Plant to put up for auction.
+  - else
+    Waiting for #{current_game.current_player.name}.
+
+-# market will be rendered here
 
 = form_for @auction, :data => {:confirm => 'Start bidding?'} do |f|
   = f.hidden_field :card_id
-
-  = render 'market', :market_type => 'actual', :cards => @actual_market
 
   - if @your_turn
     .row
@@ -18,4 +20,6 @@
         - if @your_turn && current_game.round != 1
           = link_to 'Pass', skip_auctions_url, :method => :post, :class => 'btn btn-secondary btn-block mt-2', :data => {:confirm => 'Skip the auction phase?'}
 
-= render 'market', :market_type => 'future', :cards => @future_market
+:coffee
+  $(document).on 'turbolinks:load', ->
+    window.setup_auction()
