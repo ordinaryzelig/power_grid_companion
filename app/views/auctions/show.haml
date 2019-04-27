@@ -11,7 +11,7 @@
             .col-6= link_to "Bid #{@auction.price + 1}", bid_auction_url(@auction), :method => :post, :class => 'btn btn-success btn-block'
             .col-6= link_to "Pass", pass_auction_url(@auction), :method => :post, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Sure you want to pass?'}
           - else
-            Waiting for #{@auction.player_turn.name}
+            .col Waiting for #{@auction.player_turn.name}
 
       .col-4
         %h5 Bid order
