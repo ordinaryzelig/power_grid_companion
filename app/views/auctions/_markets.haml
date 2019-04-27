@@ -2,4 +2,7 @@
   = yield :auction
 
   = render 'auctions/market', :market_type => 'actual', :cards => current_game.cards.actual_market, **local_assigns
+
+  = yield :auction_form
+
   = render 'auctions/market', :market_type => 'future', :cards => current_game.cards.future_market, **local_assigns
