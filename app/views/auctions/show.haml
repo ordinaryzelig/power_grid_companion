@@ -15,7 +15,7 @@
 
       .col-4
         %h5 Bid order
-        %ul
+        %ul.list-unstyled
           - @auction.bidders.each_with_index do |bidder, idx|
             %li
               %div{:class => [idx == 0 ? 'active' : nil]}= bidder.name
