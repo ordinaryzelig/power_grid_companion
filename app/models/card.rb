@@ -95,4 +95,10 @@ class Card < ApplicationRecord
     resources_required * 2
   end
 
+  def spike!
+    game.cards.where('position > ?', position).update_all('position = position - 1')
+    update!(:position => game.cards.last.position)
+    game.cards.reload
+  end
+
 end
