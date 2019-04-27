@@ -1,10 +1,11 @@
 task :new_game => :environment do
   g = Game.create!(
     :step => 1,
-    :players_attributes => Player.colors.keys.map do |color|
+    :players_attributes => Player.colors.keys.each_with_index.map do |color, idx|
       {
         :name => color,
         :color => color,
+        :seat_position => idx,
       }
     end,
   )
