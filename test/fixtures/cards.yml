@@ -1,3 +1,7 @@
+DEFAULTS: &DEFAULTS
+  resources_required: 1
+  kinds: 2 # coal
+
 multiple_bidders:
   game: $LABEL
   number: 3
@@ -21,4 +25,28 @@ new_turn_order_<%= number %>:
   game: new_turn_order
   number: <%= number %>
   position: <%= number - 1 %>
+<% end %>
+
+<% 7.times do |idx| %>
+market_bureaucracy_<%= idx %>:
+  <<: *DEFAULTS
+  game: market_bureaucracy
+  number: <%= idx + 10 %>
+  position: <%= idx %>
+<% end %>
+
+<% %i[spiked drawn].each_with_index do |type, idx| %>
+market_bureaucracy_<%= type %>:
+  <<: *DEFAULTS
+  game: market_bureaucracy
+  number: <%= 17 + idx %>
+  position: <%= 7 + idx %>
+<% end %>
+
+<% 3.times do |idx| %>
+card_spike_<%= idx %>:
+  <<: *DEFAULTS
+  game: card_spike
+  position: <%= idx %>
+  number: <%= 10 + idx %>
 <% end %>

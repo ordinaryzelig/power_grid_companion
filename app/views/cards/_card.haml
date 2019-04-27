@@ -1,4 +1,6 @@
-.card.mb-2.power_plant{:data => card.attributes}
+- classes = []
+- classes << 'last_drawn' if local_assigns[:highlight_last_drawn] && card == current_game.cards.last_drawn
+.card.mb-2.power_plant[card]{:data => card.attributes, :class => classes}
 
   %h5.card-header.text-center= card.number
 

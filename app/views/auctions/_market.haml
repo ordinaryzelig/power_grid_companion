@@ -2,4 +2,4 @@
 .row.power_plant_market{:class => market_type}
   - cards.each do |card|
     .col-6
-      = render card
+      = render card, **local_assigns

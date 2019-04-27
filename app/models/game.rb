@@ -15,7 +15,35 @@ class Game < ApplicationRecord
   end
   has_resources
   has_many :resource_market_spaces
-  has_many :cards
+  has_many :cards, :inverse_of => :game do
+
+    def future_market
+      market.in_groups_of(4, false).last
+    end
+
+    def actual_market
+      market.in_groups_of(4, false).first
+    end
+
+    def next_to_spike
+      market.max_by(&:number)
+    end
+
+    def last_spiked
+      in_draw_deck.last
+    end
+
+    def last_drawn
+      market.max_by(&:position)
+    end
+
+  private
+
+    def market
+      in_draw_deck.first(8)
+    end
+
+  end
   has_many :auctions
 
   accepts_nested_attributes_for :players, :reject_if => -> (atts) { atts.values_at(:name, :color).all?(&:blank?) }
@@ -35,6 +63,7 @@ class Game < ApplicationRecord
       :building               => 4,
       :cities_power_up        => 5,
       :resource_replenishment => 6,
+      :market_bureaucracy     => 7,
     },
   )
 
@@ -114,7 +143,8 @@ private
     when 'resource_purchase'      then 'building'
     when 'building'               then 'cities_power_up'
     when 'cities_power_up'        then 'resource_replenishment'
-    when 'resource_replenishment' then 'turn_order'
+    when 'resource_replenishment' then 'market_bureaucracy'
+    when 'market_bureaucracy'     then 'turn_order'
     else
       raise "No next phase for #{phase.inspect}"
     end

@@ -17,7 +17,7 @@ class Card < ApplicationRecord
 
   default_scope { order(:position) }
   scope :power_plants, -> { not_step_3 }
-  scope :auctionable, -> { where(:player_id => nil) }
+  scope :in_draw_deck, -> { where(:player_id => nil) }
 
   STANDARD_DECK = {
      3 =>  {:selected_kinds => [:oil],        :resources_required => 2, :cities => 1},
@@ -96,8 +96,9 @@ class Card < ApplicationRecord
   end
 
   def spike!
+    last_position = game.cards.map(&:position).max
     game.cards.where('position > ?', position).update_all('position = position - 1')
-    update!(:position => game.cards.last.position)
+    update!(:position => last_position)
     game.cards.reload
   end
 

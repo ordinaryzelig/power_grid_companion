@@ -2,10 +2,14 @@
   &[data-kinds="#{$kind}"]
     background-color: #{$color}
 
-.power_plant
-  .card-body, .card-header
-    padding: 0.25rem
-  .card-body.requirements
-    color: white
-    @each $kind, $color in $resource_colors
-      +power_plant_requirements($kind, $color)
+.card
+  &.power_plant
+    .card-body, .card-header
+      padding: 0.25rem
+    .card-body.requirements
+      color: white
+      @each $kind, $color in $resource_colors
+        +power_plant_requirements($kind, $color)
+
+  &.last_drawn
+    border: 2px solid theme-color('success')

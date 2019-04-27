@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   end
   resources :cities_power_ups, :only => %i[new create]
   resources :resource_replenishments, :only => %i[new create]
+  resources :market_bureaucracies, :only => %i[new create index]
 
 end

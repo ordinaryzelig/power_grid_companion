@@ -99,3 +99,9 @@ resource_purchase_pass_<%= idx %>:
 remove_phase_player:
   <<: *DEFAULTS
   game: $LABEL
+
+<% 2.times do |idx| %>
+market_bureaucracy_<%= idx %>:
+  <<: *DEFAULTS
+  game: market_bureaucracy
+<% end %>

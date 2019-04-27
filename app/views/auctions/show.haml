@@ -28,5 +28,4 @@
       - else
         %h3 #{@auction.bidders.first.name} won the auction for #{@auction.price}.
 
-= render 'market', :market_type => 'actual', :cards => @actual_market
-= render 'market', :market_type => 'future', :cards => @future_market
+= render 'auctions/markets'
