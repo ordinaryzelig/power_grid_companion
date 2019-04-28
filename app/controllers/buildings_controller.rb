@@ -26,4 +26,8 @@ private
       )
   end
 
+  def render_building_form?
+    true
+  end
+
 end

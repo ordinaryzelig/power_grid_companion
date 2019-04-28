@@ -37,4 +37,9 @@ private
   end
   helper_method :debug?
 
+  def render_building_form?
+    false
+  end
+  helper_method :render_building_form?
+
 end

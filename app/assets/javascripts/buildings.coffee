@@ -1,11 +1,11 @@
 $(document).on 'turbolinks:load', ->
 
-  form = $('#new_buildings')
+  calculator_ele = $('#building_calculator')
 
-  form.find('a.new_building').on 'click', (event) ->
+  calculator_ele.find('a.new_building').on 'click', (event) ->
     link = $(event.target)
     template = render_template {building_cost: link.data('building-cost')}
-    form.find('.rows').append(template)
+    calculator_ele.find('.rows').append(template)
     event.preventDefault()
     update_total()
     $('.connection_cost:last').focus()
@@ -16,12 +16,12 @@ $(document).on 'turbolinks:load', ->
 
   update_total = ->
     building_costs = 0
-    form.find('.building_cost, .connection_cost').each ->
+    calculator_ele.find('.building_cost, .connection_cost').each ->
       val = $(@).val()
       building_costs += parseInt(val) || 0
-    form.find('.total').html("#{building_costs}€")
+    calculator_ele.find('.total').html("#{building_costs}€")
 
-  $(document).on 'keyup', '#new_buildings .connection_cost', update_total
+  $(document).on 'keyup', '#building_calculator .connection_cost', update_total
 
   render_template = (atts) ->
     select_options = ''
