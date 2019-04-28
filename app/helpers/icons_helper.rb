@@ -13,6 +13,7 @@ module IconsHelper
     :industry     => ['fas', 'industry'],
     :recycle      => ['fas', 'recycle'],
     :renewable    => ['fas', 'wind'],
+    :hammer       => ['fas', 'hammer'],
   }
 
   def house_icon
@@ -67,6 +68,10 @@ module IconsHelper
 
   def replenishment_icon
     icon(*ICONS.fetch(:recycle))
+  end
+
+  def building_icon
+    icon(*ICONS.fetch(:hammer))
   end
 
 end

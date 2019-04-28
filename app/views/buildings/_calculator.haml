@@ -1,0 +1,20 @@
+#building_calculator.collpase{:data => {:parent => '#game_nav_panes'}}
+
+  %h3 Building
+
+  = form_with :url => buildings_url, :id => 'new_buildings', :local => true do |f|
+
+    .rows
+
+    - [10, 15, 20].each do |building_cost|
+      = link_to house_icon + "#{building_cost}€", nil, :data => {:building_cost => building_cost}, :class => 'new_building btn btn-primary'
+
+    %h3
+      Total
+      %span.total 0€
+
+    .row
+      .col-6
+        = f.submit 'Build', :class => 'btn btn-success btn-block', :data => {:confirm => 'Are you sure you are done building?'}
+      .col-6
+        = link_to 'Pass', pass_buildings_url, :method => :post, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Are you sure you want to skip building?'}
