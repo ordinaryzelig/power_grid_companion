@@ -1,18 +1,17 @@
 module IconsHelper
 
   ICONS = {
-    :coal                         => ['fas', 'cloud'],
-    :oil                          => ['fas', 'database'],
-    :uranium                      => ['fas', 'radiation-alt'],
-    :trash                        => ['far', 'trash-alt'],
-    :house                        => ['fas', 'home'],
-    :resources_power_cities_arrow => ['fas', 'long-arrow-alt-right'],
-    :bolt                         => ['fas', 'bolt'],
-    :circle                       => ['far', 'circle'],
-    :check_circle                 => ['far', 'check-circle'],
-    :users                        => ['fas', 'users'],
-    :industry                     => ['fas', 'industry'],
-    :recycle                      => ['fas', 'recycle'],
+    :coal         => ['fas', 'cloud'],
+    :oil          => ['fas', 'database'],
+    :uranium      => ['fas', 'radiation-alt'],
+    :trash        => ['far', 'trash-alt'],
+    :house        => ['fas', 'home'],
+    :bolt         => ['fas', 'bolt'],
+    :circle       => ['far', 'circle'],
+    :check_circle => ['far', 'check-circle'],
+    :users        => ['fas', 'users'],
+    :industry     => ['fas', 'industry'],
+    :recycle      => ['fas', 'recycle'],
   }
 
   def house_icon
@@ -21,10 +20,6 @@ module IconsHelper
 
   def resource_icon(resource)
     icon(*ICONS.fetch(resource.to_sym))
-  end
-
-  def resources_power_cities_arrow_icon
-    icon(*ICONS.fetch(:resources_power_cities_arrow), :class => 'arrow_right')
   end
 
   def bolt_icon
