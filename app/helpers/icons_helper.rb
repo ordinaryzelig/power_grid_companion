@@ -23,6 +23,22 @@ module IconsHelper
     icon(*ICONS.fetch(resource.to_sym))
   end
 
+  def resource_icons(resources, resources_required)
+    if resources.size == 1
+      [resources_required, 1].max.times.map do
+        icon(*ICONS.fetch(resources.first.to_sym))
+      end.join(' ').html_safe
+    else
+      content_tag :small do
+        icons =
+          resources.map do |resource|
+            icon(*ICONS.fetch(resource.to_sym))
+          end
+        "#{icons.join('/')} x #{resources_required}".html_safe
+      end
+    end
+  end
+
   def bolt_icon
     icon(*ICONS.fetch(:bolt))
   end

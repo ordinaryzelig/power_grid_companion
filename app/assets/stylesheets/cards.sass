@@ -10,6 +10,8 @@
       color: white
       @each $kind, $color in $resource_colors
         +power_plant_requirements($kind, $color)
+      &[data-kinds="coal-oil"]
+        background-image: linear-gradient(to right, map-get($resource_colors, "coal"), map-get($resource_colors, "oil"))
 
   &.last_drawn
     border: 2px solid theme-color('success')
