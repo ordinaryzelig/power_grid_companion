@@ -1,3 +1,6 @@
+window.show_building_calculator = ->
+  $('#building_calculator').collapse('show')
+
 $(document).on 'turbolinks:load', ->
 
   calculator_ele = $('#building_calculator')
