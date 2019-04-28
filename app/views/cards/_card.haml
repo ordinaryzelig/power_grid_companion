@@ -7,8 +7,9 @@
   .card-body.text-center.requirements{:data => {:kinds => card.selected_kinds.first(1).join('-')}}
     .row
       .col
-        - card.resources_required.times do
+        - [card.resources_required, 1].max.times do
           = resource_icon card.selected_kinds.first
+
     .row
       .col
         = house_icon

@@ -12,6 +12,7 @@ module IconsHelper
     :users        => ['fas', 'users'],
     :industry     => ['fas', 'industry'],
     :recycle      => ['fas', 'recycle'],
+    :renewable    => ['fas', 'wind'],
   }
 
   def house_icon
