@@ -50,3 +50,12 @@ card_spike_<%= idx %>:
   position: <%= idx %>
   number: <%= 10 + idx %>
 <% end %>
+
+<% 9.times do |idx| %>
+auction_step_3_revealed_<%= idx %>:
+  <<: *DEFAULTS
+  game: auction_step_3_revealed
+  position: <%= idx %>
+  number: <%= idx unless idx == 8 %>
+  kinds: <%= idx == 8 ? 1 : 2 %> # step_3 or :coal
+<% end %>

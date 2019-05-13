@@ -33,6 +33,7 @@ class Auction < ApplicationRecord
     player = bidders.first
     sell_to player
     game.remove_phase_player(player)
+    game.draw_card
   end
 
   def player_turn

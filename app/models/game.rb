@@ -18,11 +18,19 @@ class Game < ApplicationRecord
   has_many :cards, :inverse_of => :game do
 
     def future_market
-      market.in_groups_of(4, false).last
+      if game.step == 3
+        []
+      else
+        market.in_groups_of(4, false).last
+      end
     end
 
     def actual_market
-      market.in_groups_of(4, false).first
+      if game.step == 3
+        market
+      else
+        market.in_groups_of(4, false).first
+      end
     end
 
     def next_to_spike
@@ -37,10 +45,15 @@ class Game < ApplicationRecord
       market.max_by(&:position)
     end
 
+    def market
+      cards_in_market = game.step == 3 ? 6 : 8
+      in_draw_deck.first(cards_in_market)
+    end
+
   private
 
-    def market
-      in_draw_deck.first(8)
+    def game
+      proxy_association.owner
     end
 
   end
@@ -110,6 +123,12 @@ class Game < ApplicationRecord
   def next_phase!
     reset_phase_players
     update!(:phase => next_phase)
+  end
+
+  def draw_card
+    if cards.market.any?(&:step_3?) && phase_players.empty?
+      update!(:step => 3)
+    end
   end
 
 private

@@ -84,3 +84,11 @@ market_bureaucracy:
 card_spike:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+
+auction_step_3_revealed:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    - <%= ActiveRecord::FixtureSet.identify(:auction_step_3_revealed_0) %>
+    - <%= ActiveRecord::FixtureSet.identify(:auction_step_3_revealed_1) %>
+  step: 2

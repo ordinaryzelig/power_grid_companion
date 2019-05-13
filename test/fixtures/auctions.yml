@@ -27,3 +27,13 @@ claim_auction_replace:
     - <%= ActiveRecord::FixtureSet.identify("claim_auction_replace_#{idx}") %>
     <% end %>
   price: 6
+
+<% 2.times do |idx| %>
+auction_step_3_revealed_<%= idx %>:
+  game: auction_step_3_revealed
+  card: $LABEL
+  player: $LABEL
+  price: 1
+  bidder_ids:
+    - <%= ActiveRecord::FixtureSet.identify("auction_step_3_revealed_#{idx}") %>
+<% end %>

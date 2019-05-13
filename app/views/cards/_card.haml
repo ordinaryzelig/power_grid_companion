@@ -1,18 +1,28 @@
 - classes = []
 - classes << 'last_drawn' if local_assigns[:highlight_last_drawn] && card == current_game.cards.last_drawn
-.card.mb-2.power_plant[card]{:data => card.attributes, :class => classes}
+- classes << (card.step_3? ? 'step_3' : 'power_plant')
+.card.mb-2[card]{:data => card.attributes, :class => classes}
 
-  %h5.card-header.text-center= card.number
+  %h5.card-header.text-center
+    - if card.number
+      = card.number
 
   .card-body.text-center.requirements{:data => {:kinds => card.selected_kinds.join('-')}}
-    .row
-      .col
-        = resource_icons card.selected_kinds, card.resources_required
+    - if card.step_3?
+      .row
+        .col
+          STEP 3
 
-    .row
-      .col
-        = house_icon
-        = card.cities
+    - else
+
+      .row
+        .col
+          = resource_icons card.selected_kinds, card.resources_required
+
+      .row
+        .col
+          = house_icon
+          = card.cities
 
   - if card.resources.any?
     .card-body.resources.text-center

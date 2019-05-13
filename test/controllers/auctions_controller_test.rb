@@ -107,4 +107,33 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal players.without(player).map(&:id), game.phase_player_ids
   end
 
+  test 'reveal step 3 card in middle of auction phase leaves step 3 in the market, does not trigger step 3' do
+    game = games(:auction_step_3_revealed)
+    claim_player players(:auction_step_3_revealed_0)
+    auction = auctions(:auction_step_3_revealed_0)
+
+    assert_difference 'game.cards.power_plants.market.size', -1 do
+      post claim_auction_url(auction)
+    end
+
+    game.reload
+    assert_equal game.cards.step_3.first!, game.cards.future_market.last
+    assert_equal 2, game.step
+  end
+
+  test 'step 3 Card and lowest power plant are removed and game goes into step 3' do
+    game = games(:auction_step_3_revealed)
+
+    game.players.each_with_index do |player, idx|
+      claim_player player
+      auction = auctions("auction_step_3_revealed_#{idx}")
+      post claim_auction_url(auction)
+    end
+
+    game.reload
+    assert_equal 3, game.step
+    assert_equal 6, game.cards.market.size
+    assert_equal 6, game.cards.power_plants.market.size
+  end
+
 end

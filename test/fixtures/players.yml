@@ -105,3 +105,12 @@ market_bureaucracy_<%= idx %>:
   <<: *DEFAULTS
   game: market_bureaucracy
 <% end %>
+
+<% 2.times do |idx| %>
+auction_step_3_revealed_<%= idx %>:
+  <<: *DEFAULTS
+  game: auction_step_3_revealed
+  color: <%= idx %>
+  turn_order: <%= idx %>
+  seat_position: <%= idx %>
+<% end %>
