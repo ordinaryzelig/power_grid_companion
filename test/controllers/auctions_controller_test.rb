@@ -117,8 +117,10 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     game.reload
-    assert_equal game.cards.step_3.first!, game.cards.future_market.last
     assert_equal 2, game.step
+
+    assert_equal game.cards.step_3.first!, game.cards.future_market.last
+    assert_equal 8, game.cards.market.count
   end
 
   test 'step 3 Card and lowest power plant are removed and game goes into step 3' do
