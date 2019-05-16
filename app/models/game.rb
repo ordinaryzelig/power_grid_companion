@@ -122,13 +122,9 @@ class Game < ApplicationRecord
 
   def next_phase!
     reset_phase_players
-    update!(:phase => next_phase)
-  end
-
-  def draw_card
-    if cards.market.any?(&:step_3?) && phase_players.empty?
-      update!(:step => 3)
-    end
+    self.phase = next_phase
+    self.step = 3 if cards.market.any?(&:step_3?)
+    save!
   end
 
 private

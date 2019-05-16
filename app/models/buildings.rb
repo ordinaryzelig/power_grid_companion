@@ -12,7 +12,6 @@ class Buildings
 
     @player.game.cards.market.where('number <= ?', @player.cities).each do |card|
       card.spike!
-      @player.game.draw_card
     end
   end
 
