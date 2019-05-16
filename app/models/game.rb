@@ -15,6 +15,7 @@ class Game < ApplicationRecord
   end
   has_resources
   has_many :resource_market_spaces
+
   has_many :cards, :inverse_of => :game do
 
     def future_market
@@ -38,7 +39,7 @@ class Game < ApplicationRecord
     end
 
     def last_spiked
-      in_draw_deck.last
+      draw_deck.last
     end
 
     def last_drawn
@@ -46,8 +47,11 @@ class Game < ApplicationRecord
     end
 
     def market
-      cards_in_market = game.step == 3 ? 6 : 8
-      in_draw_deck.limit(cards_in_market)
+      unplayed.limit(num_market_cards)
+    end
+
+    def draw_deck
+      unplayed.offset(num_market_cards)
     end
 
   private
@@ -56,7 +60,17 @@ class Game < ApplicationRecord
       proxy_association.owner
     end
 
+    def num_market_cards
+      game.step == 3 ? 6 : 8
+    end
+
+    # Either in a market or yet to be drawn.
+    def unplayed
+      where(:player_id => nil)
+    end
+
   end
+
   has_many :auctions
 
   accepts_nested_attributes_for :players, :reject_if => -> (atts) { atts.values_at(:name, :color).all?(&:blank?) }
@@ -123,7 +137,10 @@ class Game < ApplicationRecord
   def next_phase!
     reset_phase_players
     self.phase = next_phase
-    self.step = 3 if cards.market.any?(&:step_3?)
+    if step != 3 && cards.market.any?(&:step_3?)
+      self.step = 3
+      cards.draw_deck.shuffle!
+    end
     save!
   end
 

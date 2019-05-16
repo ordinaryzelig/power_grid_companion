@@ -73,3 +73,11 @@ building_step_3_revealed:
   game: $LABEL
   position: 0
   kinds: 1
+
+<% (3..50).to_a.each_with_index do |number, idx| %>
+shuffle_draw_deck_<%= idx %>:
+  <<: *DEFAULTS
+  game: shuffle_draw_deck
+  position: <%= idx %>
+  number: <%= number %>
+<% end %>

@@ -17,7 +17,6 @@ class Card < ApplicationRecord
 
   default_scope { order(:position) }
   scope :power_plants, -> { not_step_3 }
-  scope :in_draw_deck, -> { where(:player_id => nil) }
 
   STANDARD_DECK = {
      3 =>  {:selected_kinds => [:oil],        :resources_required => 2, :cities => 1},
@@ -83,6 +82,13 @@ class Card < ApplicationRecord
       end
 
       game.cards.create!(:selected_kinds => [:step_3], :position => cards.size)
+    end
+
+    def shuffle!
+      new_positions = all.map(&:position).shuffle
+      all.each_with_index do |card, idx|
+        card.update!(:position => new_positions.fetch(idx))
+      end
     end
 
   end

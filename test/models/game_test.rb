@@ -63,4 +63,13 @@ class GameTest < ActiveSupport::TestCase
     assert_equal 3, game.step
   end
 
+  test 'shuffle draw deck' do
+    game = games(:shuffle_draw_deck)
+    assert_equal (11..50).to_a, game.cards.draw_deck.pluck(:number)
+
+    game.cards.draw_deck.shuffle!
+
+    refute_equal (11..50).to_a, game.cards.draw_deck.pluck(:number)
+  end
+
 end

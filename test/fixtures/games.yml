@@ -101,3 +101,7 @@ building_step_3_revealed:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
   step: 2
+
+shuffle_draw_deck:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
