@@ -47,7 +47,7 @@ class Game < ApplicationRecord
 
     def market
       cards_in_market = game.step == 3 ? 6 : 8
-      in_draw_deck.first(cards_in_market)
+      in_draw_deck.limit(cards_in_market)
     end
 
   private

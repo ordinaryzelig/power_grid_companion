@@ -92,3 +92,7 @@ auction_step_3_revealed:
     - <%= ActiveRecord::FixtureSet.identify(:auction_step_3_revealed_0) %>
     - <%= ActiveRecord::FixtureSet.identify(:auction_step_3_revealed_1) %>
   step: 2
+
+spike_card_when_number_of_cities_built:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>

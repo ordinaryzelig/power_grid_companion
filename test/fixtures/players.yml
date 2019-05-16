@@ -114,3 +114,7 @@ auction_step_3_revealed_<%= idx %>:
   turn_order: <%= idx %>
   seat_position: <%= idx %>
 <% end %>
+
+spike_card_when_number_of_cities_built:
+  <<: *DEFAULTS
+  game: $LABEL
