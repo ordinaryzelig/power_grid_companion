@@ -96,3 +96,8 @@ auction_step_3_revealed:
 spike_card_when_number_of_cities_built:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+
+building_step_3_revealed:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  step: 2

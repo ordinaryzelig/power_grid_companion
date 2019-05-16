@@ -67,3 +67,9 @@ spike_card_when_number_of_cities_built_<%= idx %>:
   position: <%= idx %>
   number: <%= idx + 1 %>
 <% end %>
+
+building_step_3_revealed:
+  <<: *DEFAULTS
+  game: $LABEL
+  position: 0
+  kinds: 1

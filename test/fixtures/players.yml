@@ -118,3 +118,9 @@ auction_step_3_revealed_<%= idx %>:
 spike_card_when_number_of_cities_built:
   <<: *DEFAULTS
   game: $LABEL
+
+<% 2.times do |idx| %>
+building_step_3_revealed_<%= idx %>:
+  <<: *DEFAULTS
+  game: building_step_3_revealed
+<% end %>

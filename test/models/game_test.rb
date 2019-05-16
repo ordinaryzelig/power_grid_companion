@@ -53,4 +53,14 @@ class GameTest < ActiveSupport::TestCase
     assert_equal 3, game.step
   end
 
+  test 'step 3 after building phase' do
+    game = games(:building_step_3_revealed)
+
+    assert_difference 'game.step' do
+      game.next_phase!
+    end
+
+    assert_equal 3, game.step
+  end
+
 end
