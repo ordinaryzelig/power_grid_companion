@@ -15,7 +15,6 @@ class Card < ApplicationRecord
     :column => 'kinds',
   )
 
-  default_scope { order(:position) }
   scope :power_plants, -> { not_step_3 }
 
   STANDARD_DECK = {

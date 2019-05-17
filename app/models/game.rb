@@ -47,11 +47,17 @@ class Game < ApplicationRecord
     end
 
     def market
-      unplayed.limit(num_market_cards).sort_by(&:auction_number)
+      numbers = unplayed.order(:position).limit(num_market_cards).pluck(:number)
+      where(:number => numbers).order('number NULLS LAST')
     end
 
     def draw_deck
-      unplayed.offset(num_market_cards)
+      unplayed.order(:position).offset(num_market_cards)
+    end
+
+    # Either in a market or yet to be drawn.
+    def unplayed
+      where(:player_id => nil)
     end
 
   private
@@ -62,11 +68,6 @@ class Game < ApplicationRecord
 
     def num_market_cards
       game.step == 3 ? 6 : 8
-    end
-
-    # Either in a market or yet to be drawn.
-    def unplayed
-      where(:player_id => nil)
     end
 
   end

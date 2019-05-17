@@ -60,7 +60,7 @@ auction_step_3_revealed_<%= idx %>:
   kinds: <%= idx == 8 ? 1 : 2 %> # step_3 or :coal
 <% end %>
 
-<% 2.times do |idx| %>
+<% 9.times do |idx| %>
 spike_card_when_number_of_cities_built_<%= idx %>:
   <<: *DEFAULTS
   game: spike_card_when_number_of_cities_built

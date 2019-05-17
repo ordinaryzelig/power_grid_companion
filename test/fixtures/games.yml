@@ -20,6 +20,7 @@ multiple_bidders:
 building:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+  phase_player_ids: []
 
 cities_power_up:
   <<: *DEFAULTS
@@ -96,6 +97,7 @@ auction_step_3_revealed:
 spike_card_when_number_of_cities_built:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+  phase_player_ids: []
 
 building_step_3_revealed:
   <<: *DEFAULTS
