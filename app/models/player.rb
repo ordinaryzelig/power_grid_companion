@@ -26,7 +26,8 @@ class Player < ApplicationRecord
 
   def purchase_resource(resource)
     self.balance -= resource.cost
-    card = cards.send(resource.kind).detect(&:has_space?)
+    cards_with_space = cards.send(resource.kind).select(&:has_space?)
+    card = cards_with_space.min_by { |c| c.selected_kinds.size }
     raise "No space to put purchased resource" unless card
     resource.move_to(card)
     save!

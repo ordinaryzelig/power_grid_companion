@@ -10,8 +10,8 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
     coal_card = player.game.cards.find_by!(:number => 4)
     player.purchase_card coal_card, 4
 
-    oil_card = player.game.cards.find_by!(:number => 5)
-    player.purchase_card oil_card, 5
+    coal_oil_card = player.game.cards.find_by!(:number => 5)
+    player.purchase_card coal_oil_card, 5
 
     assert_difference 'player.balance', -15 do
       params = {
@@ -25,7 +25,7 @@ class ResourcePurchasesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal 2, coal_card.coals.count
-    assert_equal 4, oil_card.oils.count
+    assert_equal 4, coal_oil_card.oils.count
   end
 
   test '#pass' do
