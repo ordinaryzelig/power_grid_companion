@@ -6,6 +6,7 @@ class BuildingsController < ApplicationController
   def create
     buildings = Buildings.new(current_player, buildings_params)
     buildings.save!
+    current_game.remove_phase_player(current_player)
     next_player_or_next_phase
   end
 
