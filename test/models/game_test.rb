@@ -70,6 +70,7 @@ class GameTest < ActiveSupport::TestCase
     game.cards.draw_deck.shuffle!
 
     refute_equal (11..50).to_a, game.cards.draw_deck.pluck(:number)
+    assert_equal (11..50).to_a, game.cards.draw_deck.pluck(:number).sort
   end
 
 end
