@@ -3,6 +3,4 @@
     %h3 Spiked
     = render current_game.cards.last_spiked
 
-= render 'auctions/markets', :highlight_last_drawn => true
-
 = link_to 'Continue', game_url(current_game), :class => 'btn btn-primary btn-block'
