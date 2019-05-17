@@ -47,7 +47,7 @@ class Game < ApplicationRecord
     end
 
     def market
-      unplayed.limit(num_market_cards)
+      unplayed.limit(num_market_cards).sort_by(&:auction_number)
     end
 
     def draw_deck

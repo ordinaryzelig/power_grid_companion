@@ -108,4 +108,8 @@ class Card < ApplicationRecord
     game.cards.reload
   end
 
+  def auction_number
+    number || Float::INFINITY
+  end
+
 end
