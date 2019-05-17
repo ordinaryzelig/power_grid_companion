@@ -6,7 +6,7 @@
 
     .rows
 
-    - [10, 15, 20].each do |building_cost|
+    - [10, 15, 20].first(current_game.step).each do |building_cost|
       = link_to house_icon + "#{building_cost}€", nil, :data => {:building_cost => building_cost}, :class => 'new_building btn btn-primary'
 
     %h3
