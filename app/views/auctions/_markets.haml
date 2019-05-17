@@ -5,4 +5,5 @@
 
   = yield :auction_form
 
-  = render 'auctions/market', :market_type => 'future', :cards => current_game.cards.future_market, **local_assigns
+  - unless current_game.step == 3
+    = render 'auctions/market', :market_type => 'future', :cards => current_game.cards.future_market, **local_assigns
