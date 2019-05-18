@@ -1,0 +1,7 @@
+.row
+  - @game.cards.order(:position).each do |card|
+    .col-md-3
+      Position: #{card.position},
+      - if card.player_id
+        Player: #{card.player_id}
+      = render card

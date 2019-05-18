@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :games, :only => %i[new create show]
+  resources :games, :only => %i[new create show] do
+    resources :cards, :only => %i[index]
+  end
   resources :players, :only => [] do
     member do
       post :claim
