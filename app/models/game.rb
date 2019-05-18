@@ -85,13 +85,13 @@ class Game < ApplicationRecord
 
   enum(
     :phase => {
-      :turn_order             => 1,
-      :auction                => 2,
-      :resource_purchase      => 3,
-      :building               => 4,
-      :cities_power_up        => 5,
-      :resource_replenishment => 6,
-      :market_bureaucracy     => 7,
+      :turn_order             => 0,
+      :auction                => 1,
+      :resource_purchase      => 2,
+      :building               => 3,
+      :cities_power_up        => 4,
+      :resource_replenishment => 5,
+      :market_bureaucracy     => 6,
     },
   )
 
