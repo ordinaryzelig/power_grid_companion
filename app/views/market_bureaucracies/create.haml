@@ -2,5 +2,11 @@
   .col-6.last_spiked
     %h3 Spiked
     = render current_game.cards.last_spiked
+  .col-6.drawn
+    %h3 New card
+    = render current_game.cards.last_drawn
 
-= link_to 'Continue', game_url(current_game), :class => 'btn btn-primary btn-block'
+- if current_game.cards.last_drawn.step_3?
+  = link_to 'Start Step 3', step_3_games_url, :method => :put, :class => 'btn btn-primary btn-block', :id => 'start_step_3'
+- else
+  = link_to 'Continue', game_url(current_game), :class => 'btn btn-primary btn-block'

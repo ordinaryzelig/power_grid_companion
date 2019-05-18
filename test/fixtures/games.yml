@@ -107,3 +107,8 @@ building_step_3_revealed:
 shuffle_draw_deck:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+
+market_bureaucracy_step_3_drawn:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  step: 2

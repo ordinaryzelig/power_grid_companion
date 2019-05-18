@@ -124,3 +124,9 @@ building_step_3_revealed_<%= idx %>:
   <<: *DEFAULTS
   game: building_step_3_revealed
 <% end %>
+
+<% 2.times do |idx| %>
+market_bureaucracy_step_3_drawn_<%= idx %>:
+  <<: *DEFAULTS
+  game: market_bureaucracy_step_3_drawn
+<% end %>

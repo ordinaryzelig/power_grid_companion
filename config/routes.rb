@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   resources :games, :only => %i[new create show] do
+    collection do
+      put :step_3
+    end
     resources :cards, :only => %i[index]
   end
   resources :players, :only => [] do

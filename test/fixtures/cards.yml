@@ -81,3 +81,12 @@ shuffle_draw_deck_<%= idx %>:
   position: <%= idx %>
   number: <%= number %>
 <% end %>
+
+<% 9.times do |idx| %>
+market_bureaucracy_step_3_drawn_<%= idx %>:
+  <<: *DEFAULTS
+  game: market_bureaucracy_step_3_drawn
+  position: <%= idx %>
+  number: <%= idx + 1 %>
+  kinds: <%= idx == 8 ? 1 : 2 %> # step_3 or :coal
+<% end %>
