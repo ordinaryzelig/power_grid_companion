@@ -111,4 +111,8 @@ class Card < ApplicationRecord
     number || Float::INFINITY
   end
 
+  def remove!
+    update!(:in_play => false)
+  end
+
 end

@@ -150,7 +150,8 @@ class Game < ApplicationRecord
 
   def step_3!
     update!(:step => 3)
-    cards.step_3.first.update!(:in_play => false)
+    cards.market.first.remove!
+    cards.step_3.first.remove!
   end
 
 private

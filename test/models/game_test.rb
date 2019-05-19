@@ -52,12 +52,16 @@ class GameTest < ActiveSupport::TestCase
     assert_equal (11..50).to_a, game.cards.draw_deck.pluck(:number).sort
   end
 
-  test '#step_3! removes step_3 Card from game' do
+  test '#step_3! removes lowest market power plant and step_3 Card from game' do
     game = games(:start_step_3)
+    assert_equal [1, 2, 3, 4, 5, 6, 7, 8], game.cards.market.pluck(:number)
 
     game.step_3!
 
+    game.reload
+    assert_equal 3, game.step
     refute_predicate game.cards.step_3.first, :in_play?
+    assert_equal [2, 3, 4, 5, 6, 7], game.cards.market.pluck(:number)
   end
 
 end
