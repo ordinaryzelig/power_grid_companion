@@ -55,9 +55,12 @@ class Game < ApplicationRecord
       unplayed.order(:position).offset(num_market_cards)
     end
 
-    # Either in a market or yet to be drawn.
+    # Either in a market or in draw deck.
     def unplayed
-      where(:player_id => nil)
+      where(
+        :player_id => nil,
+        :in_play   => true,
+      )
     end
 
   private
@@ -143,6 +146,7 @@ class Game < ApplicationRecord
 
   def step_3!
     update!(:step => 3)
+    cards.step_3.first.update!(:in_play => false)
     cards.draw_deck.shuffle!
   end
 

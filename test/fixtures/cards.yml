@@ -90,3 +90,12 @@ market_bureaucracy_step_3_drawn_<%= idx %>:
   number: <%= idx + 1 %>
   kinds: <%= idx == 8 ? 1 : 2 %> # step_3 or :coal
 <% end %>
+
+<% 9.times do |idx| %>
+start_step_3_<%= idx %>:
+  <<: *DEFAULTS
+  game: start_step_3
+  position: <%= idx %>
+  number: <%= idx + 1 %>
+  kinds: <%= idx == 8 ? 1 : 2 %> # step_3 or :coal
+<% end %>

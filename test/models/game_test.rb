@@ -73,4 +73,12 @@ class GameTest < ActiveSupport::TestCase
     assert_equal (11..50).to_a, game.cards.draw_deck.pluck(:number).sort
   end
 
+  test '#step_3! removes step_3 Card from game' do
+    game = games(:start_step_3)
+
+    game.step_3!
+
+    refute_predicate game.cards.step_3.first, :in_play?
+  end
+
 end

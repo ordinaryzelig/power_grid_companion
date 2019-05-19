@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
     t.integer "cities"
     t.bigint "player_id"
     t.integer "position", null: false
+    t.boolean "in_play", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id", "number"], name: "index_cards_on_game_id_and_number", unique: true
