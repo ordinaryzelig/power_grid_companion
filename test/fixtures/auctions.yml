@@ -10,7 +10,7 @@ multiple_bidders:
 
 claim_auction:
   game: $LABEL
-  card: $LABEL
+  card: claim_auction_0
   player: $LABEL
   bidder_ids:
     <% 2.times do |idx| %>

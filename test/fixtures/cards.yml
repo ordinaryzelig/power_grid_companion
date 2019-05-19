@@ -7,10 +7,12 @@ multiple_bidders:
   number: 3
   position: 0
 
-claim_auction:
-  game: $LABEL
-  number: 3
-  position: 0
+<% 2.times do |idx| %>
+claim_auction_<%= idx %>:
+  game: claim_auction
+  number: <%= idx %>
+  position: <%= idx %>
+<% end %>
 
 <% 3.upto(6) do |number| %>
 claim_auction_replace_<%= number %>:

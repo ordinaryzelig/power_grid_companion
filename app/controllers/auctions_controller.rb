@@ -33,6 +33,7 @@ class AuctionsController < ApplicationController
   def claim
     card_to_replace = current_game.cards.find(params[:card_to_replace_id]) if params[:card_to_replace_id]
     @auction.claim(card_to_replace)
+    current_game.cards.draw_deck.shuffle! if current_game.cards.last_drawn.step_3?
     next_player_or_next_phase
   end
 

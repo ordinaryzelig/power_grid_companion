@@ -64,7 +64,7 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'claiming Auction sells to bidder' do
     auction = auctions(:claim_auction)
-    card = cards(:claim_auction)
+    card = cards(:claim_auction_0)
     player = players(:claim_auction_0)
     claim_player player
 
