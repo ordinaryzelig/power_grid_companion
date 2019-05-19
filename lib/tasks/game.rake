@@ -1,20 +1,12 @@
 task :new_game => :environment do |t, args|
-  g = Game.create!(
-    :step => 1,
-    :players_attributes => Player.colors.keys.shuffle.each_with_index.map do |color, idx|
-      {
-        :name => color,
-        :color => color,
-        :seat_position => idx,
-      }
-    end,
-  )
-  puts "Game #{Rails.application.routes.url_helpers.game_path(g).inspect}"
+  g = new_game
+  ap g.taken
   ap "Players #{g.players.in_turn_order.ids.join(', ')}"
 end
 
 task :random_cards, [:game_token] => :environment do |t, args|
   game = Game.find_by!(:token => args.game_token)
+  game.update!(:round => 2) # So we can pass on Auction phase.
   cards = game.cards.power_plants.to_a
   cards.shuffle
   game.players.each do |player|
@@ -31,9 +23,35 @@ end
 
 task :step_3, [:game_token] => :environment do |t, args|
   game = Game.find_by!(:token => args.game_token)
+  step_3(game)
+end
+
+task :new_game_auction_step_3 => :environment do
+  game = new_game
+  game.update!(:phase_player_ids => game.players.ids.first(1))
+  step_3(game)
+  ap game.token
+  ap game.phase_player_ids
+end
+
+def new_game
+  Game.create!(
+    :step => 1,
+    :players_attributes => Player.colors.keys.shuffle.each_with_index.map do |color, idx|
+      {
+        :name => color,
+        :color => color,
+        :seat_position => idx,
+      }
+    end,
+  )
+end
+
+def step_3(game)
   game.update!(:step => 2)
 
   step_3 = game.cards.step_3.first!
+  step_3.update!(:in_play => true)
   last_market_card = game.cards.market.to_a.last
   top_of_draw_deck = game.cards.draw_deck.first!
 
