@@ -4,4 +4,6 @@
       Position: #{card.position},
       - if card.player_id
         Player: #{card.player_id}
+      - unless card.in_play?
+        (out)
       = render card
