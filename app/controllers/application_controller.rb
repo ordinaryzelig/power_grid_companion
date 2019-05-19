@@ -23,8 +23,13 @@ private
     if current_game.phase_players.any?
       redirect_to [:new, current_game.phase]
     else
-      current_game.next_phase!
-      redirect_to [:new, current_game.phase]
+      if current_game.cards.step_3_revealed?
+        current_game.step_3!
+        redirect_to step3s_url
+      else
+        current_game.next_phase!
+        redirect_to [:new, current_game.phase]
+      end
     end
   end
 

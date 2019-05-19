@@ -123,7 +123,7 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 8, game.cards.market.count
   end
 
-  test 'step 3 Card and lowest power plant are removed and game goes into step 3' do
+  test 'redirects to step 3 after Auction phase if step_3 Card revealed' do
     game = games(:auction_step_3_revealed)
 
     game.players.each_with_index do |player, idx|
@@ -132,10 +132,7 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
       post claim_auction_url(auction)
     end
 
-    game.reload
-    assert_equal 3, game.step
-    assert_equal 6, game.cards.market.size
-    assert_equal 6, game.cards.power_plants.market.size
+    assert_redirected_to step3s_url
   end
 
 end

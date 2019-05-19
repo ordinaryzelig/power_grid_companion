@@ -42,27 +42,6 @@ class GameTest < ActiveSupport::TestCase
   test_next_phase 'resource_replenishment', :any,   :expected => 'market_bureaucracy'
   test_next_phase 'market_bureaucracy',     :any,   :expected => 'turn_order'
 
-  test 'step 3 after auction phase' do
-    game = games(:auction_step_3_revealed)
-    game.players.first!.purchase_card game.cards.market.first, 1
-
-    assert_difference 'game.step' do
-      game.next_phase!
-    end
-
-    assert_equal 3, game.step
-  end
-
-  test 'step 3 after building phase' do
-    game = games(:building_step_3_revealed)
-
-    assert_difference 'game.step' do
-      game.next_phase!
-    end
-
-    assert_equal 3, game.step
-  end
-
   test 'shuffle draw deck' do
     game = games(:shuffle_draw_deck)
     assert_equal (11..50).to_a, game.cards.draw_deck.pluck(:number)

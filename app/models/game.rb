@@ -63,6 +63,10 @@ class Game < ApplicationRecord
       )
     end
 
+    def step_3_revealed?
+      market.step_3.exists?
+    end
+
   private
 
     def game
@@ -147,7 +151,6 @@ class Game < ApplicationRecord
   def step_3!
     update!(:step => 3)
     cards.step_3.first.update!(:in_play => false)
-    cards.draw_deck.shuffle!
   end
 
 private
