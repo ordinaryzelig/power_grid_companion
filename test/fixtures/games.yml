@@ -112,3 +112,8 @@ market_bureaucracy_step_3_drawn:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
   step: 2
+
+start_step_3:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  step: 2

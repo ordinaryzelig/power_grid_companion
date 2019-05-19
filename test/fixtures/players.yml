@@ -130,3 +130,9 @@ market_bureaucracy_step_3_drawn_<%= idx %>:
   <<: *DEFAULTS
   game: market_bureaucracy_step_3_drawn
 <% end %>
+
+<% 2.times do |idx| %>
+start_step_3_<%= idx %>:
+  <<: *DEFAULTS
+  game: start_step_3
+<% end %>

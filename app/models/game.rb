@@ -137,12 +137,13 @@ class Game < ApplicationRecord
 
   def next_phase!
     reset_phase_players
-    self.phase = next_phase
-    if step != 3 && cards.market.any?(&:step_3?)
-      self.step = 3
-      cards.draw_deck.shuffle!
-    end
+    update!(:phase => next_phase)
     save!
+  end
+
+  def step_3!
+    update!(:step => 3)
+    cards.draw_deck.shuffle!
   end
 
 private
