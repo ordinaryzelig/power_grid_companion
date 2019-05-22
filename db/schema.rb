@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
     t.bigint "player_id", null: false
     t.integer "bidder_ids", null: false, array: true
     t.integer "price"
+    t.integer "round", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_auctions_on_card_id"
     t.index ["game_id"], name: "index_auctions_on_game_id"
     t.index ["player_id"], name: "index_auctions_on_player_id"

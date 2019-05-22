@@ -136,3 +136,9 @@ start_step_3_<%= idx %>:
   <<: *DEFAULTS
   game: start_step_3
 <% end %>
+
+<% 2.times do |idx| %>
+auction_all_players_pass_<%= idx %>:
+  <<: *DEFAULTS
+  game: auction_all_players_pass
+<% end %>

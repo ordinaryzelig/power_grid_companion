@@ -101,3 +101,9 @@ start_step_3_<%= idx %>:
   number: <%= idx + 1 %>
   kinds: <%= idx == 8 ? 1 : 2 %> # step_3 or :coal
 <% end %>
+
+auction_all_players_pass:
+  <<: *DEFAULTS
+  game: $LABEL
+  position: 0
+  number: 1

@@ -11,6 +11,7 @@ class AuctionsController < ApplicationController
   def create
     auction_atts = auction_params.merge(
       :player_id => current_player.id,
+      :round     => current_game.round,
     )
     auction = current_game.auctions.create!(auction_atts)
     auction.bid_by current_player
@@ -39,6 +40,7 @@ class AuctionsController < ApplicationController
 
   def skip
     current_game.remove_phase_player(current_player)
+    current_game.cards.market.first.remove! if current_game.all_players_skipped_auction?
     next_player_or_next_phase
   end
 

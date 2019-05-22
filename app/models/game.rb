@@ -154,6 +154,10 @@ class Game < ApplicationRecord
     cards.step_3.first.remove!
   end
 
+  def all_players_skipped_auction?
+    phase_player_ids.empty? && auctions.where(:round => round).empty?
+  end
+
 private
 
   def generate_token

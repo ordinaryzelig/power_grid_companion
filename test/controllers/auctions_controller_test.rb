@@ -135,4 +135,17 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to step3s_url
   end
 
+  test 'all Players passing removes lowest card from Game' do
+    game = games(:auction_all_players_pass)
+    lowest_card = game.cards.market.first
+
+    game.players.each do |player|
+      claim_player player
+      post skip_auctions_url
+    end
+
+    lowest_card.reload
+    refute lowest_card.in_play
+  end
+
 end

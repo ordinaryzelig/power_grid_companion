@@ -1,4 +1,8 @@
+DEFAULTS: &DEFAULTS
+  round: 1
+
 multiple_bidders:
+  <<: *DEFAULTS
   game: $LABEL
   card: $LABEL
   player: multiple_bidders_0
@@ -9,6 +13,7 @@ multiple_bidders:
   price: 3
 
 claim_auction:
+  <<: *DEFAULTS
   game: $LABEL
   card: claim_auction_0
   player: $LABEL
@@ -19,6 +24,7 @@ claim_auction:
   price: 3
 
 claim_auction_replace:
+  <<: *DEFAULTS
   game: $LABEL
   card: claim_auction_replace_6
   player: $LABEL
@@ -30,6 +36,7 @@ claim_auction_replace:
 
 <% 2.times do |idx| %>
 auction_step_3_revealed_<%= idx %>:
+  <<: *DEFAULTS
   game: auction_step_3_revealed
   card: $LABEL
   player: $LABEL

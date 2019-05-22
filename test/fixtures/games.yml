@@ -117,3 +117,10 @@ start_step_3:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
   step: 2
+
+auction_all_players_pass:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    - <%= ActiveRecord::FixtureSet.identify(:auction_all_players_pass_0) %>
+    - <%= ActiveRecord::FixtureSet.identify(:auction_all_players_pass_1) %>
