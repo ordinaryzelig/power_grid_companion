@@ -16,6 +16,7 @@ class Card < ApplicationRecord
   )
 
   scope :power_plants, -> { not_step_3 }
+  scope :in_play, -> { where(:in_play => true) }
 
   STANDARD_DECK = {
      3 =>  {:selected_kinds => [:oil],        :resources_required => 2, :cities => 1},

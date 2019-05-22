@@ -1,7 +1,7 @@
 class Player < ApplicationRecord
 
   belongs_to :game
-  has_many :cards
+  has_many :cards, -> { in_play }
   has_resources :as => :owner
 
   validates :name, :presence => true
