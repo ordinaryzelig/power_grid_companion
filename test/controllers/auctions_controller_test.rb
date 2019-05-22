@@ -91,8 +91,8 @@ class AuctionsControllerTest < ActionDispatch::IntegrationTest
 
     post claim_auction_url(auction), :params => {:card_to_replace_id => card_to_replace.id}
 
-    player.reload
-    refute_includes player.cards, card_to_replace
+    card_to_replace.reload
+    refute card_to_replace.in_play
   end
 
   test 'skipping Auction removes Player from phase' do

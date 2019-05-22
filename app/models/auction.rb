@@ -29,7 +29,7 @@ class Auction < ApplicationRecord
   end
 
   def claim(card_to_replace)
-    card_to_replace&.update!(:player => nil)
+    card_to_replace&.remove!
     player = bidders.first
     sell_to player
     game.remove_phase_player(player)
