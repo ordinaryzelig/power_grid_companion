@@ -28,7 +28,7 @@ class MarketBureaucraciesControllerTest < ActionDispatch::IntegrationTest
     assert_predicate drawn_card, :step_3?
     assert_select ".drawn #card_#{drawn_card.id}"
 
-    assert_select "a#start_step_3"
+    assert_select "input#start_step_3"
   end
 
 end

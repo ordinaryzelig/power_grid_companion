@@ -34,6 +34,14 @@ task :new_game_auction_step_3 => :environment do
   ap game.phase_player_ids
 end
 
+task :new_game_market_bureaucracy_step_3 => :environment do
+  game = new_game
+  game.update!(:phase => :market_bureaucracy)
+  step_3(game)
+  ap game.token
+  ap game.phase_player_ids
+end
+
 def new_game
   Game.create!(
     :step => 1,
@@ -55,12 +63,6 @@ def step_3(game)
   last_market_card = game.cards.market.to_a.last
   top_of_draw_deck = game.cards.draw_deck.first!
 
-  if last_market_card.position < step_3.position
-    game.cards.where('position >= ?', top_of_draw_deck.position).update_all('position = position + 1')
-    step_3.update!(:position => last_market_card.position + 1)
-  else
-    raise
-    #step_3.update!(:position => top_of_draw_deck.position)
-    #top_of_draw_deck.update!(:position => step_3.position)
-  end
+  game.cards.where('position >= ?', top_of_draw_deck.position).update_all('position = position + 1')
+  step_3.update!(:position => last_market_card.position + 1)
 end
