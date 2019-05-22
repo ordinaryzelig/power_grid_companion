@@ -1,6 +1,6 @@
 task :new_game => :environment do |t, args|
   g = new_game
-  ap g.taken
+  ap g.token
   ap "Players #{g.players.in_turn_order.ids.join(', ')}"
 end
 
