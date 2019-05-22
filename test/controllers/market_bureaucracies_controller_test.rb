@@ -7,6 +7,7 @@ class MarketBureaucraciesControllerTest < ActionDispatch::IntegrationTest
     claim_player game.players.first
 
     post market_bureaucracies_url
+    follow_redirect!
 
     spiked_card = cards(:market_bureaucracy_spiked)
     drawn_card = cards(:market_bureaucracy_drawn)
@@ -21,6 +22,7 @@ class MarketBureaucraciesControllerTest < ActionDispatch::IntegrationTest
     claim_player game.players.first
 
     post market_bureaucracies_url
+    follow_redirect!
 
     drawn_card = game.cards.last_drawn
     assert_predicate drawn_card, :step_3?

@@ -6,6 +6,10 @@ class MarketBureaucraciesController < ApplicationController
 
   def create
     MarketBureaucracy.new(current_game).save!
+    redirect_to market_bureaucracies_url
+  end
+
+  def index
   end
 
 end
