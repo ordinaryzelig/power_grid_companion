@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       post :pass
     end
   end
-  resources :cities_power_ups, :only => %i[new create] do
+  resources :cities_power_ups, :only => %i[new create index] do
     collection do
       post :pass
     end

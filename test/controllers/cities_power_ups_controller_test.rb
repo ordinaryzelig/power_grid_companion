@@ -13,23 +13,24 @@ class CitiesPowerUpsControllerTest < ActionDispatch::IntegrationTest
 
     claim_player player
 
-    assert_difference 'player.balance', 22 do
-      assert_difference 'card.resources.count', -2 do
-        params = {
-          :cities_power_up => {
-            :cards => [
-              {:id => card.id, :oil => 2},
-            ],
-          },
-        }
-        post cities_power_ups_url, :params => params
-        player.reload
+    assert_difference 'player.cities_power_ups.count' do
+      assert_changes 'player.balance', :from => 50, :to => 72 do
+        assert_changes 'card.resources.count', :from => 3, :to => 1 do
+          params = {
+            :cities_power_up => {
+              :cards => [
+                {:id => card.id, :oil => 2},
+              ],
+            },
+          }
+          post cities_power_ups_url, :params => params
+          player.reload
+        end
       end
     end
 
-    player.reload
-    assert_equal 72, player.balance
-    assert_equal 1, card.resources.count
+    cities_power_up = player.cities_power_ups.last
+    assert_equal 1, cities_power_up.cities
   end
 
   test '#pass burns no resources, pays Player minimum' do

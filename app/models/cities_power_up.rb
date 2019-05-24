@@ -1,7 +1,6 @@
-class CitiesPowerUp
+class CitiesPowerUp < ApplicationRecord
 
-  extend ActiveModel::Naming
-  include ActiveModel::Conversion
+  belongs_to :player
 
   PAYMENTS = {
      0 => 10,
@@ -29,54 +28,51 @@ class CitiesPowerUp
 
   class << self
 
-    def pass!(player)
-      params = {
-        :cards => [],
-      }
-      cities_power_up = new(player, params)
+    def pass!
+      cities_power_up = new(
+        :cards => []
+      )
       cities_power_up.save!
       cities_power_up
     end
 
   end
 
-  def initialize(player, params)
-    @player = player
-    @params = params
-    @cards  = []
-  end
+  before_validation :assign_round
+  before_create :burn_resources
+  before_create :assign_cities
+  after_create :payout
 
-  def save!
-    cards_atts.each(&method(:burn_resources))
-    payout
-    @player.save!
-    @player.game.remove_phase_player(@player)
-  end
-
-  def persisted?
-    false
+  def cards=(cards_atts)
+    @cards_atts = cards_atts
   end
 
 private
 
-  def cards_atts
-    @params.fetch(:cards)
+  def cards
+    @cards ||= []
   end
 
-  def burn_resources(card_atts)
-    card = @player.cards.find(card_atts.fetch(:id))
-    @cards << card
-    card_atts.except(:id).each do |kind, count|
-      card.resources_of_kind(kind).limit(count).return_to_general_supply
+  def burn_resources
+    @cards_atts.each do |card_atts|
+      card = player.cards.find(card_atts.fetch(:id))
+      cards << card
+      card_atts.except(:id).each do |kind, count|
+        card.resources_of_kind(kind).limit(count).return_to_general_supply
+      end
     end
   end
 
   def payout
-    @player.balance += PAYMENTS.fetch(powered_cities)
+    player.update!(:balance => player.balance + PAYMENTS.fetch(cities))
   end
 
-  def powered_cities
-    [@player.cities, @cards.sum(&:cities)].min
+  def assign_round
+    self.round = player.game.round
+  end
+
+  def assign_cities
+    self.cities = [player.cities, cards.sum(&:cities)].min
   end
 
 end

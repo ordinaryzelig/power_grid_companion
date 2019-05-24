@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_020538) do
+ActiveRecord::Schema.define(version: 2019_05_24_033929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
     t.index ["game_id", "number"], name: "index_cards_on_game_id_and_number", unique: true
     t.index ["game_id"], name: "index_cards_on_game_id"
     t.index ["player_id"], name: "index_cards_on_player_id"
+  end
+
+  create_table "cities_power_ups", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.integer "round", null: false
+    t.integer "cities", null: false
+    t.index ["player_id"], name: "index_cities_power_ups_on_player_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -93,6 +100,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_020538) do
   add_foreign_key "auctions", "players"
   add_foreign_key "cards", "games"
   add_foreign_key "cards", "players"
+  add_foreign_key "cities_power_ups", "players"
   add_foreign_key "players", "games"
   add_foreign_key "resource_market_spaces", "games"
   add_foreign_key "resources", "games"
