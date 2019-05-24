@@ -124,3 +124,11 @@ auction_all_players_pass:
   phase_player_ids:
     - <%= ActiveRecord::FixtureSet.identify(:auction_all_players_pass_0) %>
     - <%= ActiveRecord::FixtureSet.identify(:auction_all_players_pass_1) %>
+
+cities_power_up_pass:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>
+  phase_player_ids:
+    <% 2.times do |idx| %>
+    - <%= ActiveRecord::FixtureSet.identify("cities_power_up_pass_#{idx}") %>
+    <% end %>

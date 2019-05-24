@@ -32,4 +32,15 @@ class CitiesPowerUpsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, card.resources.count
   end
 
+  test '#pass burns no resources, pays Player minimum' do
+    game = games(:cities_power_up_pass)
+    player = game.players.first
+    claim_player player
+
+    assert_difference 'player.balance', 10 do
+      post pass_cities_power_ups_url
+      player.reload
+    end
+  end
+
 end

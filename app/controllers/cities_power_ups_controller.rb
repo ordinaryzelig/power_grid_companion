@@ -11,6 +11,11 @@ class CitiesPowerUpsController < ApplicationController
     cities_power_up.save!
   end
 
+  def pass
+    CitiesPowerUp.pass!(current_player)
+    next_player_or_next_phase
+  end
+
 private
 
   def cities_power_up_params

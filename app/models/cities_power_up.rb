@@ -27,6 +27,19 @@ class CitiesPowerUp
     20 => 150,
   }
 
+  class << self
+
+    def pass!(player)
+      params = {
+        :cards => [],
+      }
+      cities_power_up = new(player, params)
+      cities_power_up.save!
+      cities_power_up
+    end
+
+  end
+
   def initialize(player, params)
     @player = player
     @params = params
@@ -37,6 +50,7 @@ class CitiesPowerUp
     cards_atts.each(&method(:burn_resources))
     payout
     @player.save!
+    @player.game.remove_phase_player(@player)
   end
 
   def persisted?

@@ -142,3 +142,12 @@ auction_all_players_pass_<%= idx %>:
   <<: *DEFAULTS
   game: auction_all_players_pass
 <% end %>
+
+<% 2.times do |idx| %>
+cities_power_up_pass_<%= idx %>:
+  <<: *DEFAULTS
+  game: cities_power_up_pass
+  color: <%= idx %>
+  turn_order: <%= idx %>
+  seat_position: <%= idx %>
+<% end %>

@@ -30,7 +30,11 @@ Rails.application.routes.draw do
       post :pass
     end
   end
-  resources :cities_power_ups, :only => %i[new create]
+  resources :cities_power_ups, :only => %i[new create] do
+    collection do
+      post :pass
+    end
+  end
   resources :resource_replenishments, :only => %i[new create]
   resources :market_bureaucracies, :only => %i[new create index]
   resources :step3s, :only => %i[index create]
