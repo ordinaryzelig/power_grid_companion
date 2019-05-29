@@ -2,16 +2,10 @@ class GamesChannel < ApplicationCable::Channel
 
   class << self
 
-    def player_online(player)
+    def broadcast_player_online_status(player, status)
       broadcast_to player.game, {
-        'action'    => 'player_online',
-        'player_id' => player.id,
-      }
-    end
-
-    def player_offline(player)
-      broadcast_to player.game, {
-        'action'    => 'player_offline',
+        'action'    => "player_online_status_change",
+        'status'    => status,
         'player_id' => player.id,
       }
     end

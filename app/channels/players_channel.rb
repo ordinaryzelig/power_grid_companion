@@ -28,12 +28,12 @@ class PlayersChannel < ApplicationCable::Channel
   def online
     player = find_player
     self.class.broadcast(player)
-    GamesChannel.player_online(player)
+    GamesChannel.broadcast_player_online_status(player, 'online')
   end
 
   def offline
     player = find_player
-    GamesChannel.player_offline(player)
+    GamesChannel.broadcast_player_online_status(player, 'offline')
   end
 
 private

@@ -1,3 +1,4 @@
+@import bootstrap/mixins
 =player_track($player_color, $color)
   &[data-color="#{$player_color}"]
     &:not(.active)
@@ -6,6 +7,9 @@
     &.active
       background-color: #{$color}
       color: white
+    &:not(.online)
+      .house
+        transform: rotate(180deg)
 
 .turn_order
   .player
@@ -15,5 +19,7 @@
     border-color: gray
     @each $player_color, $color in $player_colors
       +player_track($player_color, $color)
+    .house
+      transition: transform .8s ease-in-out
   .col-2
     padding: 8px
