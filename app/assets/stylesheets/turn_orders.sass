@@ -21,5 +21,11 @@
       +player_track($player_color, $color)
     .house
       transition: transform .8s ease-in-out
+    &[data-phase-status="complete"]
+      .phase_incomplete
+        display: none
+    &[data-phase-status="incomplete"]
+      .phase_complete
+        display: none
   .col-2
     padding: 8px
