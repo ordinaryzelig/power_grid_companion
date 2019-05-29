@@ -8,9 +8,6 @@ window.subscribe_player = (player_id) ->
     connected: ->
       @online()
 
-    disconnected: ->
-      # Called when the subscription has been terminated by the server
-
     received: (data) ->
       console.log data
 
