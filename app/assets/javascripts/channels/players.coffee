@@ -7,8 +7,6 @@ window.subscribe_player = (player_id) ->
 
     connected: ->
       @online()
-      $(document).on "turbolinks:load", =>
-        @online()
 
     disconnected: ->
       # Called when the subscription has been terminated by the server
