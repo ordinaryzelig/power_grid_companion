@@ -26,3 +26,8 @@
           = render 'resource_replenishments/steps'
 
       = yield
+
+  - if current_game
+    :coffee
+      subscribe_game #{current_game.id}
+      subscribe_player #{current_player.id}
