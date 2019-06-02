@@ -2,7 +2,7 @@
   .navbar-brand
     Power Grid
     - if current_game
-      | Game #{current_game.token}
+      | #{link_to "Game #{current_game.token}", game_url(current_game)}
   %button.navbar-toggler{:type => "button", :data => {:toggle => "collapse", :target => "#navbarNav"}}
     %span.navbar-toggler-icon
   #navbarNav.collapse.navbar-collapse
