@@ -9,7 +9,8 @@ class CitiesPowerUpsController < ApplicationController
   def create
     cities_power_up = current_player.cities_power_ups.build(cities_power_up_params)
     cities_power_up.save!
-    current_player.game.remove_phase_player(current_player)
+    current_game.remove_phase_player(current_player)
+    current_game.broadcast
     redirect_to cities_power_ups_url
   end
 

@@ -17,8 +17,13 @@ class GamesChannel < ApplicationCable::Channel
             :root => true,
             :include => {
               :players => {
-                :methods => %i[phase_status],
-                :except  => %i[balance],
+                :methods => %i[
+                  phase_status
+                  power_capacity
+                ],
+                :except  => %i[
+                  balance
+                ],
               },
             },
           )

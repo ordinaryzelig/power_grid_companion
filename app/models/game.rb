@@ -158,6 +158,10 @@ class Game < ApplicationRecord
     phase_player_ids.empty? && auctions.where(:round => round).empty?
   end
 
+  def broadcast
+    GamesChannel.broadcast(self)
+  end
+
 private
 
   def generate_token
