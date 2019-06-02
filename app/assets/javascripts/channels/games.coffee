@@ -14,6 +14,10 @@ window.subscribe_game = (game_id) ->
   #########
   # Private
 
+    status: (data) ->
+      for player in data.game.players
+        $("#player_#{player.id}").setData(player)
+
     player_online_status_change: (data) ->
       console.log "Player #{data.player_id} status: #{data.status}."
       $("#player_#{data.player_id}").toggleClass('online', data.status == 'online')

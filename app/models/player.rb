@@ -43,4 +43,8 @@ class Player < ApplicationRecord
     cards.sum(&:cities)
   end
 
+  def phase_status
+    game.phase_player_ids.include?(id) ? 'incomplete' : 'complete'
+  end
+
 end

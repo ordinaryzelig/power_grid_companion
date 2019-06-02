@@ -9,7 +9,6 @@ window.subscribe_player = (player_id) ->
       @online()
 
     received: (data) ->
-      console.log data
 
   #########
   # Private

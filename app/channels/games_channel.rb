@@ -10,6 +10,22 @@ class GamesChannel < ApplicationCable::Channel
       }
     end
 
+    def broadcast(game)
+      data =
+        {'action' => 'status'}.merge(
+          game.as_json(
+            :root => true,
+            :include => {
+              :players => {
+                :methods => %i[phase_status],
+                :except  => %i[balance],
+              },
+            },
+          )
+        )
+      broadcast_to game, data
+    end
+
   end
 
   def subscribed
