@@ -7,6 +7,7 @@ class BuildingsController < ApplicationController
     buildings = Buildings.new(current_player, buildings_params)
     buildings.save!
     current_game.remove_phase_player(current_player)
+    current_game.broadcast
     next_player_or_next_phase
   end
 
