@@ -1,5 +1,7 @@
 DEFAULTS: &DEFAULTS
   round: 1
+  phase_player_ids:
+    - 1
 
 resource_purchase:
   <<: *DEFAULTS
