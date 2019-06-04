@@ -1,3 +1,4 @@
+# Public channel that all Players in a Game can subscribe to.
 window.subscribe_game = (game_id) ->
 
   App.games = App.cable.subscriptions.create {
