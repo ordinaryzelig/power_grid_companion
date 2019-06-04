@@ -1,7 +1,6 @@
 @import bootstrap/mixins
 =player_track($player_color, $color)
   &[data-color="#{$player_color}"]
-    background-color: $light
     &:not(.active)
       .house
         color: #{$color}
@@ -10,11 +9,14 @@
       color: white
 
 .turn_order
+  background-color: $secondary
+
   .player
     text-align: center
     border-width: 1px
     border-style: solid
     border-color: gray
+    background-color: $light
 
     @each $player_color, $color in $player_colors
       +player_track($player_color, $color)

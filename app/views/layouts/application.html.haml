@@ -10,7 +10,7 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, shrink-to-fit=no"}
   %body
 
-    .fixed-top.bg-white
+    .fixed-top
       = render 'layouts/navbar'
       - if current_game
         = render 'layouts/game_nav'
@@ -28,7 +28,7 @@
       = yield
 
     - if current_game
-      .fixed-bottom.bg-secondary
+      .fixed-bottom
         = render 'turn_orders/turn_order', :players => current_game.players.in_turn_order, :turn_order_track => true
 
   - if current_game
