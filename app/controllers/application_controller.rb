@@ -1,13 +1,10 @@
 class ApplicationController < ActionController::Base
 
+  include AuthHelper
+
   before_action :set_resource_replenishment, :if => :current_game
 
 private
-
-  def current_player
-    @current_player ||= Player.find_by(:id => cookies.signed[:player_id]) if cookies.signed[:player_id]
-  end
-  helper_method :current_player
 
   def current_game
     current_player.game if current_player
