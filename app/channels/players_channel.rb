@@ -22,24 +22,23 @@ class PlayersChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    offline
+    set_player_online_status(false)
   end
 
   def online
-    player = find_player
-    self.class.broadcast(player)
-    GamesChannel.broadcast_player_online_status(player, 'online')
-  end
-
-  def offline
-    player = find_player
-    GamesChannel.broadcast_player_online_status(player, 'offline')
+    set_player_online_status(true)
   end
 
 private
 
   def find_player
     Player.find(@player_id)
+  end
+
+  def set_player_online_status(online)
+    player = find_player
+    player.update!(:online => online)
+    player.game.broadcast
   end
 
 end

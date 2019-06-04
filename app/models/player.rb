@@ -47,8 +47,4 @@ class Player < ApplicationRecord
     game.phase_player_ids.include?(id) ? 'incomplete' : 'complete'
   end
 
-  def broadcast_online_status(status)
-    GamesChannel.broadcast_player_online_status(self, status)
-  end
-
 end

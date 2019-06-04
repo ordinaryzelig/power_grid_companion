@@ -4,7 +4,7 @@
     .col-2
 
       - active = current_game.current_player&.id == player.id && local_assigns[:turn_order_track]
-      %div[player]{:data => {:color => player.color, :phase_status => player.phase_status}, :class => [active ? 'active' : nil]}
+      %div[player]{:data => {:color => player.color, :phase_status => player.phase_status, :online => player.online}, :class => [active ? 'active' : nil]}
         .house= house_icon
         %span.cities= player.cities
         %span>= '|'

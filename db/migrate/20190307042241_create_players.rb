@@ -8,6 +8,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.integer :cities, :null => false, :default => 0
       t.integer :seat_position, :null => false
       t.integer :turn_order, :null => false
+      t.boolean :online, :null => false, :default => false
 
       t.timestamps
     end

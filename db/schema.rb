@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_033929) do
     t.integer "cities", default: 0, null: false
     t.integer "seat_position", null: false
     t.integer "turn_order", null: false
+    t.boolean "online", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_players_on_game_id"

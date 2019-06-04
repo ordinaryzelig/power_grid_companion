@@ -18,10 +18,6 @@ window.subscribe_game = (game_id) ->
       for player in data.game.players
         @update_player(player)
 
-    player_online_status_change: (data) ->
-      console.log "Player #{data.player_id} status: #{data.status}."
-      $("#player_#{data.player_id}").toggleClass('online', data.status == 'online')
-
     update_player: (player) ->
       turn_order = $("#player_#{player.id}")
       turn_order.setData(player)
