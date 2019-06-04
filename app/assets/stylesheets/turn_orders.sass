@@ -1,6 +1,7 @@
 @import bootstrap/mixins
 =player_track($player_color, $color)
   &[data-color="#{$player_color}"]
+    background-color: $light
     &:not(.active)
       .house
         color: #{$color}
