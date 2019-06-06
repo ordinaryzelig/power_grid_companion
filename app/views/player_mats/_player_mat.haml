@@ -2,11 +2,11 @@
 
   %h3.card-header.d-flex
     .mat_item.flex-grow-1= player.name
-    .mat_item.elektro
-      = "#{player.balance}€" if player == current_player
-    .mat_item.cities
+    .mat_item
       = house_icon
-      = "#{player.cities}|#{player.power_capacity}"
+      %span.cities= player.cities
+      %span>= '|'
+      %span.power_capacity= player.power_capacity
 
   .card-body
     .row
