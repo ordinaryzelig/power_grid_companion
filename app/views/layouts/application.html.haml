@@ -29,6 +29,7 @@
 
     - if current_game
       .fixed-bottom
+        = render 'players/info_bar'
         = render 'turn_orders/turn_order', :players => current_game.players.in_turn_order, :turn_order_track => true
 
   - if current_game
