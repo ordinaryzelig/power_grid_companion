@@ -20,7 +20,14 @@ window.subscribe_game = (game_id) ->
         @update_player(player)
 
     update_player: (player) ->
+      @update_turn_order_player player
+      @update_playet_mat player
+
+    update_turn_order_player: (player) ->
       turn_order = $("#player_#{player.id}")
       turn_order.setData(player)
+
+    update_playet_mat: (player) ->
+      playet_mat = $("#player_mat_#{player.id}")
       for attr in ['cities', 'power_capacity']
-        turn_order.magic_update(attr, player[attr])
+        playet_mat.magic_update(attr, player[attr])
