@@ -1,4 +1,4 @@
-#player_info_bar.container-fluid.bg-secondary
-  .row.text-white
-    .col
-      Balance: #{current_player.balance}€
+#player_info_bar.container-fluid.bg-secondary{:data => {:color => current_player.color}}
+  %span.house= house_icon
+  %span.text-white
+    Balance: #{current_player.balance}€

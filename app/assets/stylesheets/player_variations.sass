@@ -1,0 +1,7 @@
+=house_color($player_color, $color)
+  *[data-color="#{$player_color}"]
+    .house
+      color: #{$color}
+
+@each $player_color, $color in $player_colors
+  +house_color($player_color, $color)
