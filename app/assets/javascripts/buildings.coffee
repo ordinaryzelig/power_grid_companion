@@ -24,7 +24,8 @@ $(document).on 'turbolinks:load', ->
       building_costs += parseInt(val) || 0
     calculator_ele.find('.total').html("#{building_costs}€")
 
-  $(document).on 'keyup', '#building_calculator .connection_cost', update_total
+  $(document).keyup '.connection_cost', update_total
+  $(document).change '.building_cost', update_total
 
   render_template = (atts) ->
     select_options = ''
