@@ -2,6 +2,7 @@
   *[data-color="#{$player_color}"]
     .house
       color: #{$color}
+      display: inline-block
 
 @each $player_color, $color in $player_colors
   +house_color($player_color, $color)
