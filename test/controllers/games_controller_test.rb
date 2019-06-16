@@ -20,6 +20,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     end
 
     game = Game.last
+    assert_equal 'auction', game.phase
     assert_equal colors.map(&:to_s).sort, game.players.map(&:color).sort
     assert_equal (0...colors.size).to_a, game.players.map(&:turn_order).sort
 

@@ -83,12 +83,13 @@ class Game < ApplicationRecord
 
   accepts_nested_attributes_for :players, :reject_if => -> (atts) { atts.values_at(:name, :color).all?(&:blank?) }
 
+  before_validation -> (game) { game.phase = :auction }
   before_validation :generate_token, :unless => :token
   before_validation :randomize_turn_order, :on => :create
 
   validate :at_least_2_players, :on => :create
 
-  after_create :setup
+  after_create :reset_phase_players!
 
   enum(
     :phase => {
@@ -103,7 +104,6 @@ class Game < ApplicationRecord
   )
 
   def setup
-    reset_phase_players
     Resource.setup(self)
     ResourceMarketSpace.setup(self)
     Card.setup(self)
