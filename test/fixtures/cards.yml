@@ -107,3 +107,9 @@ auction_all_players_pass:
   game: $LABEL
   position: 0
   number: 1
+
+auction_creator:
+  <<: *DEFAULTS
+  game: $LABEL
+  position: 0
+  number: 3

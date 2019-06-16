@@ -2,12 +2,11 @@ require 'test_helper'
 
 class AuctionsControllerTest < ActionDispatch::IntegrationTest
 
-  test 'creates Action record with Power Plant card' do
+  test 'creates Auction record with Power Plant card' do
     player = players(:auction_creator)
     game = player.game
-    game.setup
     claim_player player
-    card = game.cards.find_by(:number => 3)
+    card = cards(:auction_creator)
 
     assert_difference 'game.auctions.count' do
       post auctions_url, :params => {
