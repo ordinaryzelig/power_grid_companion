@@ -7,7 +7,7 @@ class Buildings
 
   def save!
     @player.cities += cities
-    @player.balance -= connection_costs + building_costs
+    @player.balance -= total_cost
     @player.save!
 
     @player.game.cards.market.where('number <= ?', @player.cities).each do |card|
@@ -33,6 +33,10 @@ class Buildings
 
   def buildings_atts
     @buildings_atts ||= @params.fetch(:buildings)
+  end
+
+  def total_cost
+    @total_cost ||= connection_costs + building_costs
   end
 
 end

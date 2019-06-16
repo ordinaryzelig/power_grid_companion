@@ -8,6 +8,7 @@ class BuildingsController < ApplicationController
     buildings.save!
     current_game.remove_phase_player(current_player)
     current_game.broadcast
+    current_game.broadcast_log "#{current_player.name} built #{buildings.cities} for #{buildings.total_cost}€."
     next_player_or_next_phase
   end
 

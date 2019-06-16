@@ -13,7 +13,7 @@ window.subscribe_game = (game_id) ->
       @[data.action](data)
 
   #########
-  # Private
+  # Actions
 
     status: (data) ->
       for player in data.game.players
@@ -22,6 +22,21 @@ window.subscribe_game = (game_id) ->
     update_player: (player) ->
       @update_turn_order_player player
       @update_playet_mat player
+
+    log: (data) ->
+      html =
+        """
+          <div class="toast" id="#{data.message_id}">
+            <div class="toast-body p-1">
+              #{data.message}
+            </div>
+          </div>
+        """
+      $('#toasts').append(html)
+      (new Toast($("##{data.message_id}")[0], delay: 3000)).show()
+
+  #########
+  # Private
 
     update_turn_order_player: (player) ->
       turn_order = $("#player_#{player.id}")

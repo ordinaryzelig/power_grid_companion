@@ -23,6 +23,15 @@ class GamesChannel < ApplicationCable::Channel
       broadcast_to game, data
     end
 
+    def log(game, msg)
+      data = {
+        'action'     => 'log',
+        'message'    => msg,
+        'message_id' => SecureRandom.hex(4),
+      }
+      broadcast_to game, data
+    end
+
   end
 
   def subscribed

@@ -162,6 +162,10 @@ class Game < ApplicationRecord
     GamesChannel.broadcast(self)
   end
 
+  def broadcast_log(message)
+    GamesChannel.log(self, message)
+  end
+
 private
 
   def generate_token
