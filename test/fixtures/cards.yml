@@ -113,3 +113,13 @@ auction_creator:
   game: $LABEL
   position: 0
   number: 3
+
+<% [4, 5].each do |number| %>
+resource_purchases_<%= number %>:
+  <<: *DEFAULTS
+  game: resource_purchase
+  position: number
+  number: <%= number %>
+  resources_required: 2
+  kinds: <%= Card.new(:selected_kinds => number == 4 ? [:coal] : [:coal, :oil]).kinds %>
+<% end %>

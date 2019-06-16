@@ -1,0 +1,15 @@
+<% 2.times do |idx| %>
+resource_purchase_coal_<%= idx %>:
+  game: resource_purchase
+  kind: 1
+  cost: 1
+  occupied: true
+<% end %>
+
+<% [3, 3, 3, 4].each_with_index do |cost, idx| %>
+resource_purchase_oil_<%= idx %>:
+  game: resource_purchase
+  kind: 2
+  cost: <%= cost %>
+  occupied: true
+<% end %>

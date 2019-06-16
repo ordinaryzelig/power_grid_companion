@@ -1,0 +1,13 @@
+<% 2.times do |idx| %>
+resource_purchase_coal_<%= idx %>:
+  game: resource_purchase
+  kind: 1
+  owner: $LABEL (ResourceMarketSpace)
+<% end %>
+
+<% 4.times do |idx| %>
+resource_purchase_oil_<%= idx %>:
+  game: resource_purchase
+  kind: 2
+  owner: $LABEL (ResourceMarketSpace)
+<% end %>
