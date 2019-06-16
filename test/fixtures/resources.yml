@@ -11,3 +11,10 @@ resource_purchase_oil_<%= idx %>:
   kind: 2
   owner: $LABEL (ResourceMarketSpace)
 <% end %>
+
+<% 3.times do |idx| %>
+cities_power_up_<%= idx %>:
+  game: cities_power_up
+  kind: 2
+  owner: cities_power_up (Card)
+<% end %>

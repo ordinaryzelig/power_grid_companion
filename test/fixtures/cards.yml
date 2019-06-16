@@ -123,3 +123,13 @@ resource_purchases_<%= number %>:
   resources_required: 2
   kinds: <%= Card.new(:selected_kinds => number == 4 ? [:coal] : [:coal, :oil]).kinds %>
 <% end %>
+
+cities_power_up:
+  <<: *DEFAULTS
+  game: $LABEL
+  number: 3
+  resources_required: 2
+  kinds: <%= Card.new(:selected_kinds => [:oil]).kinds %>
+  player: $LABEL
+  position: 0
+  cities: 2

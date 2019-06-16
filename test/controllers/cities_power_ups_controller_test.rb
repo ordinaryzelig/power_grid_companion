@@ -4,13 +4,8 @@ class CitiesPowerUpsControllerTest < ActionDispatch::IntegrationTest
 
   test 'burns resources, pays Player' do
     player = players(:cities_power_up)
-    game = player.game
-    game.setup
-
-    card = game.cards.find_by!(:number => 3)
-    player.cards << card
-    card.oils = game.oils.purchasable.limit(3)
-
+    game   = player.game
+    card   = game.cards.find_by!(:number => 3)
     claim_player player
 
     assert_difference 'player.cities_power_ups.count' do
