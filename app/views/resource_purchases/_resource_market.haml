@@ -3,28 +3,30 @@
 
   %h3 Resources
 
-  - current_game.resource_market_spaces.group_by(&:cost).each do |cost, cost_spaces|
-    .card
+  .row
+    - current_game.resource_market_spaces.group_by(&:cost).each do |cost, cost_spaces|
+      .col-6.col-sm-4.col-md-3
+        .card.mb-3
 
-      %h4.card-header.text-center= cost
+          %h4.card-header.text-center= cost
 
-      .card-body
+          .card-body.p-2
 
-        .row
-          - cost_spaces.select(&:coal?).each do |space|
-            .col-4
-              = resource_market_space space
+            .row
+              - cost_spaces.select(&:coal?).each do |space|
+                .col-4
+                  = resource_market_space space
 
-        .row
-          - cost_spaces.select(&:oil?).each do |space|
-            .col-3
-              = resource_market_space space
+            .row.m-0
+              - cost_spaces.select(&:oil?).each do |space|
+                .col-3.p-1
+                  = resource_market_space space
 
-          .col-3
-            - cost_spaces.select(&:uranium?).each do |space|
-              = resource_market_space space
+              .col-3.p-1
+                - cost_spaces.select(&:uranium?).each do |space|
+                  = resource_market_space space
 
-        .row
-          - cost_spaces.select(&:trash?).each do |space|
-            .col-4
-              = resource_market_space space
+            .row
+              - cost_spaces.select(&:trash?).each do |space|
+                .col-4
+                  = resource_market_space space
