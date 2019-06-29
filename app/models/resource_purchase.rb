@@ -11,10 +11,10 @@ class ResourcePurchase
 
   def save!
     authorize_player unless @options[:skip_authorization]
-    purchase_resources(resources)
+    purchase_resources
   end
 
-  def purchase_resources(resources)
+  def purchase_resources
     resources.each(&@player.method(:purchase_resource))
   end
 
