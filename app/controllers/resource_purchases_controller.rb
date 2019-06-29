@@ -10,6 +10,13 @@ class ResourcePurchasesController < ApplicationController
     resource_purchase = ResourcePurchase.new(current_player, resource_purchase_params)
     resource_purchase.save!
     current_game.remove_phase_player(current_player)
+
+    current_game.broadcast
+    resources_str = resource_purchase.resources.group_by(&:kind).map do |kind, resources|
+      "#{resources.size} #{kind.pluralize(resources.size)}"
+    end.join(', ')
+    current_game.broadcast_log "#{current_player.name} bought #{resources_str} for #{resource_purchase.cost}€.".tap(&method(:ap))
+
     next_player_or_next_phase
   end
 

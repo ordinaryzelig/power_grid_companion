@@ -3,6 +3,8 @@ class ResourcePurchase
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
+  attr_reader :cost
+
   def initialize(player, resource_params, options = {})
     @player          = player
     @resource_params = resource_params
@@ -11,6 +13,9 @@ class ResourcePurchase
 
   def save!
     authorize_player unless @options[:skip_authorization]
+    # Need to calculate before actual purchase because the resource will not belong to
+    # the ResourceMarketSpace anymore, and we will not get cost.
+    calculate_cost
     purchase_resources
   end
 
@@ -28,11 +33,9 @@ class ResourcePurchase
     end
   end
 
-  def cost
-    resources.sum(&:cost)
+  def calculate_cost
+    @cost = resources.sum(&:cost)
   end
-
-private
 
   def resources
     @resources ||=
@@ -44,6 +47,8 @@ private
           .map(&:resource)
       end
   end
+
+private
 
   def authorize_player
     unless @player.id == @player.game.current_player.id

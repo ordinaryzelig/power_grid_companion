@@ -122,6 +122,7 @@ resource_purchases_<%= number %>:
   number: <%= number %>
   resources_required: 2
   kinds: <%= Card.new(:selected_kinds => number == 4 ? [:coal] : [:coal, :oil]).kinds %>
+  cities: 1
 <% end %>
 
 cities_power_up:
