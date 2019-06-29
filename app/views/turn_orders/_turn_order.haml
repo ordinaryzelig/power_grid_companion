@@ -7,9 +7,10 @@
         - active = current_game.current_player&.id == player.id && local_assigns[:turn_order_track]
         %div[player]{:data => {:color => player.color, :phase_status => player.phase_status, :online => player.online, :name => player.name}, :class => [active ? 'active' : nil]}
           .house= house_icon
-          %span.cities= player.cities
-          %span>= '|'
-          %span.power_capacity= player.power_capacity
+          %div
+            %span.cities= player.cities
+            %span>= '|'
+            %span.power_capacity= player.power_capacity
 
           - unless local_assigns[:hide_phase_status]
             .phase_status
