@@ -18,6 +18,7 @@ window.subscribe_game = (game_id) ->
     status: (data) ->
       for player in data.game.players
         @update_player(player)
+      @set_current_player(data.game.phase_player_ids[0])
 
     update_player: (player) ->
       @update_turn_order_player player
@@ -46,3 +47,7 @@ window.subscribe_game = (game_id) ->
       playet_mat = $("#player_mat_#{player.id}")
       for attr in ['cities', 'power_capacity']
         playet_mat.magic_update(attr, player[attr])
+
+    set_current_player: (player_id) ->
+      $('.turn_order_track .player').removeClass('active')
+      $("#player_#{player_id}").addClass('active')
