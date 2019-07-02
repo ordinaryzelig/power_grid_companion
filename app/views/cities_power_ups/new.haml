@@ -1,6 +1,6 @@
-%h3 Choose resources to power your cities
+= form_for @cities_power_up, :data => current_player.attributes.slice(*%w[cities]), :html => {:class => "your_turn_#{@your_turn}"} do |f|
+  %h3 Choose resources to power your cities
 
-= form_for @cities_power_up, :data => current_player.attributes.slice(*%w[cities]), :html => {:class => 'your_turn'} do |f|
   = render 'player_mats/player_mat', :player => current_player, :form => f
   = f.submit 'Burn resources', :class => 'btn btn-success btn-block mt-2'
   = link_to 'Pass', pass_cities_power_ups_url, :method => :post, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Are you sure you do not want to power up your cities?'}

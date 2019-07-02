@@ -18,6 +18,7 @@ private
 
   def next_player_or_next_phase
     if current_game.phase_players.any?
+      current_game.current_player.broadcast_your_turn
       redirect_to [:new, current_game.phase]
     else
       if current_game.cards.step_3_revealed?

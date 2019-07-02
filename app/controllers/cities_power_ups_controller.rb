@@ -16,6 +16,7 @@ class CitiesPowerUpsController < ApplicationController
 
   def pass
     cities_power_ups = current_player.cities_power_ups.pass!
+    current_game.remove_phase_player(current_player)
     next_player_or_next_phase
   end
 
