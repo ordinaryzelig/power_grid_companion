@@ -11,12 +11,12 @@ class CitiesPowerUpsController < ApplicationController
     cities_power_up.save!
     current_game.remove_phase_player(current_player)
     current_game.broadcast
-    redirect_to cities_power_ups_url
+    next_player_or_next_phase
   end
 
   def pass
     cities_power_ups = current_player.cities_power_ups.pass!
-    redirect_to cities_power_ups_url
+    next_player_or_next_phase
   end
 
 private

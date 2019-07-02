@@ -2,16 +2,12 @@ class PlayersChannel < ApplicationCable::Channel
 
   class << self
 
-    def broadcast(player)
-      player.as_json
-      data = broadcast_data(player)
+    def your_turn(player)
+      data = {
+        'action' => 'your_turn',
+        'phase'  => player.game.phase,
+      }
       broadcast_to player, data
-    end
-
-    def broadcast_data(player)
-      player.as_json(
-        :root => true,
-      )
     end
 
   end

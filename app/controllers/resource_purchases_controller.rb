@@ -15,7 +15,7 @@ class ResourcePurchasesController < ApplicationController
     resources_str = resource_purchase.resources.group_by(&:kind).map do |kind, resources|
       "#{resources.size} #{kind.pluralize(resources.size)}"
     end.join(', ')
-    current_game.broadcast_log "#{current_player.name} bought #{resources_str} for #{resource_purchase.cost}€.".tap(&method(:ap))
+    current_game.broadcast_log "#{current_player.name} bought #{resources_str} for #{resource_purchase.cost}€."
 
     next_player_or_next_phase
   end

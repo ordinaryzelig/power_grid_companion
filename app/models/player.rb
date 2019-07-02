@@ -47,4 +47,8 @@ class Player < ApplicationRecord
     game.phase_player_ids.include?(id) ? 'incomplete' : 'complete'
   end
 
+  def broadcast_your_turn
+    PlayersChannel.your_turn(self)
+  end
+
 end

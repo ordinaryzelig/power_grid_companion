@@ -8,3 +8,13 @@ window.subscribe_player = (player_id) ->
 
     connected: ->
       @perform('online')
+
+    received: (data) ->
+      console.log data
+      @[data.action](data)
+
+  #########
+  # Actions
+
+    your_turn: (data) ->
+      $(".game_phase_#{data.phase} .your_turn").show()
