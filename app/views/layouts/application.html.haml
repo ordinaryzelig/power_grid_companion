@@ -32,7 +32,7 @@
         #toasts
 
         = render 'players/info_bar'
-        = render 'turn_orders/turn_order', :players => current_game.players.in_turn_order, :turn_order_track => true
+        = render 'turn_orders/turn_order', :players => current_game.players.in_turn_order
 
   - if current_game
     :coffee

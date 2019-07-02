@@ -49,5 +49,5 @@ window.subscribe_game = (game_id) ->
         playet_mat.magic_update(attr, player[attr])
 
     set_current_player: (player_id) ->
-      $('.turn_order_track .player').removeClass('active')
+      $('.turn_order .player').removeClass('active')
       $("#player_#{player_id}").addClass('active')

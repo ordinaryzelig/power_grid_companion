@@ -1,5 +1,17 @@
 %h3 New turn order
 
-= render 'turn_orders/turn_order', :players => @new_turn_order_players, :hide_phase_status => true
+%table.table
+  %thead
+    %th Player
+    %th.text-center Cities
+    %th.text-center High card
+  %tbody
+    - @new_turn_order_players.each do |player|
+      %tr.player{:data => {:color => player.color}}
+        %th
+          .house= house_icon
+          = player.name
+        %td.text-center= player.cities
+        %td.text-center= player.cards.map(&:number).max
 
 = button_to 'Continue', turn_orders_url, :class => 'btn btn-primary btn-block mt-3'
