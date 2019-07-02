@@ -14,4 +14,7 @@
         %td.text-center= player.cities
         %td.text-center= player.cards.map(&:number).max
 
-= button_to 'Continue', turn_orders_url, :class => 'btn btn-primary btn-block mt-3'
+- if current_player == @controlling_player
+  = button_to 'Continue', turn_orders_url, :class => 'btn btn-primary btn-block mt-3'
+- else
+  Waiting for #{@controlling_player.name} to accept.

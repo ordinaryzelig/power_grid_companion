@@ -2,6 +2,7 @@ class TurnOrdersController < ApplicationController
 
   def new
     @new_turn_order_players = current_game.players.in_new_turn_order
+    @controlling_player = @new_turn_order_players.first
   end
 
   def create
