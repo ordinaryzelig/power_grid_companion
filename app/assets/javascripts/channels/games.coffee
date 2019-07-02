@@ -20,10 +20,6 @@ window.subscribe_game = (game_id) ->
         @update_player(player)
       @set_current_player(data.game.phase_player_ids[0])
 
-    update_player: (player) ->
-      @update_turn_order_player player
-      @update_playet_mat player
-
     log: (data) ->
       html =
         """
@@ -38,6 +34,10 @@ window.subscribe_game = (game_id) ->
 
   #########
   # Private
+
+    update_player: (player) ->
+      @update_turn_order_player player
+      @update_playet_mat player
 
     update_turn_order_player: (player) ->
       turn_order = $("#player_#{player.id}")

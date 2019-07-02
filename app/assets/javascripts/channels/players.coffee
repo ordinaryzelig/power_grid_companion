@@ -17,4 +17,4 @@ window.subscribe_player = (player_id) ->
   # Actions
 
     your_turn: (data) ->
-      $(".game_phase_#{data.phase} .your_turn_false").show()
+      $("body[data-phase='#{data.phase}'] .your_turn_false").show()
