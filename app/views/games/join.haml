@@ -1,0 +1,9 @@
+.row#join_game
+  - @game.players.in_seat_order.each do |player|
+    .col-6
+      .card.mb-4[player]{:data => {:color => player.color}}
+        .card-header.text-center
+          .house= house_icon
+          = player.name
+        .card-body.text-center
+          = button_to 'Claim', claim_player_url(player), :class => 'btn btn-primary', :disabled => player.online

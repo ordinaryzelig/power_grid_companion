@@ -10,7 +10,6 @@ window.subscribe_player = (player_id) ->
       @perform('online')
 
     received: (data) ->
-      console.log data
       @[data.action](data)
 
   #########

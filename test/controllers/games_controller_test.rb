@@ -29,4 +29,18 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     refute_empty game.cards
   end
 
+  test '#join shows game and players to claim' do
+    game = games(:join)
+
+    get join_game_url(game)
+
+    assert_response :ok
+
+    offline_player_button = css_select("#player_#{players(:join_offline).id} input[type=submit]").first
+    refute offline_player_button[:disabled]
+
+    online_player_button = css_select("#player_#{players(:join_online).id} input[type=submit]").first
+    assert online_player_button[:disabled]
+  end
+
 end

@@ -141,3 +141,7 @@ cities_power_up_pass:
     <% 2.times do |idx| %>
     - <%= ActiveRecord::FixtureSet.identify("cities_power_up_pass_#{idx}") %>
     <% end %>
+
+join:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>

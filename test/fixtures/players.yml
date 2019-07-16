@@ -151,3 +151,13 @@ cities_power_up_pass_<%= idx %>:
   turn_order: <%= idx %>
   seat_position: <%= idx %>
 <% end %>
+
+<% %w[online offline].each_with_index do |status, idx| %>
+join_<%= status %>:
+  <<: *DEFAULTS
+  game: join
+  color: <%= idx %>
+  turn_order: <%= idx %>
+  seat_position: <%= idx %>
+  online: <%= status == 'online' %>
+<% end %>

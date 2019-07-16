@@ -45,4 +45,12 @@ private
   end
   helper_method :render_building_form?
 
+  def hide_turn_order
+    @hide_turn_order = true
+  end
+
+  def logout_player
+    cookies.delete(:player_id)
+  end
+
 end

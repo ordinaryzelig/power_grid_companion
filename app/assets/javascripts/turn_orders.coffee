@@ -1,6 +1,6 @@
 $(document).on 'turbolinks:load', ->
 
-  players = $('.player')
+  players = $('.turn_order .player')
   players.tooltip(
     title: -> $(@).data('name')
   )

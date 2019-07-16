@@ -8,7 +8,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, shrink-to-fit=no"}
-  %body{:data => {'phase' => current_game.phase}}
+  %body{:data => {'phase' => current_game&.phase}}
 
     .fixed-top
       = render 'layouts/navbar'
@@ -27,14 +27,17 @@
 
       = yield
 
-    - if current_game
+    - if current_game && !@hide_turn_order
       .fixed-bottom
         #toasts
 
         = render 'players/info_bar'
         = render 'turn_orders/turn_order', :players => current_game.players.in_turn_order
 
-  - if current_game
+  - if @subscribe_to_game ||= current_game
     :coffee
-      subscribe_game #{current_game.id}
+      subscribe_game #{@subscribe_to_game.id}
+
+  - if current_player
+    :coffee
       subscribe_player #{current_player.id}

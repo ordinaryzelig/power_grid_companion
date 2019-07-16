@@ -36,12 +36,16 @@ window.subscribe_game = (game_id) ->
   # Private
 
     update_player: (player) ->
-      @update_turn_order_player player
+      @update_player_div player
       @update_playet_mat player
+      @update_join_table player
 
-    update_turn_order_player: (player) ->
-      turn_order = $("#player_#{player.id}")
-      turn_order.setData(player)
+    update_player_div: (player) ->
+      player_div = $("#player_#{player.id}")
+      player_div.setData(player)
+
+    update_join_table: (player) ->
+      $("#join_game #player_#{player.id} input[type=submit]").attr('disabled', player.online)
 
     update_playet_mat: (player) ->
       playet_mat = $("#player_mat_#{player.id}")

@@ -25,4 +25,4 @@
                 #{current_player.balance}€
               - else
                 - if Rails.env.development?
-                  = link_to player.id, claim_player_url(player)
+                  = link_to player.id, claim_player_url(player, :debug => true)
