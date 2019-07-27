@@ -161,3 +161,7 @@ join_<%= status %>:
   seat_position: <%= idx %>
   online: <%= status == 'online' %>
 <% end %>
+
+transfer_resources:
+  <<: *DEFAULTS
+  game: $LABEL

@@ -2,7 +2,7 @@ class Player < ApplicationRecord
 
   belongs_to :game
   has_many :cards, -> { in_play }
-  has_resources :as => :owner
+  has_resources :through => :cards
   has_many :cities_power_ups
 
   validates :name, :presence => true

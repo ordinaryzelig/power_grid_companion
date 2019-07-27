@@ -134,3 +134,15 @@ cities_power_up:
   player: $LABEL
   position: 0
   cities: 2
+
+<% %i[source destination].each_with_index do |kind, idx| %>
+transfer_<%= kind %>:
+  <<: *DEFAULTS
+  game: transfer_resources
+  number: <%= 3 + idx %>
+  resources_required: 2
+  kinds: <%= Card.new(:selected_kinds => [:coal]).kinds %>
+  player: transfer_resources
+  position: <%= idx %>
+  cities: 2
+<% end %>

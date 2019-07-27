@@ -145,3 +145,7 @@ cities_power_up_pass:
 join:
   <<: *DEFAULTS
   token: <%= SecureRandom.hex(3) %>
+
+transfer_resources:
+  <<: *DEFAULTS
+  token: <%= SecureRandom.hex(3) %>

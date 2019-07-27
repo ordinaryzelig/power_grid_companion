@@ -41,5 +41,6 @@ Rails.application.routes.draw do
   resources :resource_replenishments, :only => %i[new create]
   resources :market_bureaucracies, :only => %i[new create index]
   resources :step3s, :only => %i[index create]
+  resources :resource_transfers, :only => %i[new create]
 
 end

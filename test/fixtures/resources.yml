@@ -18,3 +18,10 @@ cities_power_up_<%= idx %>:
   kind: 2
   owner: cities_power_up (Card)
 <% end %>
+
+<% 2.times do |idx| %>
+transfer_<%= idx %>:
+  game: transfer_resources
+  kind: 1
+  owner: transfer_source (Card)
+<% end %>
