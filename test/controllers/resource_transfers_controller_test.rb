@@ -11,7 +11,7 @@ class ResourceTransfersControllerTest < ActionDispatch::IntegrationTest
 
     params = {
       :resource_transfer => {
-        :resource_ids => resource_ids,
+        :resource_ids => resource_ids.to_json,
         :card_id      => destination_card.id,
       },
     }

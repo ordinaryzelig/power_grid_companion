@@ -31,3 +31,8 @@
           .col
             - resources.each do |resource|
               = resource_token resource
+
+  - if card.player == current_player
+    .resource_transfer.text-center
+      = label_tag "card_id_#{card.id}", 'To here'
+      = radio_button_tag :card_id, card.id

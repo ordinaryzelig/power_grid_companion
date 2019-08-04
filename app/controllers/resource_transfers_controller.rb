@@ -1,5 +1,8 @@
 class ResourceTransfersController < ApplicationController
 
+  def new
+  end
+
   def create
     transfer = ResourceTransfer.new(current_player, transfer_params)
     transfer.save!
@@ -12,7 +15,7 @@ private
       .require(:resource_transfer)
       .permit(
         :card_id,
-        :resource_ids => [],
+        :resource_ids, # JSON array.
       )
   end
 

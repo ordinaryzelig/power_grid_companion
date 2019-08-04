@@ -2,7 +2,7 @@ class ResourceTransfer
 
   def initialize(player, params)
     @player = player
-    @resources = @player.resources.find(params.fetch(:resource_ids))
+    @resources = @player.resources.find(MultiJson.load(params.fetch(:resource_ids)))
     @card      = @player.cards.find(params.fetch(:card_id))
   end
 

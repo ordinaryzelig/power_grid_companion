@@ -1,0 +1,12 @@
+- content_for :resource_transfer do
+
+  = form_with :url => resource_transfers_url do |form|
+    = form.fields_for :resource_transfer do |transfer_f|
+      = transfer_f.text_field 'resource_ids'
+      = transfer_f.text_field 'card_id'
+
+      = transfer_f.submit :transfer, :class => 'btn btn-primary'
+
+:coffee
+  $(document).on 'turbolinks:load', ->
+    setup_resource_transfer()

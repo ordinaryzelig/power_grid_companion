@@ -1,4 +1,4 @@
-.card[PlayerMat.new(player)]{:data => player.attributes.slice(*%w[color])}
+.card[PlayerMat.new(player)]{:data => player.attributes.slice(*%w[color]), :class => player == current_player ? 'current' : nil}
 
   %h3.card-header.d-flex
     .mat_item.flex-grow-1= player.name
@@ -14,4 +14,7 @@
         .col-4
 
           - if card = player.cards[idx]
-            = render card, :form => local_assigns[:form]
+            = render card
+
+  - if content_for?(:resource_transfer) && player == current_player
+    = yield :resource_transfer
