@@ -32,6 +32,9 @@ window.subscribe_game = (game_id) ->
       $('#toasts').append(html)
       (new Toast($("##{data.message_id}")[0], delay: 3000)).show()
 
+    replace: (data) ->
+      $(data.dom_id).replaceWith(data.html)
+
   #########
   # Private
 

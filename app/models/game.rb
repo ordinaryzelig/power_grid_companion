@@ -166,6 +166,10 @@ class Game < ApplicationRecord
     GamesChannel.log(self, message)
   end
 
+  def broadcast_replace(dom_id, html)
+    GamesChannel.replace self, dom_id, html
+  end
+
 private
 
   def generate_token

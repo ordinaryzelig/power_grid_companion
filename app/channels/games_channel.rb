@@ -32,6 +32,15 @@ class GamesChannel < ApplicationCable::Channel
       broadcast_to game, data
     end
 
+    def replace(game, dom_id, html)
+      data = {
+        'action' => 'replace',
+        'dom_id' => dom_id,
+        'html'   => html,
+      }
+      broadcast_to game, data
+    end
+
   end
 
   def subscribed
