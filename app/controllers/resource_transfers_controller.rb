@@ -1,8 +1,5 @@
 class ResourceTransfersController < ApplicationController
 
-  def new
-  end
-
   def create
     transfer = ResourceTransfer.new(current_player, transfer_params)
     transfer.save!

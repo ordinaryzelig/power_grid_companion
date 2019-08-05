@@ -16,5 +16,15 @@
           - if card = player.cards[idx]
             = render card
 
-  - if content_for?(:resource_transfer) && player == current_player
-    = yield :resource_transfer
+  - if player == current_player
+    .d-flex.justify-content-center
+
+      = form_with :url => resource_transfers_url, :class => 'resource_transfer start_hidden' do |form|
+        = form.fields_for :resource_transfer do |transfer_f|
+          = transfer_f.hidden_field 'resource_ids'
+          = transfer_f.hidden_field 'card_id'
+
+          = transfer_f.submit 'Transfer', :class => 'btn btn-primary'
+
+      .resource_transfer.start_shown
+        %small.text-muted Tap resource to transfer.
