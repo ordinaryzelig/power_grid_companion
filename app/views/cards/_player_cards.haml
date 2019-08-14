@@ -1,0 +1,20 @@
+%div{:class => "player_#{player.id}_cards player_cards"}
+  .row
+    - 3.times.each do |idx|
+      .col-4
+
+        - if card = player.cards[idx]
+          = render card
+
+  - if local_assigns[:show_resource_transfer_form]
+    .d-flex.justify-content-center
+
+      = form_with :url => resource_transfers_url, :class => 'resource_transfer start_hidden' do |form|
+        = form.fields_for :resource_transfer do |transfer_f|
+          = transfer_f.hidden_field 'resource_ids', :class => 'resource_transfer_resource_ids'
+          = transfer_f.hidden_field 'card_id'
+
+          = transfer_f.submit 'Transfer', :class => 'btn btn-primary'
+
+      .resource_transfer.start_shown
+        %small.text-muted Tap resource to transfer.

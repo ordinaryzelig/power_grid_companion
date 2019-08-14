@@ -3,8 +3,8 @@ class ResourceTransfersController < ApplicationController
   def create
     transfer = ResourceTransfer.new(current_player, transfer_params)
     transfer.save!
-    player_mat = render(:partial => 'player_mats/player_mat', :locals => {:player => current_player})
-    current_game.broadcast_replace "#player_mat_#{current_player.id}", player_mat
+    player_cards = render(:partial => 'cards/player_cards', :locals => {:player => current_player, :show_resource_transfer_form => true})
+    current_game.broadcast_replace "#player_mat_#{current_player.id} .", player_cards
     head :ok
   end
 
