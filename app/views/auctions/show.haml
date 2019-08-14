@@ -25,6 +25,8 @@
 
         - if current_player == @auction.bidders.first
           %h3 You won the auction for #{@auction.price}€.
+          - if current_player.cards.size == 3
+            .text-muted Be sure to transfer any resources before paying. You can transfer resources from your player mat.
           = link_to 'Pay', claim_auction_url(@auction), :method => :post, :class => 'btn btn-success btn-block'
 
         - else
