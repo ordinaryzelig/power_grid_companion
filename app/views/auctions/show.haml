@@ -38,6 +38,10 @@
         - else
           %h3 #{@auction.bidders.first.name} won the auction for #{@auction.price}.
 
-:coffee
-  $(document).on 'turbolinks:load', ->
-    window.show_markets()
+- if local_assigns[:direct_render]
+  = yield :auction
+
+- else
+  :coffee
+    $(document).on 'turbolinks:load', ->
+      window.show_markets()
