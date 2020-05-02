@@ -17,3 +17,6 @@ window.subscribe_player = (player_id) ->
 
     your_turn: (data) ->
       $("body[data-phase='#{data.phase}'] .your_turn_false").show()
+
+    replace: (data) ->
+      $(data.dom_id).replaceWith(data.html)

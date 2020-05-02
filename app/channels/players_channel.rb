@@ -10,6 +10,15 @@ class PlayersChannel < ApplicationCable::Channel
       broadcast_to player, data
     end
 
+    def replace(player, dom_id, html)
+      data = {
+        'action' => 'replace',
+        'dom_id' => dom_id,
+        'html'   => html,
+      }
+      broadcast_to player, data
+    end
+
   end
 
   def subscribed
