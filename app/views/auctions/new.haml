@@ -22,6 +22,10 @@
         - classes << 'disabled' if current_game.round == 1
         = link_to 'Pass', skip_auctions_url, :method => :post, :class => classes, :data => {:confirm => 'Skip the auction phase?'}
 
-:coffee
-  $(document).on 'turbolinks:load', ->
-    window.setup_auction()
+- if current_game.current_player == current_player
+  :coffee
+    $(document).on 'turbolinks:load', ->
+      window.setup_auction()
+- else
+  :coffee
+    window.show_markets()
