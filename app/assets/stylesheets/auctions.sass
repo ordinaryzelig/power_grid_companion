@@ -1,4 +1,7 @@
-.power_plant_market
+body[data-phase="auction"] .power_plant_market
   @include bg-variant('.power_plant.selected', $success)
-  .power_plant.selected
-    color: $white
+  .power_plant
+    &.selected
+      color: $white
+    &:not(.selected)
+      opacity: 50%
