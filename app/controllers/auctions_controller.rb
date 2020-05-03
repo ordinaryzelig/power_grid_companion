@@ -1,8 +1,6 @@
 class AuctionsController < ApplicationController
 
   before_action :set_auction, :only => %i[show bid pass claim]
-  before_action :set_turn, :only => %i[new]
-  before_action :set_bid_turn, :only => %i[show]
   after_action  :broadcast, :only => %i[bid pass claim]
 
   def new
@@ -24,12 +22,12 @@ class AuctionsController < ApplicationController
 
   def bid
     @auction.bid_by current_player
-    redirect_to @auction
+    head :ok
   end
 
   def pass
     @auction.pass_by current_player
-    redirect_to @auction
+    head :ok
   end
 
   def claim
@@ -59,17 +57,9 @@ private
     @auction = current_game.auctions.find(params[:id])
   end
 
-  def set_turn
-    @your_turn = current_game.current_player == current_player
-  end
-
-  def set_bid_turn
-    @your_turn = @auction.player_turn?(current_player)
-  end
-
   def broadcast
-    current_game.players.where.not(:id => current_player.id).each do |player|
-      html = ApplicationController.renderer.render(
+    current_game.players.each do |player|
+      html = render_to_string(
         :template => 'auctions/show',
         :layout   => false,
         :locals   => {
@@ -78,7 +68,7 @@ private
           :direct_render  => true,
         },
       )
-      PlayersChannel.replace(player, '.auction', html)
+      PlayersChannel.replace(player, "#auction_#{@auction.id}", html)
     end
   end
 

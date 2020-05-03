@@ -2,7 +2,7 @@
 
   %h2 Auction
 
-  - if @your_turn
+  - if current_game.current_player == current_player
     %p Choose a Power Plant to put up for auction.
   - else
     Waiting for #{current_game.current_player.name}.
@@ -14,7 +14,7 @@
   = form_for @auction, :data => {:confirm => 'Start bidding?'} do |f|
     = f.hidden_field :card_id
 
-    - if @your_turn
+    - if current_game.current_player == current_player
       .mt-3
         = f.submit 'Start bidding', :class => 'btn btn-success btn-block'
 

@@ -7,9 +7,9 @@
         %h3 #{@auction.bidders.last.name} bid #{@auction.price}
 
         .row
-          - if @your_turn
-            .col-6= link_to "Bid #{@auction.price + 1}", bid_auction_url(@auction), :method => :post, :class => 'btn btn-success btn-block'
-            .col-6= link_to "Pass", pass_auction_url(@auction), :method => :post, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Sure you want to pass?'}
+          - if @auction.player_turn?(current_player)
+            .col-6= link_to "Bid #{@auction.price + 1}", bid_auction_url(@auction), :method => :post, :class => 'btn btn-success btn-block', :data => {:remote => true}
+            .col-6= link_to "Pass", pass_auction_url(@auction), :method => :post, :class => 'btn btn-secondary btn-block', :data => {:confirm => 'Sure you want to pass?', :remote => true}
           - else
             .col Waiting for #{@auction.player_turn.name}
 
