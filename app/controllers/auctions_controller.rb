@@ -1,6 +1,7 @@
 class AuctionsController < ApplicationController
 
   before_action :set_auction, :only => %i[show bid pass claim]
+  before_action :check_auction_in_progress, :only => %i[new]
   after_action  :broadcast, :only => %i[bid pass claim]
 
   def new
@@ -69,6 +70,12 @@ private
         },
       )
       PlayersChannel.replace(player, "#auction_#{@auction.id}", html)
+    end
+  end
+
+  def check_auction_in_progress
+    if auction = current_game.auctions.reverse.detect(&:open?)
+      redirect_to auction_url(auction)
     end
   end
 
