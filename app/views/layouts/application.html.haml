@@ -20,7 +20,7 @@
       - if current_game
         #game_nav_panes
           = render 'player_mats/player_mats'
-          = render 'auctions/markets'
+          = render 'auctions/markets', :auction => @auction
           = render 'resource_purchases/resource_market'
           = render 'buildings/calculator'
           = render 'resource_replenishments/steps'

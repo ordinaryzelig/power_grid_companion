@@ -1,6 +1,7 @@
 - classes = []
 - classes << 'last_drawn' if local_assigns[:highlight_last_drawn] && card == current_game.cards.last_drawn
 - classes << (card.step_3? ? 'step_3' : 'power_plant')
+- classes << 'selected' if local_assigns[:auction]&.card == card
 .card.mb-2[card]{:data => card.attributes, :class => classes}
 
   %h5.card-header.text-center
