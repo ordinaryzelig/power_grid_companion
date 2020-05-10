@@ -10,13 +10,17 @@ class PlayersChannel < ApplicationCable::Channel
       broadcast_to player, data
     end
 
-    def replace(player, dom_id, html)
+    def replace(player, replacements)
       data = {
-        'action' => 'replace',
-        'dom_id' => dom_id,
-        'html'   => html,
+        'actions' => replacements.map(&method(:replace_action_data)),
       }
       broadcast_to player, data
+    end
+
+  private
+
+    def replace_action_data(replace_data)
+      {'action' => 'replace'}.merge(replace_data)
     end
 
   end

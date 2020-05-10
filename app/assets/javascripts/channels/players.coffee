@@ -10,7 +10,8 @@ window.subscribe_player = (player_id) ->
       @perform('online')
 
     received: (data) ->
-      @[data.action](data)
+      for action_data in data.actions
+        @[action_data.action](action_data)
 
   #########
   # Actions

@@ -1,5 +1,7 @@
-%h3.mt-3 #{market_type.titleize} Market
-.row.power_plant_market{:class => market_type}
-  - cards.each do |card|
-    .col-6
-      = render card, **local_assigns
+- if cards.any?
+  .power_plant_market{:class => market_type}
+    %h3.mt-3 #{market_type.titleize} Market
+    .row
+      - cards.each do |card|
+        .col-6
+          = render card, **local_assigns

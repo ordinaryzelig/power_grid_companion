@@ -22,7 +22,7 @@ class Game < ApplicationRecord
       if game.step == 3
         []
       else
-        market.in_groups_of(4, false).last
+        market.in_groups_of(4, false).last || []
       end
     end
 
@@ -30,7 +30,7 @@ class Game < ApplicationRecord
       if game.step == 3
         market
       else
-        market.in_groups_of(4, false).first
+        market.in_groups_of(4, false).first || []
       end
     end
 

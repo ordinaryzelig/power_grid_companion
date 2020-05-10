@@ -2,7 +2,8 @@ class AuctionsController < ApplicationController
 
   before_action :set_auction, :only => %i[show bid pass claim]
   before_action :check_auction_in_progress, :only => %i[new]
-  after_action  :broadcast, :only => %i[bid pass claim]
+  after_action  :broadcast_auction_updated, :only => %i[bid pass claim]
+  after_action  :broadcast_markets_updated, :only => %i[create claim pass]
 
   def new
     @auction = current_game.auctions.new
@@ -13,9 +14,9 @@ class AuctionsController < ApplicationController
       :player_id => current_player.id,
       :round     => current_game.round,
     )
-    auction = current_game.auctions.create!(auction_atts)
-    auction.bid_by current_player
-    redirect_to auction
+    @auction = current_game.auctions.create!(auction_atts)
+    @auction.bid_by current_player
+    redirect_to @auction
   end
 
   def show
@@ -58,7 +59,7 @@ private
     @auction = current_game.auctions.find(params[:id])
   end
 
-  def broadcast
+  def broadcast_auction_updated
     current_game.players.each do |player|
       html = render_to_string(
         :template => 'auctions/show',
@@ -69,7 +70,35 @@ private
           :direct_render  => true,
         },
       )
-      PlayersChannel.replace(player, "#auction_#{@auction.id}", html)
+      PlayersChannel.replace(player, [
+        {
+          :dom_id => "#auction_#{@auction.id}",
+          :html   => html,
+        },
+      ])
+    end
+  end
+
+  def broadcast_markets_updated
+    replacements = %w[actual future].map do |market_type|
+      dom_id = ".power_plant_market.#{market_type}"
+      html =
+        render_to_string(
+          :template => 'auctions/_market',
+          :layout   => false,
+          :locals   => {
+            :cards       => current_game.cards.send("#{market_type}_market"),
+            :market_type => market_type,
+            :auction     => @auction,
+          },
+        )
+      {
+        :dom_id => dom_id,
+        :html   => html,
+      }
+    end
+    current_game.players.each do |player|
+      PlayersChannel.replace player, replacements
     end
   end
 
